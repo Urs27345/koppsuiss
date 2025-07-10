@@ -10,7 +10,7 @@ const HeaderNavigation = () => {
   const router = useRouter();
   return (
     <nav className="bg-white py-3 sticky top-0">
-      <Container className="flex">
+      <Container className="flex flex-wrap">
         {headerNavigationList.map((item, index) => (
           <div className="mr-10" key={index}>
             <button
