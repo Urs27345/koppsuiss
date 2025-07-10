@@ -1,8 +1,10 @@
 import React from "react";
-import Container from "../container";
-import styles from "./style.module.scss";
 import classNames from "classnames";
 import Link from "next/link";
+
+import Container from "../container";
+import styles from "./style.module.scss";
+import { serviceList } from "@/utils/constant";
 
 const Footer = () => {
   return (
@@ -23,30 +25,15 @@ const Footer = () => {
           </div>
           <div className={styles.services}>
             <h3>Services</h3>
-            <div className={styles.serviceContent}>
-              <Link href={""} className={styles.link}>
-                Residential Solar Panels
-              </Link>
-              <Link href={""} className={styles.link}>
-                About Us
-              </Link>
-            </div>
-            <div className={styles.serviceContent}>
-              <Link href={""} className={styles.link}>
-                Commercial Solar Panels
-              </Link>
-              <Link href={""} className={styles.link}>
-                Our Services
-              </Link>
-            </div>
-            <div className={styles.serviceContent}>
-              <Link href={""} className={styles.link}>
-                Energy Stations
-              </Link>
-              <Link href={""} className={styles.link}>
-                News
-              </Link>
-            </div>
+            {serviceList.map((group, groupIndex) => (
+              <div key={groupIndex} className={styles.serviceContent}>
+                {group.map((service, index) => (
+                  <Link key={index} href={service.href} className={styles.link}>
+                    {service.label}
+                  </Link>
+                ))}
+              </div>
+            ))}
           </div>
           <div className={styles.content}>
             <h3>Follow Us</h3>
