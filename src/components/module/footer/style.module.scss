@@ -1,0 +1,33 @@
+.footer {
+  h3 {
+    @apply text-white mb-3.5 text-xl font-semibold;
+  }
+
+  p {
+    @apply text-secondaryGray text-sm font-semibold leading-8;
+  }
+
+  .contacts {
+    p {
+      @apply cursor-pointer text-green hover:text-white;
+    }
+  }
+
+  .services {
+    @apply w-full;
+
+    .serviceContent {
+      @apply flex items-center gap-4 w-full;
+
+      .link {
+        @apply text-secondaryGray text-sm font-semibold leading-8 mb-2 hover:text-secondaryBlack w-1/2;
+      }
+    }
+  }
+
+  .content {
+    h3 {
+      @apply text-white mb-3.5 text-xl font-semibold;
+    }
+  }
+}

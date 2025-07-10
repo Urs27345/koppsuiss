@@ -20,11 +20,18 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        blue: "#ff0000"
+        blue: "#ff0000",
+        green: "#00a335",
+        darkGray: "#272e32",
+        secondaryGray: "#777777",
+        secondaryBlack: "#240000"
       },
       spacing: {
         3.5: "14px",
         5.5: "22px",
+        30: '30px',
+        49: "49px",
+        93: '93px',
       }
     },
   },
