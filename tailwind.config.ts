@@ -23,7 +23,9 @@ const config: Config = {
         blue: "#ff0000",
         green: "#00a335",
         darkGray: "#272e32",
+        lightGray: "#969696",
         secondaryGray: "#777777",
+        thirdGray: "#444444",
         secondaryBlack: "#240000"
       },
       spacing: {

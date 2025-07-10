@@ -3,16 +3,38 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "../components/module/header";
 import Footer from "../components/module/footer";
+import HeaderNavigation from "../components/module/headerNavigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const jost = localFont({
+  src: [
+    {
+      path: "./fonts/jost/static/Jost-Regular.ttf",
+      weight: "400",
+    },
+    {
+      path: "./fonts/jost/static/Jost-Medium.ttf",
+      weight: "500",
+    },
+    {
+      path: "./fonts/jost/static/Jost-SemiBold.ttf",
+      weight: "600",
+    },
+    {
+      path: "./fonts/jost/static/Jost-Bold.ttf",
+      weight: "700",
+    },
+    {
+      path: "./fonts/jost/static/Jost-ExtraBold.ttf",
+      weight: "900",
+    },
+  ],
+  display: "swap",
+  variable: "--font-Jost",
 });
 
 export const metadata: Metadata = {
@@ -27,10 +49,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${jost.className} antialiased`}>
         <Header />
+        <HeaderNavigation />
         {children}
         <Footer />
       </body>

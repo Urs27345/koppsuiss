@@ -12,7 +12,7 @@ const Footer = () => {
       className={classNames(styles.footer, "bg-darkGray fixed bottom-0 w-full")}
     >
       <Container>
-        <div className="grid grid-cols-4 pt-93 pb-49">
+        <div className="grid gird-cols-1 phone:grid-cols-2 tablet:grid-cols-4 pt-93 pb-49">
           <div>
             <h3>Company</h3>
             <p>12345 Porto Blvd.</p>

@@ -12,3 +12,26 @@ export const serviceList = [
     { href: "https://www.portotheme.com/wordpress/porto/renewable-energy/service/energy-station/", label: "News" },
   ],
 ];
+
+export const headerNavigationList = [
+  {
+    label: "PLANOS DE PLANTA Y PRECIOS",
+    link: "/planos-de-planta-y-precios"
+  },
+  {
+    label: "IMPRESIONES",
+    link: "/impresiones",
+  },
+  {
+    label: "DESCRIPCIÓN DE LA CONSTRUCCIÓN",
+    link: "/descripcion-de-la-construccion",
+  },
+  {
+    label: "VENTAS",
+    link: "/ventas",
+  },
+  {
+    label: "SANTA CRUZ",
+    link: "/santa-cruz",
+  },
+]

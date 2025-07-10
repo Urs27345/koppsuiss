@@ -10,7 +10,13 @@ const Header = () => {
     <div className="py-5.5 bg-black">
       <Container className="flex items-center justify-between">
         <Link href="/">
-          <Image src={"/logo.png"} alt="Logo" width={200} height={51} />
+          <Image
+            src={"/logo.png"}
+            alt="Logo"
+            width={200}
+            height={51}
+            priority
+          />
         </Link>
         <div className="flex items-center">
           <div className="socials">

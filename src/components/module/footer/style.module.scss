@@ -4,7 +4,7 @@
   }
 
   p {
-    @apply text-secondaryGray text-sm font-semibold leading-8;
+    @apply text-lightGray text-sm font-semibold leading-8;
   }
 
   .contacts {
@@ -20,7 +20,7 @@
       @apply flex items-center gap-4 w-full;
 
       .link {
-        @apply text-secondaryGray text-sm font-semibold leading-8 mb-2 hover:text-secondaryBlack w-1/2;
+        @apply text-lightGray text-sm font-semibold leading-8 mb-2 hover:text-secondaryBlack w-1/2;
       }
     }
   }
