@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useRef } from "react";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
@@ -17,7 +17,26 @@ const SliderComponent: React.FC<Props> = ({ child }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  return <Slider {...settings}>{child}</Slider>;
+
+  const sliderRef = useRef<any>(null);
+  console.log("sliderRef", sliderRef);
+
+  return (
+    <div>
+      <Slider {...settings} ref={sliderRef}>
+        {child}
+      </Slider>
+      <button
+        className="relative z-40"
+        onClick={() => {
+          console.log("test");
+          sliderRef.current.slickPrev();
+        }}
+      >
+        test
+      </button>
+    </div>
+  );
 };
 
 export default SliderComponent;

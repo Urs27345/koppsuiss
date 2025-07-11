@@ -13,29 +13,14 @@ const Header = () => {
     <div className="py-5.5 bg-black">
       <Container className="flex items-center justify-between">
         <Link href="/">
-          <Image
-            src={"/logo.png"}
-            alt="Logo"
-            width={200}
-            height={51}
-            priority
-          />
+          <Image src={"/logo.png"} alt="Logo" width={200} height={51} priority />
         </Link>
         <div className="flex items-center justify-between gap-2 tablet:gap-10">
           <div className={styles.socials}>
             {socialLinks.map((item, index) => (
-              <a
-                className="social-links__link"
-                href={item.url}
-                target="_blank"
-                title={item.name}
-                key={index}
-              >
+              <a className="social-links__link" href={item.url} target="_blank" title={item.name} key={index}>
                 <div className="bg-white p-[6px] rounded-full">
-                  <Icon
-                    name={item.name as IconType}
-                    className="w-4 h-4 text-black hover:text-green"
-                  />
+                  <Icon name={item.name as IconType} className="w-4 h-4 text-black hover:text-green" />
                 </div>
               </a>
             ))}
@@ -45,10 +30,7 @@ const Header = () => {
               <Icon name="Phone" className="w-7 h-7 text-blue" />
               <p>+591 71634174</p>
             </a>
-            <a
-              className="flex items-center gap-2"
-              href="mailto:casa@koppsuisse.ch"
-            >
+            <a className="flex items-center gap-2" href="mailto:casa@koppsuisse.ch">
               <Icon name="Mail" className="w-7 h-7 text-blue" />
               <p>casa@koppsuisse.ch</p>
             </a>

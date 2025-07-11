@@ -1,7 +1,7 @@
 export const headerNavigationList = [
   {
     label: "PLANOS DE PLANTA Y PRECIOS",
-    link: "/planos-de-planta-y-precios"
+    link: "/planos-de-planta-y-precios",
   },
   {
     label: "IMPRESIONES",
@@ -19,13 +19,13 @@ export const headerNavigationList = [
     label: "SANTA CRUZ",
     link: "/santa-cruz",
   },
-]
+];
 
 export const socialLinks = [
   {
     url: "https://www.facebook.com/cPanel",
     name: "Facebook",
-    color: "fourthBlue"
+    color: "fourthBlue",
   },
   {
     url: "https://www.facebook.com/cPanel",
@@ -40,6 +40,6 @@ export const socialLinks = [
   {
     url: "https://www.facebook.com/cPanel",
     name: "Linkedin",
-    color: "thirdBlue"
+    color: "thirdBlue",
   },
 ];

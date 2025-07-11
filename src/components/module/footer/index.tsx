@@ -33,31 +33,15 @@ const Footer = () => {
           </div>
           <div className={styles.services}>
             <h3>Services</h3>
-            <p>
-              Consulting and sale of modern apartments in Santa Cruz/Bolivia
-            </p>
+            <p>Consulting and sale of modern apartments in Santa Cruz/Bolivia</p>
           </div>
           <div className={styles.content}>
             <h3>Follow Us</h3>
             <div className="flex gap-3">
               {socialLinks.map((item, index) => (
-                <a
-                  className="social-links__link"
-                  href={item.url}
-                  target="_blank"
-                  title={item.name}
-                  key={index}
-                >
-                  <div
-                    className={classNames(
-                      `p-[6px] rounded-full`,
-                      socialHoverClasses[item.color]
-                    )}
-                  >
-                    <Icon
-                      name={item.name as IconType}
-                      className="w-4 h-4 text-white"
-                    />
+                <a className="social-links__link" href={item.url} target="_blank" title={item.name} key={index}>
+                  <div className={classNames(`p-[6px] rounded-full`, socialHoverClasses[item.color])}>
+                    <Icon name={item.name as IconType} className="w-4 h-4 text-white" />
                   </div>
                 </a>
               ))}
@@ -65,9 +49,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="pt-30 pb-12 border-t-[1px] border-[#ffffff1a]">
-          <p className="text-center">
-            Kopp Suisse SRL © 2025 All rights reserved.
-          </p>
+          <p className="text-center">Kopp Suisse SRL © 2025 All rights reserved.</p>
         </div>
         <ScrollButton />
       </Container>
