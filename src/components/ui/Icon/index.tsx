@@ -9,8 +9,19 @@ const Twitter = dynamic<{ className?: string }>(() => import("./icons/twitter.sv
 const Instagram = dynamic<{ className?: string }>(() => import("./icons/instagram.svg"));
 const Linkedin = dynamic<{ className?: string }>(() => import("./icons/linkedin.svg"));
 const ArrowTop = dynamic<{ className?: string }>(() => import("./icons/arrowTop.svg"));
+const ArrowLeft = dynamic<{ className?: string }>(() => import("./icons/arrowLeft.svg"));
+const ArrowRight = dynamic<{ className?: string }>(() => import("./icons/arrowRight.svg"));
 
-export type IconType = "Mail" | "Phone" | "Facebook" | "Twitter" | "Instagram" | "Linkedin" | "ArrowTop";
+export type IconType =
+  | "Mail"
+  | "Phone"
+  | "Facebook"
+  | "Twitter"
+  | "Instagram"
+  | "Linkedin"
+  | "ArrowTop"
+  | "ArrowLeft"
+  | "ArrowRight";
 
 type IconProps = {
   name: IconType | undefined;
@@ -31,6 +42,8 @@ const Icon: React.FC<IconProps> = ({ name, className }) => {
     Twitter,
     Linkedin,
     ArrowTop,
+    ArrowLeft,
+    ArrowRight,
   };
   const CurrentIcon = icons[name];
 

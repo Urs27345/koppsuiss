@@ -6,7 +6,10 @@ import SwimmingPoolImage from "@/assets/piscina01.jpg";
 import styles from "./style.module.scss";
 import Container from "../../../module/container";
 import SliderComponent from "../../../ui/slider";
-import SliderImage from "@/assets/home_slider/01.jpg";
+import SliderImage1 from "@/assets/home_slider/01.jpg";
+import SliderImage2 from "@/assets/home_slider/02.jpg";
+import SliderImage3 from "@/assets/home_slider/03.jpg";
+import SliderImage4 from "@/assets/home_slider/04.jpg";
 
 const contentList = [
   {
@@ -134,24 +137,10 @@ const HomeContent = () => {
       <SliderComponent
         child={
           <>
-            <div>
-              <Image src={SliderImage} alt="test" />
-            </div>
-            <div>
-              <h3>2</h3>
-            </div>
-            <div>
-              <h3>3</h3>
-            </div>
-            <div>
-              <h3>4</h3>
-            </div>
-            <div>
-              <h3>5</h3>
-            </div>
-            <div>
-              <h3>6</h3>
-            </div>
+            <Image src={SliderImage1} alt="01" />
+            <Image src={SliderImage2} alt="02" />
+            <Image src={SliderImage3} alt="03" />
+            <Image src={SliderImage4} alt="04" />
           </>
         }
       />

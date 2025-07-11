@@ -1,0 +1,7 @@
+.wrapper {
+  @apply relative mb-10;
+
+  button {
+    @apply absolute top-1/2  z-40 rounded-full bg-white/50 -translate-y-1/2 flex justify-center items-center p-1;
+  }
+}
