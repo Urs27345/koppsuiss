@@ -1,0 +1,7 @@
+.wrapper {
+  @apply bg-fiveGray w-full py-16;
+
+  h1 {
+    @apply font-bold text-[32px] text-darkGray;
+  }
+}
