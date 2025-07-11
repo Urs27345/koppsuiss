@@ -13,23 +13,23 @@ const geistSans = localFont({
 const jost = localFont({
   src: [
     {
-      path: "./fonts/jost/static/Jost-Regular.ttf",
+      path: "./fonts/Jost/static/Jost-Regular.ttf",
       weight: "400",
     },
     {
-      path: "./fonts/jost/static/Jost-Medium.ttf",
+      path: "./fonts/Jost/static/Jost-Medium.ttf",
       weight: "500",
     },
     {
-      path: "./fonts/jost/static/Jost-SemiBold.ttf",
+      path: "./fonts/Jost/static/Jost-SemiBold.ttf",
       weight: "600",
     },
     {
-      path: "./fonts/jost/static/Jost-Bold.ttf",
+      path: "./fonts/Jost/static/Jost-Bold.ttf",
       weight: "700",
     },
     {
-      path: "./fonts/jost/static/Jost-ExtraBold.ttf",
+      path: "./fonts/Jost/static/Jost-ExtraBold.ttf",
       weight: "900",
     },
   ],
