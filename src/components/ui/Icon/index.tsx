@@ -12,8 +12,11 @@ const Facebook = dynamic<{ className?: string }>(
 const Instagram = dynamic<{ className?: string }>(
   () => import("./icons/instagram.svg")
 );
+const ArrowTop = dynamic<{ className?: string }>(
+  () => import("./icons/arrowTop.svg")
+);
 
-export type IconType = "Mail" | "Phone" | "Facebook" | "Instagram";
+export type IconType = "Mail" | "Phone" | "Facebook" | "Instagram" | "ArrowTop";
 
 type IconProps = {
   name: IconType | undefined;
@@ -31,6 +34,7 @@ const Icon: React.FC<IconProps> = ({ name, className }) => {
     Phone,
     Instagram,
     Facebook,
+    ArrowTop,
   };
   const CurrentIcon = icons[name];
 

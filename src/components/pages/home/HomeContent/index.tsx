@@ -5,6 +5,8 @@ import BeachImage from "@/assets/salar01.jpg";
 import SwimmingPoolImage from "@/assets/piscina01.jpg";
 import styles from "./style.module.scss";
 import Container from "../../../module/container";
+import SliderComponent from "../../../ui/slider";
+import SliderImage from "@/assets/01.jpg";
 
 const contentList = [
   {
@@ -141,7 +143,7 @@ const HomeContent = () => {
           para este tipo de casas en <b>Bolivia</b>.
         </p>
       </div>
-      <div className="flex flex-col gap-14">
+      <div className="flex flex-col gap-14 mb-10">
         {contentList.map((item, index) => (
           <div className="grid grid-cols-2 gap-5" key={index}>
             {item.content}
@@ -153,6 +155,30 @@ const HomeContent = () => {
           </div>
         ))}
       </div>
+      <SliderComponent
+        child={
+          <>
+            <div>
+              <Image src={SliderImage} alt="test" />
+            </div>
+            <div>
+              <h3>2</h3>
+            </div>
+            <div>
+              <h3>3</h3>
+            </div>
+            <div>
+              <h3>4</h3>
+            </div>
+            <div>
+              <h3>5</h3>
+            </div>
+            <div>
+              <h3>6</h3>
+            </div>
+          </>
+        }
+      />
     </Container>
   );
 };

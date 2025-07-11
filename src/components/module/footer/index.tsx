@@ -3,8 +3,10 @@ import classNames from "classnames";
 import Link from "next/link";
 
 import Container from "../container";
-import styles from "./style.module.scss";
 import { serviceList } from "@/utils/constant";
+import ScrollButton from "../../ui/scrollButton";
+
+import styles from "./style.module.scss";
 
 const Footer = () => {
   return (
@@ -40,6 +42,7 @@ const Footer = () => {
         <div className="pt-30 pb-12 border-t-[1px] border-[#ffffff1a]">
           <p className="text-center">Porto © 2022. All Rights Reserved.</p>
         </div>
+        <ScrollButton />
       </Container>
     </div>
   );

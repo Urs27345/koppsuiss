@@ -26,6 +26,7 @@ const config: Config = {
         lightGray: "#969696",
         secondaryGray: "#777777",
         thirdGray: "#444444",
+        fourthGray: "#404040bf",
         secondaryBlack: "#240000"
       },
       spacing: {
