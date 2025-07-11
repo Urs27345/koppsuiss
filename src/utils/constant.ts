@@ -35,3 +35,22 @@ export const headerNavigationList = [
     link: "/santa-cruz",
   },
 ]
+
+export const socialLinks = [
+  {
+    url: "https://www.facebook.com/cPanel",
+    name: "Facebook"
+  },
+  {
+    url: "https://www.facebook.com/cPanel",
+    name: "Twitter"
+  },
+  {
+    url: "https://www.facebook.com/cPanel",
+    name: "Instagram"
+  },
+  {
+    url: "https://www.facebook.com/cPanel",
+    name: "Linkedin"
+  },
+]

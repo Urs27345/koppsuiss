@@ -1,9 +1,12 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 import Container from "../container";
 import styles from "./style.module.scss";
+import Icon, { IconType } from "../../ui/Icon";
+import { socialLinks } from "../../../utils/constant";
 
 const Header = () => {
   return (
@@ -18,31 +21,37 @@ const Header = () => {
             priority
           />
         </Link>
-        <div className="flex items-center">
-          <div className="socials">
-            <a
-              className="social-links__link"
-              href="https://www.facebook.com/cPanel"
-              target="_blank"
-              title="Facebook"
-            >
-              <span className="icon">
-                <Image
-                  src="https://koppsuisse.ch/wp-content/maintenance/assets/images/facebook.svg"
-                  alt="Facebook"
-                  width={25}
-                  height={25}
-                />
-              </span>
-            </a>
+        <div className="flex items-center justify-between gap-2 tablet:gap-10">
+          <div className={styles.socials}>
+            {socialLinks.map((item, index) => (
+              <a
+                className="social-links__link"
+                href={item.url}
+                target="_blank"
+                title={item.name}
+                key={index}
+              >
+                <div className="bg-white p-[6px] rounded-full">
+                  <Icon
+                    name={item.name as IconType}
+                    className="w-4 h-4 text-black hover:text-green"
+                  />
+                </div>
+              </a>
+            ))}
           </div>
           <div className={styles.contact}>
-            <div className="phone">
+            <a className="flex items-center gap-2" href="tel:+591 71634174">
+              <Icon name="Phone" className="w-7 h-7 text-blue" />
               <p>+591 71634174</p>
-            </div>
-            <div className="mail">
+            </a>
+            <a
+              className="flex items-center gap-2"
+              href="mailto:casa@koppsuisse.ch"
+            >
+              <Icon name="Mail" className="w-7 h-7 text-blue" />
               <p>casa@koppsuisse.ch</p>
-            </div>
+            </a>
           </div>
         </div>
       </Container>
