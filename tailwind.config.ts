@@ -27,7 +27,11 @@ const config: Config = {
         secondaryGray: "#777777",
         thirdGray: "#444444",
         fourthGray: "#404040bf",
-        secondaryBlack: "#240000"
+        secondaryBlack: "#240000",
+        secondBlue: "#1aa9e1",
+        thirdBlue: "#0073b2",
+        fourthBlue: "#3b5a9a",
+        brown: "#7c4a3a"
       },
       spacing: {
         3.5: "14px",

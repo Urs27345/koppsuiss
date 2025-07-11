@@ -53,7 +53,7 @@ const Icon: React.FC<IconProps> = ({ name, className }) => {
   };
   const CurrentIcon = icons[name];
 
-  return <CurrentIcon className={classNames("w-auto h-auto", className)} />;
+  return <CurrentIcon className={classNames(className)} />;
 };
 
 export default Icon;
