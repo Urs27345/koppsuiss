@@ -17,7 +17,7 @@ export const headerNavigationList = [
   },
   {
     label: "SANTA CRUZ",
-    link: "/santa-cruz",
+    link: "/santaCruz",
   },
 ];
 
