@@ -9,7 +9,7 @@ export const headerNavigationList = [
   },
   {
     label: "DESCRIPCIÓN DE LA CONSTRUCCIÓN",
-    link: "/descripcion-de-la-construccion",
+    link: "/buildingDescription",
   },
   {
     label: "VENTAS",

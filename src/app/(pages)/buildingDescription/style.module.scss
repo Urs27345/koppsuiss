@@ -1,0 +1,34 @@
+.wrapper {
+  @apply max-w-[1000px] mx-auto;
+
+  .headerContent {
+    @apply flex flex-col gap-5 mt-5;
+
+    p {
+      @apply text-thirdGray;
+    }
+  }
+
+  h1 {
+    @apply text-[35px] font-bold text-thirdGray mt-10;
+  }
+
+  h2 {
+    @apply text-[30px] my-5 font-bold text-thirdGray;
+  }
+
+  .content {
+    @apply max-w-[1000px] flex flex-col gap-5 mb-5;
+
+    p {
+      @apply text-secondaryGray text-lg;
+    }
+  }
+
+  .imageContent {
+    @apply grid grid-cols-3 w-full max-w-[1200px] gap-4 my-8 mx-auto;
+    .image {
+      @apply w-full h-[230px] rounded-lg;
+    }
+  }
+}
