@@ -11,9 +11,14 @@
   }
 
   .imageContent {
-    @apply grid grid-cols-3 w-full max-w-[1200px] gap-4 my-8 mx-auto;
-    .image {
-      @apply w-full h-[400px] rounded-lg object-cover;
+    @apply flex flex-wrap w-full max-w-[1200px] gap-4 my-8 mx-auto justify-center;
+
+    .imageWrapper {
+      @apply w-[200px];
+
+      .image {
+        @apply w-full h-[240px] rounded-lg object-cover;
+      }
     }
   }
 }

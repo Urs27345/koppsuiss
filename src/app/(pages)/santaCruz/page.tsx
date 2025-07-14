@@ -1,27 +1,13 @@
 import React from "react";
 import Image from "next/image";
 
-import image1 from "@/assets/ventas/1.png";
-import image2 from "@/assets/ventas/2.jpg";
-import image3 from "@/assets/ventas/3.jpg";
+import female from "@/assets/santa/female.png";
+import male from "@/assets/santa/man.png";
 
 import styles from "./style.module.scss";
+import { partnerList } from "../../../utils/constant";
 
 const SantaCruz = () => {
-  const imageList = [
-    {
-      label: "Santa Cruz Cathedral",
-      image: image1,
-    },
-    {
-      label: "Toco Toucan – Rainforest",
-      image: image2,
-    },
-    {
-      label: "Waterfall near Santa Cruz",
-      image: image3,
-    },
-  ];
   return (
     <div className={styles.wrapper}>
       <h1>SANTA CRUZ</h1>
@@ -39,10 +25,10 @@ const SantaCruz = () => {
         </p>
       </div>
       <div className={styles.imageContent}>
-        {imageList.map((item, index) => (
-          <div key={index}>
-            <Image src={item.image} alt={`image-${index}`} className={styles.image} />
-            <p className="text-center text-lg text-secondaryGray font-medium">{item.label}</p>
+        {partnerList.map((item, index) => (
+          <div key={index} className={styles.imageWrapper}>
+            <Image src={item.type === "female" ? female : male} alt={`image-${index}`} className={styles.image} />
+            <p className="text-center text-lg text-secondaryGray font-medium">{item.name}</p>
           </div>
         ))}
       </div>

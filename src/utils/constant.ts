@@ -43,3 +43,42 @@ export const socialLinks = [
     color: "thirdBlue",
   },
 ];
+
+export const partnerList = [
+  {
+    type: "female",
+    name: "Zulma Diepolder",
+    role: "Construction manager",
+    phone: "+591 716 34 174",
+  },
+  {
+    type: "man",
+    name: "Urs Diepolder",
+    role: "Construction manager",
+    phone: "+591 716 34 177",
+  },
+  {
+    type: "man",
+    name: "Jairo Flores",
+    role: "Engineer",
+    phone: "+591 ___ ___ ___",
+  },
+  {
+    type: "man",
+    name: "Jefferson",
+    role: "Engineer",
+    phone: "+591 ___ ___ ___",
+  },
+  {
+    type: "female",
+    name: "Marcela",
+    role: "architect",
+    phone: "+591 716 34 174",
+  },
+  {
+    type: "female",
+    name: "Sarah",
+    role: "architect",
+    phone: "+591 716 34 174",
+  },
+];
