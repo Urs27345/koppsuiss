@@ -11,9 +11,9 @@
   }
 
   .imageContent {
-    @apply grid grid-cols-3 w-full max-w-[1200px] gap-4 my-8 mx-auto;
+    @apply grid grid-cols-1 tablet:grid-cols-3 w-full max-w-[1200px] gap-4 my-8 mx-auto;
     .image {
-      @apply w-full h-[400px] rounded-lg object-cover;
+      @apply w-full h-auto tablet:h-[400px] rounded-lg object-cover;
     }
   }
 }

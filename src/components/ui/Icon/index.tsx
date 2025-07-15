@@ -11,6 +11,7 @@ const Linkedin = dynamic<{ className?: string }>(() => import("./icons/linkedin.
 const ArrowTop = dynamic<{ className?: string }>(() => import("./icons/arrowTop.svg"));
 const ArrowLeft = dynamic<{ className?: string }>(() => import("./icons/arrowLeft.svg"));
 const ArrowRight = dynamic<{ className?: string }>(() => import("./icons/arrowRight.svg"));
+const Hamburger = dynamic<{ className?: string }>(() => import("./icons/hamburger.svg"));
 
 export type IconType =
   | "Mail"
@@ -21,7 +22,8 @@ export type IconType =
   | "Linkedin"
   | "ArrowTop"
   | "ArrowLeft"
-  | "ArrowRight";
+  | "ArrowRight"
+  | "Hamburger";
 
 type IconProps = {
   name: IconType | undefined;
@@ -44,6 +46,7 @@ const Icon: React.FC<IconProps> = ({ name, className }) => {
     ArrowTop,
     ArrowLeft,
     ArrowRight,
+    Hamburger,
   };
   const CurrentIcon = icons[name];
 

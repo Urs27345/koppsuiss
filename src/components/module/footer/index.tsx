@@ -18,7 +18,7 @@ const Footer = () => {
   return (
     <div className={classNames(styles.footer, "bg-darkGray w-full")}>
       <Container>
-        <div className="grid gird-cols-1 phone:grid-cols-2 tablet:grid-cols-4 pt-93 pb-49">
+        <div className="grid gird-cols-1 phone:grid-cols-2 tablet:grid-cols-4 pt-93 pb-49 gap-5 tablet:gap-0">
           <div>
             <h3>Pursue</h3>
             <p>Kopp Suisse SRL</p>
