@@ -3,7 +3,7 @@
     @apply text-center text-[35.2px] my-10 font-semibold text-thirdGray;
   }
   .context {
-    @apply max-w-[1000px] mx-auto text-center flex flex-col gap-5;
+    @apply max-w-[1000px] mx-auto text-center flex flex-col gap-5 my-2;
 
     p {
       @apply text-secondaryGray text-[18px] font-medium leading-7;
@@ -11,14 +11,9 @@
   }
 
   .imageContent {
-    @apply flex flex-wrap w-full max-w-[900px] gap-4 my-8 mx-auto justify-center;
-
-    .imageWrapper {
-      @apply w-[200px];
-
-      .image {
-        @apply w-full h-[240px] rounded-lg object-cover;
-      }
+    @apply grid grid-cols-3 w-full max-w-[1200px] gap-4 my-8 mx-auto;
+    .image {
+      @apply w-full h-[400px] rounded-lg object-cover;
     }
   }
 }

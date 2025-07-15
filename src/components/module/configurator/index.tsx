@@ -134,7 +134,7 @@ const Configurator = () => {
         if (groupFloor === refFloor) {
           group.userData.targetY = 0;
         } else if (groupFloor > refFloor) {
-          group.userData.targetY = 0.02;
+          group.userData.targetY = 0.01;
         } else {
           group.userData.targetY = 0;
         }
@@ -170,14 +170,14 @@ const Configurator = () => {
             setCubeHighlight(hoveredCubeGroup, false);
             resetFloorPositions();
           }
-          hoveredCubeGroup = mesh;
           setCubeHighlight(mesh, true);
           moveUpperFloorsUp(mesh);
+          hoveredCubeGroup = mesh;
         }
       } else {
         if (hoveredCubeGroup) {
           setCubeHighlight(hoveredCubeGroup, false);
-          resetFloorPositions();
+          // resetFloorPositions();
           hoveredCubeGroup = null;
         }
       }

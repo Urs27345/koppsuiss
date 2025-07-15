@@ -12,12 +12,12 @@ export const headerNavigationList = [
     link: "/buildingDescription",
   },
   {
-    label: "VENTAS",
-    link: "/ventas",
-  },
-  {
     label: "SANTA CRUZ",
     link: "/santaCruz",
+  },
+  {
+    label: "VENTAS",
+    link: "/ventas",
   },
 ];
 
