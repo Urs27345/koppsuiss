@@ -1,7 +1,7 @@
 export const headerNavigationList = [
   {
     label: "PLANOS DE PLANTA Y PRECIOS",
-    link: "/planos-de-planta-y-precios",
+    link: "/planos/101",
   },
   {
     label: "IMPRESIONES",
@@ -81,4 +81,15 @@ export const partnerList = [
     role: "architect",
     phone: "+591 716 34 174",
   },
+];
+
+export const floorOverview = [
+  "6th floor",
+  "5th floor",
+  "4th floor",
+  "3th floor",
+  "2th floor",
+  "1th floor",
+  "Ground floor",
+  "basement",
 ];
