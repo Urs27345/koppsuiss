@@ -12,7 +12,7 @@ const PageHeaderContent = () => {
   const title = headerNavigationList.find((item) => item.link === pathName)?.label ?? "PLANOS DE PLANTA Y PRECIOS";
   return (
     <div className={styles.wrapper}>
-      <Container className="flex items-center justify-between">
+      <Container className="flex flex-col tablet:flex-row items-center justify-between gap-4 tablet:gap-0">
         <h1>{title}</h1>
         <div className="flex items-center">
           <a href="/" className="text-green">

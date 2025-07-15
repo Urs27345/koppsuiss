@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import classNames from "classnames";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { apartmentDetails, floorOverview } from "../../../utils/constant";
 import image010 from "@/assets/department/010.jpg";
@@ -43,6 +44,7 @@ type Props = {
 };
 
 const Department: React.FC<Props> = ({ id }) => {
+  const router = useRouter();
   const floorNumber = id.substring(0, 1);
   const departmentImage: { [key: string]: any } = {
     image010: image010,
@@ -94,6 +96,10 @@ const Department: React.FC<Props> = ({ id }) => {
             {floorOverview.map((item, index) => (
               <p
                 key={index}
+                role="button"
+                onClick={() => {
+                  router.push(`${item.floor}01`);
+                }}
                 className={classNames(styles.floorRow, item.floor.toString() === floorNumber ? styles.active : "")}
               >
                 {item.label}

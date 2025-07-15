@@ -235,7 +235,7 @@ const Configurator = () => {
     };
   }, []);
 
-  return <div ref={containerRef} style={{ width: "400px", height: "500px" }} />;
+  return <div ref={containerRef} className="w-full tablet:w-[400px] h-[500px]" />;
 };
 
 export default Configurator;

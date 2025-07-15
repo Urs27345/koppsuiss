@@ -39,7 +39,7 @@
 }
 
 .bottomContent {
-  @apply flex gap-5 py-10 justify-center;
+  @apply flex flex-col tablet:flex-row gap-5 py-10 justify-center;
 
   .additionalButton {
     @apply bg-[#6c5e46] text-white px-6 py-3 font-bold rounded-2xl hover:bg-[#4e4533];

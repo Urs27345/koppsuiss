@@ -11,11 +11,11 @@ import { socialLinks } from "../../../utils/constant";
 const Header = () => {
   return (
     <div className="py-5.5 bg-black">
-      <Container className="flex items-center justify-between">
+      <Container className="flex flex-col tablet:flex-row items-center justify-between gap-4 tablet:gap-0">
         <Link href="/">
           <Image src={"/logo.png"} alt="Logo" width={200} height={51} priority />
         </Link>
-        <div className="flex items-center justify-between gap-2 tablet:gap-10">
+        <div className="flex flex-col tablet:flex-row items-center justify-between gap-2 tablet:gap-10">
           <div className={styles.socials}>
             {socialLinks.map((item, index) => (
               <a className="social-links__link" href={item.url} target="_blank" title={item.name} key={index}>
