@@ -29,6 +29,8 @@ const SantaCruz = () => {
           <div key={index} className={styles.imageWrapper}>
             <Image src={item.type === "female" ? female : male} alt={`image-${index}`} className={styles.image} />
             <p className="text-center text-lg text-secondaryGray font-medium">{item.name}</p>
+            <p className="text-center text-lg text-secondaryGray font-medium">{item.role}</p>
+            <p className="text-center text-lg text-secondaryGray font-medium">{item.phone}</p>
           </div>
         ))}
       </div>
