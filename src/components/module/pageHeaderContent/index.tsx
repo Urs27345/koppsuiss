@@ -9,7 +9,7 @@ import { headerNavigationList } from "../../../utils/constant";
 
 const PageHeaderContent = () => {
   const pathName = usePathname();
-  const title = headerNavigationList.find((item) => item.link === pathName)?.label;
+  const title = headerNavigationList.find((item) => item.link === pathName)?.label ?? "PLANOS DE PLANTA Y PRECIOS";
   return (
     <div className={styles.wrapper}>
       <Container className="flex items-center justify-between">
