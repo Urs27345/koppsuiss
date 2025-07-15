@@ -1,5 +1,5 @@
 .wrapper {
-  @apply flex gap-2 w-full py-10;
+  @apply flex flex-col tablet:flex-row gap-2 w-full py-10;
 
   .content {
     @apply p-6 rounded-2xl w-full border border-lightGray/10;
@@ -35,5 +35,13 @@
         }
       }
     }
+  }
+}
+
+.bottomContent {
+  @apply flex gap-5 py-10 justify-center;
+
+  .additionalButton {
+    @apply bg-[#6c5e46] text-white px-6 py-3 font-bold rounded-2xl hover:bg-[#4e4533];
   }
 }

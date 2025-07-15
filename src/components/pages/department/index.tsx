@@ -2,6 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import classNames from "classnames";
+import Link from "next/link";
 
 import { floorOverview } from "../../../utils/constant";
 import image101 from "@/assets/department/101.jpg";
@@ -15,7 +16,7 @@ type Props = {
 };
 
 const Department: React.FC<Props> = ({ id }) => {
-  console.log("id", id);
+  const floorNumber = id.substring(0, 1);
   return (
     <Container>
       <div className={styles.wrapper}>
@@ -33,8 +34,11 @@ const Department: React.FC<Props> = ({ id }) => {
           <h2>Floor overview</h2>
           <div className={styles.overviewWrapper}>
             {floorOverview.map((item, index) => (
-              <p key={index} className={classNames(styles.floorRow)}>
-                {item}
+              <p
+                key={index}
+                className={classNames(styles.floorRow, item.floor.toString() === floorNumber ? styles.active : "")}
+              >
+                {item.label}
               </p>
             ))}
           </div>
@@ -72,6 +76,32 @@ const Department: React.FC<Props> = ({ id }) => {
         </div>
         <div className="w-full"></div>
         <div className="w-full"></div>
+      </div>
+      <div className={styles.bottomContent}>
+        <Link href={"/"} target="_blank" className={styles.additionalButton}>
+          Enquire about this apartment
+        </Link>
+        <Link
+          href={"https://koppsuisse.ch/wp-content/uploads/2025/07/101-Grundriss.pdf"}
+          target="_blank"
+          className={styles.additionalButton}
+        >
+          Floor plan as PDF
+        </Link>
+        <Link
+          href={"https://koppsuisse.ch/wp-content/uploads/2025/07/preisliste.pdf"}
+          className={styles.additionalButton}
+          target="_blank"
+        >
+          Complete price list
+        </Link>
+        <Link
+          href={"https://koppsuisse.ch/wp-content/uploads/2025/07/baubeschrieb.pdf"}
+          className={styles.additionalButton}
+          target="_blank"
+        >
+          Construction description
+        </Link>
       </div>
     </Container>
   );

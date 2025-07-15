@@ -84,12 +84,12 @@ export const partnerList = [
 ];
 
 export const floorOverview = [
-  "6th floor",
-  "5th floor",
-  "4th floor",
-  "3th floor",
-  "2th floor",
-  "1th floor",
-  "Ground floor",
-  "basement",
+  { floor: 6, label: "6th floor" },
+  { floor: 5, label: "5th floor" },
+  { floor: 4, label: "4th floor" },
+  { floor: 3, label: "3th floor" },
+  { floor: 2, label: "2th floor" },
+  { floor: 1, label: "1th floor" },
+  { floor: 0, label: "Ground floor" },
+  { floor: -1, label: "basement" },
 ];
