@@ -1,10 +1,12 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
+import classNames from "classnames";
+
 import { headerNavigationList } from "../../../utils/constant";
 import Container from "../container";
-import classNames from "classnames";
 import Icon from "../../ui/Icon";
+import SelectLanguageBox from "../base/SelectLanguageBox";
 
 const HeaderNavigation = () => {
   const pathName = usePathname();
@@ -13,7 +15,7 @@ const HeaderNavigation = () => {
   return (
     <div>
       <nav className="bg-white py-3 sticky top-0 z-50 hidden tablet:block">
-        <Container className="flex flex-wrap">
+        <Container className="flex flex-wrap items-center">
           {headerNavigationList.map((item, index) => (
             <div className="mr-10" key={index}>
               <button
@@ -29,6 +31,9 @@ const HeaderNavigation = () => {
               </button>
             </div>
           ))}
+          <div>
+            <SelectLanguageBox />
+          </div>
         </Container>
       </nav>
       <div>

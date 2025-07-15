@@ -12,6 +12,9 @@ const ArrowTop = dynamic<{ className?: string }>(() => import("./icons/arrowTop.
 const ArrowLeft = dynamic<{ className?: string }>(() => import("./icons/arrowLeft.svg"));
 const ArrowRight = dynamic<{ className?: string }>(() => import("./icons/arrowRight.svg"));
 const Hamburger = dynamic<{ className?: string }>(() => import("./icons/hamburger.svg"));
+const Germany = dynamic<{ className?: string }>(() => import("./icons/germany.svg"));
+const Mexico = dynamic<{ className?: string }>(() => import("./icons/mexico.svg"));
+const English = dynamic<{ className?: string }>(() => import("./icons/english.svg"));
 
 export type IconType =
   | "Mail"
@@ -23,6 +26,9 @@ export type IconType =
   | "ArrowTop"
   | "ArrowLeft"
   | "ArrowRight"
+  | "Germany"
+  | "Mexico"
+  | "English"
   | "Hamburger";
 
 type IconProps = {
@@ -46,6 +52,9 @@ const Icon: React.FC<IconProps> = ({ name, className }) => {
     ArrowTop,
     ArrowLeft,
     ArrowRight,
+    Germany,
+    Mexico,
+    English,
     Hamburger,
   };
   const CurrentIcon = icons[name];
