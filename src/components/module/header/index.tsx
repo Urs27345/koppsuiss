@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
 import Container from "../container";
 import styles from "./style.module.scss";
@@ -9,10 +10,11 @@ import Icon, { IconType } from "../../ui/Icon";
 import { socialLinks } from "../../../utils/constant";
 
 const Header = () => {
+  const { locale } = useParams();
   return (
     <div className="py-5.5 bg-black">
       <Container className="flex flex-col tablet:flex-row items-center justify-between gap-4 tablet:gap-0">
-        <Link href="/">
+        <Link href={`/${locale}`}>
           <Image src={"/logo.png"} alt="Logo" width={200} height={51} priority />
         </Link>
         <div className="flex flex-col tablet:flex-row items-center justify-between gap-2 tablet:gap-10">

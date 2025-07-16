@@ -1,29 +1,25 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 
 import female from "@/assets/santa/female.png";
 import male from "@/assets/santa/man.png";
 
+import { partnerList } from "../../../../utils/constant";
+import Container from "../../../../components/module/container";
+import { useMyContext } from "../../../context/context";
+
 import styles from "./style.module.scss";
-import { partnerList } from "../../../utils/constant";
-import Container from "../../../components/module/container";
 
 const SantaCruz = () => {
+  const { dictionary } = useMyContext();
   return (
     <Container>
       <div className={styles.wrapper}>
         <div className={styles.context}>
-          <p>
-            Welcome to our sales and consulting page ! We are your reliable partner when it comes to finding the best
-            solutions for your needs. Our experienced team is at your side with in-depth knowledge and personalized
-            support.
-          </p>
-          <p>
-            {`In the sales area, we offer a carefully selected range of products and services that meet the highest quality standards. Each offering is designed to provide you with added value and exceed your expectations.`}
-          </p>
-          <p>
-            {`Our consulting services go far beyond mere sales. We take the time to understand your specific requirements and develop customized strategies that are precisely tailored to your goals. Trust our expertise for a successful collaboration.`}
-          </p>
+          <p>{dictionary["ventasDescription1"]}</p>
+          <p>{dictionary["ventasDescription2"]}</p>
+          <p>{dictionary["ventasDescription3"]}</p>
         </div>
         <div className={styles.imageContent}>
           {partnerList.map((item, index) => (

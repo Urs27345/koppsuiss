@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { Trans } from "react-i18next";
 
 import BeachImage from "@/assets/salar01.jpg";
 import SwimmingPoolImage from "@/assets/piscina01.jpg";

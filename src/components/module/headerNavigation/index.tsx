@@ -1,17 +1,24 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 
 import { headerNavigationList } from "../../../utils/constant";
 import Container from "../container";
 import Icon from "../../ui/Icon";
 import SelectLanguageBox from "../base/SelectLanguageBox";
+import { useMyContext } from "../../../app/context/context";
 
-const HeaderNavigation = () => {
+const HeaderNavigation = ({ dict, locale }: { dict: any; locale: string }) => {
+  const { setDictionary } = useMyContext();
   const pathName = usePathname();
   const router = useRouter();
   const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    setDictionary(dict);
+  }, [dict]);
+
   return (
     <div>
       <nav className="bg-white py-3 sticky top-0 z-50 hidden tablet:block">
@@ -24,10 +31,10 @@ const HeaderNavigation = () => {
                   "py-3.5 block font-semibold text-lg leading-5 hover:text-green",
                 )}
                 onClick={() => {
-                  router.push(item.link);
+                  router.push(`/${locale}/${item.link}`);
                 }}
               >
-                {item.label}
+                {dict[item.label]}
               </button>
             </div>
           ))}

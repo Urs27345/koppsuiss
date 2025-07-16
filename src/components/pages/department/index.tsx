@@ -37,6 +37,8 @@ import image506 from "@/assets/department/506.jpg";
 import Container from "../../module/container";
 import Configurator from "../../module/configurator";
 
+import { useMyContext } from "../../../app/context/context";
+
 import styles from "./style.module.scss";
 
 type Props = {
@@ -45,6 +47,7 @@ type Props = {
 
 const Department: React.FC<Props> = ({ id }) => {
   const router = useRouter();
+  const { dictionary } = useMyContext();
   const floorNumber = id.substring(0, 1);
   const departmentImage: { [key: string]: any } = {
     image010: image010,
@@ -81,17 +84,19 @@ const Department: React.FC<Props> = ({ id }) => {
     <Container>
       <div className={styles.wrapper}>
         <div className={classNames(styles.content, "tablet:max-w-[450px]")}>
-          <h2>3D visualization</h2>
+          <h2>{dictionary["visualization"]}</h2>
           <Configurator />
         </div>
         <div className={classNames(styles.content, "flex-auto")}>
-          <h2>Floor plan apartment {id}</h2>
+          <h2>
+            {dictionary["floorPlanApartment"]} {id}
+          </h2>
           <div>
             <Image src={departmentImage[`image${id}`]} alt="101" className="w-full" />
           </div>
         </div>
         <div className={classNames(styles.content, "max-w-[350px]")}>
-          <h2>Floor overview</h2>
+          <h2>{dictionary["floorOverview"]}</h2>
           <div className={styles.overviewWrapper}>
             {floorOverview.map((item, index) => (
               <p
@@ -110,30 +115,32 @@ const Department: React.FC<Props> = ({ id }) => {
       </div>
       <div className={styles.wrapper}>
         <div className={styles.content}>
-          <h2>Apartment details</h2>
+          <h2>{dictionary["apartmentDetails"]}</h2>
           <div className={styles.apartmentContent}>
             <div className={styles.detailsRow}>
-              <p className={styles.label}>Type:</p>
+              <p className={styles.label}>{dictionary["type"]}:</p>
               <p className={styles.value}>{apartmentDetails?.[id]?.type} bedroom</p>
             </div>
             <div className={styles.detailsRow}>
-              <p className={styles.label}>Living space:</p>
+              <p className={styles.label}>{dictionary["livingSpace"]}:</p>
               <p className={styles.value}>{apartmentDetails?.[id]?.livingSpace} m²</p>
             </div>
             <div className={styles.detailsRow}>
-              <p className={styles.label}>Balcony:</p>
+              <p className={styles.label}>{dictionary["balcony"]}:</p>
               <p className={styles.value}>{apartmentDetails?.[id]?.balcony} m²</p>
             </div>
             <div className={styles.detailsRow}>
-              <p className={styles.label}>Total area:</p>
-              <p className={styles.value}>{floorNumber}st floor</p>
+              <p className={styles.label}>{dictionary["totalArea"]}:</p>
+              <p className={styles.value}>
+                {floorNumber}st {dictionary["floor"]}
+              </p>
             </div>
             <div className={styles.detailsRow}>
-              <p className={styles.label}>Elevator:</p>
+              <p className={styles.label}>{dictionary["elevator"]}:</p>
               <p className={styles.value}>{apartmentDetails?.[id]?.elevator}</p>
             </div>
             <div className={styles.detailsRow}>
-              <p className={styles.label}>Price:</p>
+              <p className={styles.label}>{dictionary["price"]}:</p>
               <p className={styles.value}>CHF {apartmentDetails?.[id]?.price}.–</p>
             </div>
           </div>
@@ -143,28 +150,28 @@ const Department: React.FC<Props> = ({ id }) => {
       </div>
       <div className={styles.bottomContent}>
         <Link href={"/"} target="_blank" className={styles.additionalButton}>
-          Enquire about this apartment
+          {dictionary["enquireAboutThisApartment"]}
         </Link>
         <Link
           href={"https://koppsuisse.ch/wp-content/uploads/2025/07/101-Grundriss.pdf"}
           target="_blank"
           className={styles.additionalButton}
         >
-          Floor plan as PDF
+          {dictionary["floorPlanAsPDF"]}
         </Link>
         <Link
           href={"https://koppsuisse.ch/wp-content/uploads/2025/07/preisliste.pdf"}
           className={styles.additionalButton}
           target="_blank"
         >
-          Complete price list
+          {dictionary["completePriceList"]}
         </Link>
         <Link
           href={"https://koppsuisse.ch/wp-content/uploads/2025/07/baubeschrieb.pdf"}
           className={styles.additionalButton}
           target="_blank"
         >
-          Construction description
+          {dictionary["constructionDescriptionLower"]}
         </Link>
       </div>
     </Container>

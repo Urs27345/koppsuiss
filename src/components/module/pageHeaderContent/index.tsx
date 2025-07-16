@@ -6,20 +6,22 @@ import Container from "../container";
 import Icon from "../../ui/Icon";
 import { usePathname } from "next/navigation";
 import { headerNavigationList } from "../../../utils/constant";
+import { useMyContext } from "../../../app/context/context";
 
 const PageHeaderContent = () => {
+  const { dictionary } = useMyContext();
   const pathName = usePathname();
-  const title = headerNavigationList.find((item) => item.link === pathName)?.label ?? "PLANOS DE PLANTA Y PRECIOS";
+  const title = headerNavigationList.find((item) => pathName.includes(item.link))?.label ?? "floorPlan";
   return (
     <div className={styles.wrapper}>
       <Container className="flex flex-col tablet:flex-row items-center justify-between gap-4 tablet:gap-0">
-        <h1>{title}</h1>
+        <h1>{dictionary[title]}</h1>
         <div className="flex items-center">
           <a href="/" className="text-green">
-            Home
+            {dictionary["home"]}
           </a>
           <Icon name="ArrowRight" className="text-secondaryGray w-4 h-4" />
-          <p className="text-secondaryGray">{title}</p>
+          <p className="text-secondaryGray">{dictionary[title]}</p>
         </div>
       </Container>
     </div>

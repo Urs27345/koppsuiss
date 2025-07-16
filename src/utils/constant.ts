@@ -1,22 +1,22 @@
 export const headerNavigationList = [
   {
-    label: "PLANOS DE PLANTA Y PRECIOS",
+    label: "floorPlan",
     link: "/planos/101",
   },
   {
-    label: "IMPRESIONES",
+    label: "impression",
     link: "/impresiones",
   },
   {
-    label: "DESCRIPCIÓN DE LA CONSTRUCCIÓN",
+    label: "constructionDescription",
     link: "/buildingDescription",
   },
   {
-    label: "SANTA CRUZ",
+    label: "holyCross",
     link: "/santaCruz",
   },
   {
-    label: "VENTAS",
+    label: "sales",
     link: "/ventas",
   },
 ];

@@ -1,5 +1,5 @@
 import React from "react";
-import PageHeaderContent from "../../components/module/pageHeaderContent";
+import PageHeaderContent from "../../../components/module/pageHeaderContent";
 
 export default function PageHeaderLayout({
   children,
