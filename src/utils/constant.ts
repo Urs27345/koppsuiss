@@ -161,9 +161,10 @@ export const floorOverview = [
   {
     floor: 0,
     label: "basement",
-    rooms: [
-      { no: "0-10", type: "2", price: "109,776.00" },
-      { no: "0-20", type: "2", price: "141,880.00" },
+    color: "gray",
+    room: [
+      { no: "001", type: "2", price: "109,776.00" },
+      { no: "002", type: "2", price: "141,880.00" },
     ],
   },
 ];

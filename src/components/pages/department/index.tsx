@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Image from "next/image";
 import classNames from "classnames";
 import Link from "next/link";
@@ -48,8 +48,9 @@ type Props = {
 const Department: React.FC<Props> = ({ id }) => {
   const router = useRouter();
   const { locale } = useParams();
-
   const { dictionary } = useMyContext();
+  const [hoveredRoom, setHoveredRoom] = useState<string>();
+
   const floorNumber = id.substring(0, 1);
   const departmentImage: { [key: string]: any } = {
     image001: image010,
@@ -94,7 +95,7 @@ const Department: React.FC<Props> = ({ id }) => {
       <div className={styles.wrapper}>
         <div className={classNames(styles.content, "tablet:max-w-[450px]")}>
           <h2>{dictionary["visualization"]}</h2>
-          <Configurator />
+          <Configurator hoveredRoom={hoveredRoom} />
         </div>
         <div className={classNames(styles.content, "flex-auto")}>
           <h2>
@@ -107,47 +108,48 @@ const Department: React.FC<Props> = ({ id }) => {
         <div className={classNames(styles.content, "max-w-[350px]")}>
           <h2>{dictionary["floorOverview"]}</h2>
           <div className={styles.overviewWrapper}>
-            {floorOverview.map((item, index) => {
-              return (
-                <Fragment key={index}>
-                  <p
-                    role="button"
-                    onClick={() => {
-                      router.push(`${item.floor}01`);
-                    }}
-                    className={classNames(styles.floorRow, item.floor.toString() === floorNumber ? styles.active : "")}
-                  >
-                    {item.label}
-                  </p>
-                  {item.floor.toString() === floorNumber && (
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <div>Nr</div>
-                        <div>Zimmer</div>
-                        <div>Verkaufspreis</div>
-                      </div>
-                      {item.room?.map((room, roomIndex) => {
-                        return (
-                          <Link
-                            key={roomIndex}
-                            href={`/${locale}/planos/${room.no}`}
-                            className={classNames(
-                              `flex items-center justify-between border-b border-gray-200 py-2 px-1`,
-                              hoverStyleList[item?.color ?? "green"],
-                            )}
-                          >
-                            <span className={styles.roomNo}>{room.no}</span>
-                            <span className={styles.roomNo}>{room.type}</span>
-                            <span className={styles.roomPrice}>CHF {room.price}</span>
-                          </Link>
-                        );
-                      })}
+            {floorOverview.map((item, index) => (
+              <Fragment key={index}>
+                <p
+                  role="button"
+                  onClick={() => {
+                    router.push(`${item.floor}01`);
+                  }}
+                  className={classNames(styles.floorRow, item.floor.toString() === floorNumber ? styles.active : "")}
+                >
+                  {item.label}
+                </p>
+                {item.floor.toString() === floorNumber && (
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <div>Nr</div>
+                      <div>Zimmer</div>
+                      <div>Verkaufspreis</div>
                     </div>
-                  )}
-                  <div></div>
-                </Fragment>
-              );
-            })}
+                    {item.room?.map((room, roomIndex) => (
+                      <Link
+                        key={roomIndex}
+                        href={`/${locale}/planos/${room.no}`}
+                        className={classNames(
+                          `flex items-center justify-between border-b border-gray-200 py-2 px-1`,
+                          hoverStyleList[item?.color ?? "green"],
+                        )}
+                        onMouseOver={() => {
+                          if (hoveredRoom !== room.no) {
+                            setHoveredRoom(room.no);
+                          }
+                        }}
+                      >
+                        <span className={styles.roomNo}>{room.no}</span>
+                        <span className={styles.roomNo}>{room.type}</span>
+                        <span className={styles.roomPrice}>CHF {room.price}</span>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                <div></div>
+              </Fragment>
+            ))}
           </div>
         </div>
       </div>

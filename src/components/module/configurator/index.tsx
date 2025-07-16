@@ -6,16 +6,68 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 
-const Configurator = () => {
+type Props = {
+  hoveredRoom: string | undefined;
+};
+
+const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
   const containerRef = useRef<any>();
+  const cubeGroupsRef = useRef<any[]>([]);
+  const hoveredCubeGroupRef = useRef<any>(null);
+  const hoveredRoomRef = useRef<any>(null);
+
+  const previousMovedGroupsRef = useRef<any[]>([]);
+  const previousFloorRef = useRef<number>(0);
+  const raycaster = new THREE.Raycaster();
+
+  const getFloorFromName = (name: string) => {
+    const match = name.match(/Mesh_(\d+)_\d+/);
+    return match ? parseInt(match[1]) : -1;
+  };
+
+  const moveUpperFloorsUp = (referenceMesh: any) => {
+    const refFloor = getFloorFromName(referenceMesh.name);
+    if (refFloor === previousFloorRef.current || refFloor === -1) return;
+    previousFloorRef.current = refFloor;
+
+    previousMovedGroupsRef.current = [];
+    cubeGroupsRef.current.forEach((group: any) => {
+      const groupFloor = getFloorFromName(group.name);
+      group.userData.originalY = group.position.y;
+      previousMovedGroupsRef.current.push(group);
+
+      if (groupFloor === refFloor) {
+        group.userData.targetY = 0;
+      } else if (groupFloor > refFloor) {
+        group.userData.targetY = 0.01;
+      } else {
+        group.userData.targetY = 0;
+      }
+    });
+  };
+
+  const setCubeHighlight = (mesh: any, highlight: any) => {
+    mesh.traverse((child: any) => {
+      if (child.isMesh) {
+        if (highlight) {
+          child.material.color.copy(child.originalColor);
+        } else {
+          child.material.color.set("#FFFFFF");
+        }
+      }
+    });
+  };
+
+  const resetFloorPositions = () => {
+    previousMovedGroupsRef.current.forEach((group: any) => {
+      if (group.userData.originalY !== undefined) {
+        group.position.y = group.userData.originalY;
+      }
+    });
+    previousMovedGroupsRef.current = [];
+  };
 
   useEffect(() => {
-    const cubeGroups: any = [];
-    let hoveredCubeGroup: any = null;
-    let previousMovedGroups: any = [];
-    let previousFloor = 0;
-
-    const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
 
     const container = containerRef.current;
@@ -91,9 +143,10 @@ const Configurator = () => {
           }
         });
 
+        cubeGroupsRef.current.length = 0;
         model.children.forEach((child: any) => {
           if (child.isMesh || child.isGroup) {
-            cubeGroups.push(child);
+            cubeGroupsRef.current.push(child);
           }
         });
       },
@@ -103,53 +156,6 @@ const Configurator = () => {
       },
     );
 
-    const setCubeHighlight = (group: any, highlight: any) => {
-      group.traverse((child: any) => {
-        if (child.isMesh) {
-          if (highlight) {
-            child.material.color.copy(child.originalColor);
-          } else {
-            child.material.color.set("#FFFFFF");
-          }
-        }
-      });
-    };
-
-    const getFloorFromName = (name: string) => {
-      const match = name.match(/Mesh_(\d+)_\d+/);
-      return match ? parseInt(match[1]) : -1;
-    };
-
-    const moveUpperFloorsUp = (referenceMesh: any) => {
-      const refFloor = getFloorFromName(referenceMesh.name);
-      if (refFloor === previousFloor || refFloor === -1) return;
-      previousFloor = refFloor;
-
-      previousMovedGroups = [];
-      cubeGroups.forEach((group: any) => {
-        const groupFloor = getFloorFromName(group.name);
-        group.userData.originalY = group.position.y;
-        previousMovedGroups.push(group);
-
-        if (groupFloor === refFloor) {
-          group.userData.targetY = 0;
-        } else if (groupFloor > refFloor) {
-          group.userData.targetY = 0.01;
-        } else {
-          group.userData.targetY = 0;
-        }
-      });
-    };
-
-    const resetFloorPositions = () => {
-      previousMovedGroups.forEach((group: any) => {
-        if (group.userData.originalY !== undefined) {
-          group.position.y = group.userData.originalY;
-        }
-      });
-      previousMovedGroups = [];
-    };
-
     const onMouseMove = (event: any) => {
       const rect = renderer.domElement.getBoundingClientRect();
 
@@ -157,28 +163,28 @@ const Configurator = () => {
       mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
       raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(cubeGroups, true);
+      const intersects = raycaster.intersectObjects(cubeGroupsRef.current, true);
 
       if (intersects.length > 0) {
         let mesh = intersects[0].object;
-        while (mesh.parent && !cubeGroups.includes(mesh)) {
+        while (mesh.parent && !cubeGroupsRef.current.includes(mesh)) {
           mesh = mesh.parent;
         }
 
-        if (hoveredCubeGroup !== mesh) {
-          if (hoveredCubeGroup) {
-            setCubeHighlight(hoveredCubeGroup, false);
+        if (hoveredCubeGroupRef.current !== mesh) {
+          if (hoveredCubeGroupRef.current) {
+            setCubeHighlight(hoveredCubeGroupRef.current, false);
             resetFloorPositions();
           }
           setCubeHighlight(mesh, true);
           moveUpperFloorsUp(mesh);
-          hoveredCubeGroup = mesh;
+          hoveredCubeGroupRef.current = mesh;
         }
       } else {
-        if (hoveredCubeGroup) {
-          setCubeHighlight(hoveredCubeGroup, false);
+        if (hoveredCubeGroupRef.current) {
+          setCubeHighlight(hoveredCubeGroupRef.current, false);
           // resetFloorPositions();
-          hoveredCubeGroup = null;
+          hoveredCubeGroupRef.current = null;
         }
       }
     };
@@ -188,7 +194,7 @@ const Configurator = () => {
     const animate = () => {
       requestAnimationFrame(animate);
 
-      cubeGroups.forEach((group: any) => {
+      cubeGroupsRef.current.forEach((group: any) => {
         if (group.userData.targetY !== undefined) {
           const currentY = group.position.y;
           const targetY = group.userData.targetY;
@@ -203,7 +209,7 @@ const Configurator = () => {
         }
       });
 
-      cubeGroups.forEach((group: any) => {
+      cubeGroupsRef.current.forEach((group: any) => {
         group.traverse((child: any) => {
           if (child.isMesh && child.userData.outline) {
             const outline = child.userData.outline;
@@ -234,6 +240,21 @@ const Configurator = () => {
       renderer.dispose();
     };
   }, []);
+
+  useEffect(() => {
+    if (hoveredRoom) {
+      const hoveredMeshName = `Mesh_${hoveredRoom.substring(0, 1)}_${hoveredRoom.slice(-1)}`;
+      const hoveredMesh = cubeGroupsRef.current.find((group) => group.name === hoveredMeshName);
+      moveUpperFloorsUp(hoveredMesh);
+
+      if (hoveredRoomRef.current && hoveredRoomRef.current !== hoveredMesh) {
+        setCubeHighlight(hoveredRoomRef.current, false);
+      }
+
+      setCubeHighlight(hoveredMesh, true);
+      hoveredRoomRef.current = hoveredMesh;
+    }
+  }, [hoveredRoom]);
 
   return <div ref={containerRef} className="w-full tablet:w-[400px] h-[500px]" />;
 };
