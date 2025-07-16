@@ -54,7 +54,7 @@ const Department: React.FC<Props> = ({ id }) => {
   const floorNumber = id.substring(0, 1);
   const departmentImage: { [key: string]: any } = {
     image001: image010,
-    image020: image020,
+    image002: image020,
     image101: image101,
     image102: image102,
     image103: image103,
@@ -102,7 +102,11 @@ const Department: React.FC<Props> = ({ id }) => {
             {dictionary["floorPlanApartment"]} {id}
           </h2>
           <div>
-            <Image src={departmentImage[`image${id}`]} alt="101" className="w-full" />
+            <Image
+              src={departmentImage[`image${floorNumber === "6" ? `5${id.slice(1)}` : id}`]}
+              alt="101"
+              className="w-full"
+            />
           </div>
         </div>
         <div className={classNames(styles.content, "max-w-[350px]")}>

@@ -26,6 +26,7 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
   };
 
   const moveUpperFloorsUp = (referenceMesh: any) => {
+    if (!referenceMesh) return;
     const refFloor = getFloorFromName(referenceMesh.name);
     if (refFloor === previousFloorRef.current || refFloor === -1) return;
     previousFloorRef.current = refFloor;
@@ -47,6 +48,8 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
   };
 
   const setCubeHighlight = (mesh: any, highlight: any) => {
+    if (!mesh) return;
+
     mesh.traverse((child: any) => {
       if (child.isMesh) {
         if (highlight) {
