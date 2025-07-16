@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
+import React, { Fragment } from "react";
 import Image from "next/image";
 import classNames from "classnames";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 import { apartmentDetails, floorOverview } from "../../../utils/constant";
 import image010 from "@/assets/department/010.jpg";
@@ -47,10 +47,12 @@ type Props = {
 
 const Department: React.FC<Props> = ({ id }) => {
   const router = useRouter();
+  const { locale } = useParams();
+
   const { dictionary } = useMyContext();
   const floorNumber = id.substring(0, 1);
   const departmentImage: { [key: string]: any } = {
-    image010: image010,
+    image001: image010,
     image020: image020,
     image101: image101,
     image102: image102,
@@ -80,6 +82,13 @@ const Department: React.FC<Props> = ({ id }) => {
     image506: image506,
   };
 
+  const hoverStyleList: { [key: string]: string } = {
+    pink: "hover:bg-[##F2DCDA]",
+    green: "hover:bg-[##92D050]",
+    gray: "hover:bg-secondaryGray/30",
+    brown: "hover:bg-[#C4BD97]",
+  };
+
   return (
     <Container>
       <div className={styles.wrapper}>
@@ -98,18 +107,47 @@ const Department: React.FC<Props> = ({ id }) => {
         <div className={classNames(styles.content, "max-w-[350px]")}>
           <h2>{dictionary["floorOverview"]}</h2>
           <div className={styles.overviewWrapper}>
-            {floorOverview.map((item, index) => (
-              <p
-                key={index}
-                role="button"
-                onClick={() => {
-                  router.push(`${item.floor}01`);
-                }}
-                className={classNames(styles.floorRow, item.floor.toString() === floorNumber ? styles.active : "")}
-              >
-                {item.label}
-              </p>
-            ))}
+            {floorOverview.map((item, index) => {
+              return (
+                <Fragment key={index}>
+                  <p
+                    role="button"
+                    onClick={() => {
+                      router.push(`${item.floor}01`);
+                    }}
+                    className={classNames(styles.floorRow, item.floor.toString() === floorNumber ? styles.active : "")}
+                  >
+                    {item.label}
+                  </p>
+                  {item.floor.toString() === floorNumber && (
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <div>Nr</div>
+                        <div>Zimmer</div>
+                        <div>Verkaufspreis</div>
+                      </div>
+                      {item.room?.map((room, roomIndex) => {
+                        return (
+                          <Link
+                            key={roomIndex}
+                            href={`/${locale}/planos/${room.no}`}
+                            className={classNames(
+                              `flex items-center justify-between border-b border-gray-200 py-2 px-1`,
+                              hoverStyleList[item?.color ?? "green"],
+                            )}
+                          >
+                            <span className={styles.roomNo}>{room.no}</span>
+                            <span className={styles.roomNo}>{room.type}</span>
+                            <span className={styles.roomPrice}>CHF {room.price}</span>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                  <div></div>
+                </Fragment>
+              );
+            })}
           </div>
         </div>
       </div>

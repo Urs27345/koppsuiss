@@ -84,17 +84,92 @@ export const partnerList = [
 ];
 
 export const floorOverview = [
-  { floor: 6, label: "6th floor" },
-  { floor: 5, label: "5th floor" },
-  { floor: 4, label: "4th floor" },
-  { floor: 3, label: "3th floor" },
-  { floor: 2, label: "2th floor" },
-  { floor: 1, label: "1th floor" },
-  { floor: 0, label: "basement" },
+  {
+    floor: 6,
+    label: "6th floor",
+    color: "green",
+    room: [
+      { no: "601", type: "1", price: "83,200.00" },
+      { no: "602", type: "1", price: "65,520.00" },
+      { no: "603", type: "1", price: "67,360.00" },
+      { no: "604", type: "1", price: "88,344.00" },
+      { no: "605", type: "2", price: "109,840.00" },
+      { no: "606", type: "2", price: "118,696.00" },
+    ],
+  },
+  {
+    floor: 5,
+    label: "5th floor",
+    color: "green",
+    room: [
+      { no: "501", type: "3", price: "164,118.00" },
+      { no: "502", type: "1", price: "103,819.00" },
+      { no: "503", type: "1", price: "129,616.50" },
+      { no: "504", type: "1", price: "103,819.00" },
+      { no: "505", type: "2", price: "203,932.00" },
+      { no: "506", type: "2", price: "196,061.00" },
+    ],
+  },
+  {
+    floor: 4,
+    label: "4th floor",
+    color: "brown",
+    room: [
+      { no: "401", type: "2", price: "144,592.00" },
+      { no: "402", type: "2", price: "153,456.00" },
+      { no: "403", type: "1", price: "80,064.00" },
+      { no: "404", type: "3", price: "156,184.00" },
+    ],
+  },
+  {
+    floor: 3,
+    label: "3th floor",
+    color: "gray",
+    room: [
+      { no: "301", type: "1", price: "83,200.00" },
+      { no: "302", type: "1", price: "65,520.00" },
+      { no: "303", type: "1", price: "67,360.00" },
+      { no: "304", type: "1", price: "88,344.00" },
+      { no: "305", type: "2", price: "109,840.00" },
+      { no: "306", type: "2", price: "118,696.00" },
+    ],
+  },
+  {
+    floor: 2,
+    label: "2th floor",
+    color: "brown",
+    room: [
+      { no: "201", type: "2", price: "144,592.00" },
+      { no: "202", type: "2", price: "153,456.00" },
+      { no: "203", type: "1", price: "80,064.00" },
+      { no: "204", type: "3", price: "156,184.00" },
+    ],
+  },
+  {
+    floor: 1,
+    label: "1th floor",
+    color: "gray",
+    room: [
+      { no: "101", type: "1", price: "83,200.00" },
+      { no: "102", type: "1", price: "65,520.00" },
+      { no: "103", type: "1", price: "67,360.00" },
+      { no: "104", type: "1", price: "88,344.00" },
+      { no: "105", type: "2", price: "109,840.00" },
+      { no: "106", type: "2", price: "118,696.00" },
+    ],
+  },
+  {
+    floor: 0,
+    label: "basement",
+    rooms: [
+      { no: "0-10", type: "2", price: "109,776.00" },
+      { no: "0-20", type: "2", price: "141,880.00" },
+    ],
+  },
 ];
 
 export const apartmentDetails: { [key: string]: any } = {
-  "010": {
+  "001": {
     type: 2,
     livingSpace: 65.12,
     balcony: 6.98,

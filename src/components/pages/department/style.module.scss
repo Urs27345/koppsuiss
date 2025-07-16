@@ -14,6 +14,13 @@
 
       .floorRow {
         @apply py-2.5 px-3.5 bg-[#e5f5e5] hover:bg-[#cce7cc] cursor-pointer rounded-md text-secondaryGray;
+
+        .hover-green {
+          @apply hover:bg-[#cce7cc];
+        }
+        .hover-blue {
+          @apply hover:bg-blue/20;
+        }
       }
       .active {
         @apply bg-[#a3d9a5] border-l-4 border-[#388e3c];
