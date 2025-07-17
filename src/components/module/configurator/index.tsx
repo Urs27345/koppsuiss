@@ -17,7 +17,7 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
   const hoveredRoomRef = useRef<any>(null);
 
   const previousMovedGroupsRef = useRef<any[]>([]);
-  const previousFloorRef = useRef<number>(0);
+  const previousFloorRef = useRef<number>(-1);
   const raycaster = new THREE.Raycaster();
 
   const getFloorFromName = (name: string) => {

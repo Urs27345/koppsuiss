@@ -94,8 +94,41 @@ const Department: React.FC<Props> = ({ id }) => {
     <Container>
       <div className={styles.wrapper}>
         <div className={classNames(styles.content, "tablet:max-w-[450px]")}>
-          <h2>{dictionary["visualization"]}</h2>
-          <Configurator hoveredRoom={hoveredRoom} />
+          <div>
+            <h2>{dictionary["visualization"]}</h2>
+            <Configurator hoveredRoom={hoveredRoom} />
+          </div>
+          <div className="mt-4">
+            <h2>{dictionary["apartmentDetails"]}</h2>
+            <div className={styles.apartmentContent}>
+              <div className={styles.detailsRow}>
+                <p className={styles.label}>{dictionary["type"]}:</p>
+                <p className={styles.value}>{apartmentDetails?.[id]?.type} bedroom</p>
+              </div>
+              <div className={styles.detailsRow}>
+                <p className={styles.label}>{dictionary["livingSpace"]}:</p>
+                <p className={styles.value}>{apartmentDetails?.[id]?.livingSpace} m²</p>
+              </div>
+              <div className={styles.detailsRow}>
+                <p className={styles.label}>{dictionary["balcony"]}:</p>
+                <p className={styles.value}>{apartmentDetails?.[id]?.balcony} m²</p>
+              </div>
+              <div className={styles.detailsRow}>
+                <p className={styles.label}>{dictionary["totalArea"]}:</p>
+                <p className={styles.value}>
+                  {floorNumber}st {dictionary["floor"]}
+                </p>
+              </div>
+              <div className={styles.detailsRow}>
+                <p className={styles.label}>{dictionary["elevator"]}:</p>
+                <p className={styles.value}>{apartmentDetails?.[id]?.elevator}</p>
+              </div>
+              <div className={styles.detailsRow}>
+                <p className={styles.label}>{dictionary["price"]}:</p>
+                <p className={styles.value}>CHF {apartmentDetails?.[id]?.price}.–</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div className={classNames(styles.content, "flex-auto")}>
           <h2>
@@ -153,7 +186,7 @@ const Department: React.FC<Props> = ({ id }) => {
           </div>
         </div>
       </div>
-      <div className={styles.wrapper}>
+      {/* <div className={styles.wrapper}>
         <div className={styles.content}>
           <h2>{dictionary["apartmentDetails"]}</h2>
           <div className={styles.apartmentContent}>
@@ -187,7 +220,7 @@ const Department: React.FC<Props> = ({ id }) => {
         </div>
         <div className="w-full"></div>
         <div className="w-full"></div>
-      </div>
+      </div> */}
       <div className={styles.bottomContent}>
         <Link href={"/"} target="_blank" className={styles.additionalButton}>
           {dictionary["enquireAboutThisApartment"]}
