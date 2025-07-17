@@ -9,12 +9,8 @@
     }
   }
 
-  h1 {
-    @apply text-[35px] font-bold text-thirdGray mt-10;
-  }
-
   h2 {
-    @apply text-[30px] my-5 font-bold text-thirdGray;
+    @apply text-[30px] my-5 font-bold text-green/50;
   }
 
   .content {
