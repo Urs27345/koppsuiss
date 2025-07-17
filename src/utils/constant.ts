@@ -85,19 +85,6 @@ export const partnerList = [
 
 export const floorOverview = [
   {
-    floor: 6,
-    label: "6th floor",
-    color: "green",
-    room: [
-      { no: "601", type: "1", price: "83,200.00" },
-      { no: "602", type: "1", price: "65,520.00" },
-      { no: "603", type: "1", price: "67,360.00" },
-      { no: "604", type: "1", price: "88,344.00" },
-      { no: "605", type: "2", price: "109,840.00" },
-      { no: "606", type: "2", price: "118,696.00" },
-    ],
-  },
-  {
     floor: 5,
     label: "5th floor",
     color: "green",

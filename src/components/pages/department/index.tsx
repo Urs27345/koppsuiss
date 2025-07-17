@@ -102,11 +102,7 @@ const Department: React.FC<Props> = ({ id }) => {
             {dictionary["floorPlanApartment"]} {id}
           </h2>
           <div>
-            <Image
-              src={departmentImage[`image${floorNumber === "6" ? `5${id.slice(1)}` : id}`]}
-              alt="101"
-              className="w-full"
-            />
+            <Image src={departmentImage[`image${id}`]} alt="101" className="w-full" />
           </div>
         </div>
         <div className={classNames(styles.content, "max-w-[350px]")}>

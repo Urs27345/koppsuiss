@@ -40,7 +40,7 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
       if (groupFloor === refFloor) {
         group.userData.targetY = 0;
       } else if (groupFloor > refFloor) {
-        group.userData.targetY = 0.01;
+        group.userData.targetY = 0.02;
       } else {
         group.userData.targetY = 0;
       }
