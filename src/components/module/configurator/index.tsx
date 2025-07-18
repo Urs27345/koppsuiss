@@ -216,7 +216,6 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
           mesh = mesh.parent;
         }
         const roomData = mesh.name.split("_");
-        console.log("Clicked mesh:", roomData[1], roomData[2]);
         if (!disabledMeshList.includes(mesh.name)) {
           router.push(`/${locale}/planos/${roomData[1]}0${roomData[2]}`);
         }
