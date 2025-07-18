@@ -125,7 +125,7 @@ const Department: React.FC<Props> = ({ id }) => {
               </div>
               <div className={styles.detailsRow}>
                 <p className={styles.label}>{dictionary["price"]}:</p>
-                <p className={styles.value}>CHF {apartmentDetails?.[id]?.price}.–</p>
+                <p className={styles.value}>USD {apartmentDetails?.[id]?.price}.–</p>
               </div>
             </div>
           </div>
@@ -175,7 +175,7 @@ const Department: React.FC<Props> = ({ id }) => {
                       >
                         <span className={styles.roomNo}>{room.no}</span>
                         <span className={styles.roomNo}>{room.type}</span>
-                        <span className={styles.roomPrice}>CHF {room.price}</span>
+                        <span className={styles.roomPrice}>USD {room.price}</span>
                       </Link>
                     ))}
                   </div>
@@ -214,7 +214,7 @@ const Department: React.FC<Props> = ({ id }) => {
             </div>
             <div className={styles.detailsRow}>
               <p className={styles.label}>{dictionary["price"]}:</p>
-              <p className={styles.value}>CHF {apartmentDetails?.[id]?.price}.–</p>
+              <p className={styles.value}>USD {apartmentDetails?.[id]?.price}.–</p>
             </div>
           </div>
         </div>
