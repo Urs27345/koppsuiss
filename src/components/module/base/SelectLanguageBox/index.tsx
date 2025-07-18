@@ -36,12 +36,12 @@ const SelectLanguageBox = () => {
         <SelectValue placeholder="DE" />
       </SelectTrigger>
       <SelectContent>
-        {/* <SelectItem value="de">
+        <SelectItem value="de">
           <div className="flex gap-2 items-center">
             <Icon name="Germany" className="w-5 h-5" />
             <p>Deutsch</p>
           </div>
-        </SelectItem> */}
+        </SelectItem>
         <SelectItem value="en">
           <div className="flex gap-2 items-center">
             <Icon name="English" className="w-5 h-5" />

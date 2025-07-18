@@ -354,3 +354,20 @@ export const apartmentDetails: { [key: string]: any } = {
     price: "196,061.00",
   },
 };
+
+export const disabledMeshList = [
+  "Mesh_0_4",
+  "Mesh_0_5",
+  "Mesh_1_7",
+  "Mesh_2_5",
+  "Mesh_3_7",
+  "Mesh_4_5",
+  "Mesh_5_7",
+  "Mesh_6_1",
+  "Mesh_6_2",
+  "Mesh_6_3",
+  "Mesh_6_4",
+  "Mesh_6_5",
+  "Mesh_6_6",
+  "Mesh_6_7",
+];

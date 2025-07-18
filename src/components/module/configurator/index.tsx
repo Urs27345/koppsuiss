@@ -5,12 +5,17 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import { disabledMeshList } from "../../../utils/constant";
+import { useParams, useRouter } from "next/navigation";
 
 type Props = {
   hoveredRoom: string | undefined;
 };
 
 const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
+  const { locale } = useParams();
+
+  const router = useRouter();
   const containerRef = useRef<any>();
   const cubeGroupsRef = useRef<any[]>([]);
   const hoveredCubeGroupRef = useRef<any>(null);
@@ -173,6 +178,11 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
         while (mesh.parent && !cubeGroupsRef.current.includes(mesh)) {
           mesh = mesh.parent;
         }
+        if (disabledMeshList.includes(mesh.name)) {
+          renderer.domElement.style.cursor = "default";
+        } else {
+          renderer.domElement.style.cursor = "pointer";
+        }
 
         if (hoveredCubeGroupRef.current !== mesh) {
           if (hoveredCubeGroupRef.current) {
@@ -192,7 +202,28 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
       }
     };
 
+    const onMeshClick = (event: MouseEvent) => {
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(cubeGroupsRef.current, true);
+
+      if (intersects.length > 0) {
+        let mesh = intersects[0].object;
+        while (mesh.parent && !cubeGroupsRef.current.includes(mesh)) {
+          mesh = mesh.parent;
+        }
+        const roomData = mesh.name.split("_");
+        if (!disabledMeshList.includes(mesh.name)) {
+          router.push(`/${locale}/planos/${roomData[1]}0${roomData[2]}`);
+        }
+      }
+    };
+
     window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("pointerdown", onMeshClick);
 
     const animate = () => {
       requestAnimationFrame(animate);
@@ -239,6 +270,8 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("pointerdown", onMeshClick);
+
       container.removeChild(renderer.domElement);
       renderer.dispose();
     };
@@ -259,7 +292,7 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
     }
   }, [hoveredRoom]);
 
-  return <div ref={containerRef} className="w-full tablet:w-[400px] h-[500px]" />;
+  return <div ref={containerRef} className="w-full tablet:w-[400px] h-[500px] cu" />;
 };
 
 export default Configurator;
