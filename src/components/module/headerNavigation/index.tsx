@@ -66,13 +66,14 @@ const HeaderNavigation = ({ dict, locale }: { dict: any; locale: string }) => {
                   "py-1 text-left font-medium text-base leading-5 hover:text-green",
                 )}
                 onClick={() => {
-                  router.push(item.link);
+                  router.push(`/${locale}/${item.link}`);
                 }}
               >
                 {item.label}
               </button>
             </div>
           ))}
+          <SelectLanguageBox />
         </nav>
       </div>
     </div>
