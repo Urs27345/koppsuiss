@@ -69,7 +69,7 @@ const HeaderNavigation = ({ dict, locale }: { dict: any; locale: string }) => {
                   router.push(`/${locale}/${item.link}`);
                 }}
               >
-                {item.label}
+                {dict[item.label]}
               </button>
             </div>
           ))}
