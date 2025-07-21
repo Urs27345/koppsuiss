@@ -77,6 +77,7 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
 
   useEffect(() => {
     const mouse = new THREE.Vector2();
+    const isMobile = window.innerWidth <= 768;
 
     const container = containerRef.current;
     const width = container.clientWidth;
@@ -125,8 +126,8 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
       "/house.glb",
       (gltf) => {
         const model = gltf.scene;
-        model.scale.set(13, 13, 13);
-        model.position.set(-0.1, -0.35, 0);
+        model.scale.set(isMobile ? 9 : 13, isMobile ? 9 : 13, isMobile ? 9 : 13);
+        model.position.set(-0.1, isMobile ? -0.35 : -0.15, 0);
         scene.add(model);
 
         const edgeMaterial = new THREE.LineBasicMaterial({ color: "#A9A9A9" });
@@ -292,7 +293,7 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
     }
   }, [hoveredRoom]);
 
-  return <div ref={containerRef} className="w-full tablet:w-[400px] h-[500px] cu" />;
+  return <div ref={containerRef} className="w-full tablet:w-[400px] h-[300px] tablet:h-[500px] cu" />;
 };
 
 export default Configurator;
