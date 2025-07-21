@@ -127,7 +127,7 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
       (gltf) => {
         const model = gltf.scene;
         model.scale.set(isMobile ? 9 : 13, isMobile ? 9 : 13, isMobile ? 9 : 13);
-        model.position.set(-0.1, isMobile ? -0.35 : -0.15, 0);
+        model.position.set(-0.1, isMobile ? -0.15 : -0.35, 0);
         scene.add(model);
 
         const edgeMaterial = new THREE.LineBasicMaterial({ color: "#A9A9A9" });
