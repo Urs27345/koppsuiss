@@ -1,21 +1,20 @@
+/* Allgemeiner Stil für alle Texte */
 .wrapper p {
   @apply font-medium text-lg leading-7 text-secondaryGray;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem; /* Abstand angepasst */
 }
 
 /* Intro-Überschrift */
 .intro {
-  @apply text-4xl font-bold text-blue-600;
-  margin-bottom: 2rem;
+  @apply text-4xl font-bold text-blue-600 mb-8; /* Überschrift blau und Abstand */
 }
 
 /* Intro-Beschreibung */
 .intro1 {
-  @apply text-lg text-gray-600 leading-relaxed;
-  margin-bottom: 3rem;
+  @apply text-lg text-gray-600 mb-12 leading-relaxed; /* Abstand und Schriftgröße */
 }
 
-/* Alle Überschriften (1–10) in Blau */
+/* Alle Überschriften (1-10) in Blau */
 .wrapper p b {
   @apply text-blue-600;
 }
@@ -24,7 +23,7 @@
 .image {
   width: 100%;
   max-width: 570px;
-  border-radius: 8px;
+  border-radius: 8px; /* Leichte Abrundung */
   object-fit: cover;
-  margin-top: 10px;
+  margin-top: 10px; /* Abstand oben */
 }
