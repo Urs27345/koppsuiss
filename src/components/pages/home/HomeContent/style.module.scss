@@ -1,23 +1,20 @@
-.wrapper {
-  /* Allgemeiner Stil für alle Texte */
-  p {
-    @apply font-medium text-lg leading-7 text-secondaryGray;
-  }
+.wrapper p {
+  @apply font-medium text-lg leading-7 text-secondaryGray;
+}
 
-  /* Intro-Überschrift */
-  .intro {
-    @apply text-4xl font-bold text-blue-600 mb-6;
-  }
+/* Intro-Überschrift */
+.intro {
+  @apply text-4xl font-bold text-blue-600 mb-6;
+}
 
-  /* Intro-Beschreibung */
-  .intro1 {
-    @apply text-lg text-gray-600 mb-10 leading-relaxed;
-  }
+/* Intro-Beschreibung */
+.intro1 {
+  @apply text-lg text-gray-600 mb-10 leading-relaxed;
+}
 
-  /* Alle Überschriften (1-10) in Blau */
-  p b {
-    @apply text-blue-600;
-  }
+/* Alle Überschriften (1-10) in Blau */
+.wrapper p b {
+  @apply text-blue-600;
 }
 
 /* Bildstil */
