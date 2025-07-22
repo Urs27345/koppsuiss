@@ -1,29 +1,18 @@
 {
   "greeting": "Bonjour",
   "about": "À propos de nous",
-  "intro": "<b>En el corazón de Santa Cruz</b> le espera un concepto residencial único.",
-"intro1": "Nuestro edificio multifamiliar combina la calidad de construcción suiza con el confort moderno – un estándar sin igual en Bolivia. Experimente una forma completamente nueva de vivir con estos destacados beneficios:",
-
-"beachDescription": "<b>1. Piscina de agua salada climatizada con sal del Salar de Uyuni</b><br/> El agua de la piscina, enriquecida con sal de Uyuni, requiere mucho menos cloro y otros productos químicos. La sal no solo es agradable para la piel, sino que también es beneficiosa para la salud. Gracias al sistema de calefacción integrado, puede disfrutar de agua agradablemente tibia en cualquier momento.",
-
-"swimmingDescription": "<b>2. Piscina infinita panorámica con plexiglás de seguridad</b><br/> El plexiglás le ofrece una vista impresionante de Santa Cruz. El diseño infinito da la sensación de fusionarse directamente con el horizonte – un verdadero punto destacado para todos los sentidos.",
-
-"highQuality": "<b>3. Piso epóxico de alta calidad</b><br/> Este tipo de revestimiento se utiliza ampliamente en Europa y otros países. El recubrimiento epóxico hace que el piso sea suave, cómodo e higiénico. Es fácil de limpiar y ofrece una apariencia moderna y elegante.",
-
-"importedVeneer": "<b>4. Madera enchapada importada</b><br/> Para cocinas, baños y muebles de sala, utilizamos únicamente madera enchapada de la más alta calidad. Está compuesta por al menos 10 capas de láminas delgadas de madera, lo que la hace mucho más estable y resistente al agua que la madera de melamina convencional.",
-
-"stableSoundProof": "<b>5. Puertas robustas e insonorizadas</b><br/> Nuestras puertas están hechas de madera multicapa de alta calidad. Esta construcción garantiza un aislamiento acústico óptimo, estabilidad y una larga durabilidad.",
-
-"soundproofAluminum": "<b>6. Ventanas de aluminio insonorizadas</b><br/> Nuestras modernas ventanas cuentan con doble acristalamiento y gas adicional en la cámara. Garantizan un excelente aislamiento térmico, acústico y una larga vida útil según los estándares suizos.",
-
-"airCondition": "<b>7. Aire acondicionado en el techo</b><br/> Un moderno sistema de climatización con menos unidades exteriores garantiza temperaturas agradables con un menor consumo de energía. Las unidades interiores están elegantemente integradas en el techo y apenas son visibles.",
-
-"importedSeismic": "<b>8. Acero estructural importado y antisísmico</b><br/> Utilizamos acero antisísmico de la misma calidad que se emplea en la construcción de los edificios más altos del mundo. Esto garantiza la máxima seguridad y estabilidad.",
-
-"electricalSystem": "<b>9. Instalación eléctrica con calidad alemana</b><br/> Todo el sistema eléctrico ha sido instalado por una empresa de construcción alemana, lo que garantiza los más altos estándares de seguridad y calidad.",
-
-"fachadaVentilada": "<b>10. Fachada ventilada</b><br/> El aislamiento de lana mineral mantiene el apartamento fresco en verano y cálido en invierno. También ofrece un excelente aislamiento acústico, protección contra la humedad y es ecológico.",
-
+  "intro": "<b>En el corazón de Santa Cruz,</b> le espera un edificio de apartamentos único.",
+  "intro1": "Desde constructores innovadores de Suiza hasta estándares suizos, te ofrecemos una nueva sensación de vivir en 10 puntos que es una novedad para este tipo de casas en <b>Bolivia</b>.",
+  "beachDescription": "<b>Piscina climatizada de agua salada con sal del salar de Uyuni,</b><br />agua de la piscina que se mezcla muy ligeramente con la sal de Uyuni. Esto significa que necesita mucho menos cloro y otros productos químicos. Al mismo tiempo, la sal es agradable y saludable para el cuerpo y la piel. Debido a la calefacción incorporada, el agua salada siempre está constantemente caliente.",
+  "swimmingDescription": "<b>Piscina infinita panorámica con plexiglás de seguridad</b><br /> A través del plexiglás se tiene una vista impresionante de Santa Cruz.",
+  "highQuality": "Suelos epoxi de alta calidad en todas las viviendas Suelos muy utilizados en Europa y otros países. La capa de epoxi hace que el suelo sea suave y cómodo. Debido a que es una superficie continua, el piso es fácil de limpiar y se ve limpio y liso.",
+  "importedVeneer": "Madera de chapa importada para muebles de cocina, baño y sala de estar La mejor calidad de madera de chapa se utiliza para todos los muebles y gabinetes. La madera se pega a partir de al menos 10 capas de paneles de madera delgados y, por lo tanto, es mucho más estable y resistente al agua que la madera de melanina que se usa generalmente en Bolivia, que se pega a partir de astillas de madera. Nuestra chapa de madera está protegida adicionalmente con una capa de color madera o blanca. Toda la madera es procesada en muebles por un carpintero suizo con el más alto estándar aquí en Bolivia.",
+  "stableSoundProof": "Puertas insonorizadas estables de madera multicapa Nuestras puertas están compuestas de forma óptima por diferentes maderas, para que sean estables, insonorizadas y duraderas.",
+  "soundproofAluminum": "Ventanas de aluminio insonorizadas con doble acristalamiento: Ventanas de última generación según las normas suizas en cuanto a insonorización y durabilidad. Nuestras ventanas no solo tienen doble acristalamiento, sino que también están llenas de gas entre los cristales, lo que proporciona un aislamiento adicional.",
+  "airCondition": "Sistema de climatización instalado en los techos. 50-70% menos de unidades exteriores en fachadas Sistema de climatización de última generación. Nuestros dispositivos de exterior pueden hacer funcionar varios dispositivos de interior al mismo tiempo. Esto significa que nuestros aires acondicionados consumen menos electricidad y, al mismo tiempo, la casa tiene un aspecto más agradable porque hay que utilizar menos electrodomésticos de exterior. Además, nuestras unidades interiores no son objetos voluminosos y torpes que generalmente se cuelgan en la pared, sino que las unidades interiores están discretamente ocultas en el techo y solo se ven pequeños espacios.",
+  "importedSeismic": "Acero estructural antisísmico importado, el mismo que se utiliza para construir los edificios más altos del mundo. Utilizamos acero original importado que se utiliza para construir los mejores edificios del mundo.",
+  "electricalSystem": "Sistema eléctrico instalado por una empresa constructora alemana La mejor instalación de calidad alemana.",
+  "fachadaVentilada": "<b>Fachada ventilada</b><br /> El aislamiento con lana de vidrio asegura que el calor esté donde debe estar. En verano es agradable y fresco en el apartamento, en invierno el calor se queda en el apartamento. Además, el aislamiento proporciona un excelente aislamiento acústico, protección contra la humedad, ecología y durabilidad. Reduce las pérdidas de energía a través de las paredes exteriores en un 80%",
   "floorPlan": "PLANOS DE PLANTA Y PRECIOS",
   "impression": "IMPRESIONES",
   "constructionDescription": "DESCRIPCIÓN DE LA CONSTRUCCIÓN",
