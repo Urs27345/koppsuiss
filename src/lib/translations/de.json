@@ -3,16 +3,26 @@
   "about": "About us",
   "intro": "<b>Im Herzen von Santa Cruz</b> erwartet Sie ein einzigartiges Wohnkonzept.",
   "intro1": "Unser Mehrfamilienhaus vereint Schweizer Bauqualität mit modernem Wohnkomfort – ein Standard, der in Bolivien seinesgleichen sucht. Erleben Sie ein völlig neues Wohngefühl mit diesen herausragenden Highlights:",
-  "beachDescription": "Beheizter Salzwasserpool mit Salz aus der Uyuni-Salinen. Das Poolwasser ist leicht mit Uyuni-Salz versetzt. Dadurch benötigt es deutlich weniger Chlor und andere Chemikalien. Gleichzeitig ist das Salz angenehm und gesund für Körper und Haut. Dank der eingebauten Heizung ist das Salzwasser stets gleichmäßig warm.",
-  "swimmingDescription": "<b>Panorama-Infinity-Pool mit Sicherheitsplexiglas.</b><br /> Durch das Plexiglas haben Sie einen atemberaubenden Blick auf Santa Cruz.",
-  "highQuality": "Hochwertiger Epoxidboden in jedem Zuhause. Dieser Bodenbelag ist in Europa und anderen Ländern weit verbreitet. Die Epoxidbeschichtung macht den Boden weich und komfortabel. Da es sich um eine durchgehende Oberfläche handelt, ist der Boden leicht zu reinigen und sieht sauber und glatt aus.",
-  "importedVeneer": "Importiertes Furnierholz für Küchen-, Bad- und Wohnzimmermöbel. Für alle Möbel und Schränke wird hochwertigstes Furnierholz verwendet. Das Holz wird aus mindestens 10 Lagen dünner Holzplatten verleimt und ist daher wesentlich stabiler und wasserbeständiger als das in Bolivien üblicherweise verwendete Melaminholz, das aus Holzspänen verleimt wird. Unser Furnier ist zusätzlich mit einer holzfarbenen oder weißen Schicht geschützt. Sämtliches Holz wird von einem Schweizer Schreiner nach höchsten Standards hier in Bolivien zu Möbeln verarbeitet.",
-  "stableSoundProof": "Stabile, schalldichte Türen aus Mehrschichtholz. Der optimale Aufbau unserer Türen aus verschiedenen Holzarten sorgt für Stabilität, Schallschutz und Langlebigkeit.",
-  "soundproofAluminum": "Schallschutz-Aluminiumfenster mit Doppelverglasung: Moderne Fenster, die den Schweizer Schallschutz- und Langlebigkeitsstandards entsprechen. Unsere Fenster sind nicht nur doppelt verglast, sondern verfügen zusätzlich über eine Gasfüllung zwischen den Scheiben, die für zusätzliche Isolierung sorgt.",
-  "airCondition": "Deckenklimaanlage. 50–70 % weniger Außengeräte an Fassaden. Modernes Klimasystem. Unsere Außengeräte können mehrere Innengeräte gleichzeitig betreiben. Das bedeutet weniger Stromverbrauch und gleichzeitig ein angenehmeres Wohngefühl durch weniger Außengeräte. Unsere Innengeräte sind keine sperrigen, unhandlichen Objekte, die üblicherweise an der Wand hängen. Stattdessen sind die Innengeräte diskret in der Decke versteckt, sodass nur kleine Zwischenräume sichtbar sind.",
-  "importedSeismic": "Importierter, erdbebensicherer Baustahl, der auch für den Bau der höchsten Gebäude der Welt verwendet wird. Wir verwenden importierten Originalstahl, der auch für den Bau der schönsten Gebäude der Welt verwendet wird.",
-  "electricalSystem": "Die Elektroinstallation wurde von einem deutschen Bauunternehmen installiert. Installation in bester deutscher Qualität.",
-  "fachadaVentilada": "<b>Gelüftete Fassade</b><br /> Glaswolledämmung sorgt dafür, dass die Wärme dort bleibt, wo sie hingehört. Im Sommer ist die Wohnung angenehm kühl, während im Winter die Wärme im Haus bleibt. Darüber hinaus bietet die Dämmung hervorragenden Schallschutz, Feuchtigkeitsschutz, Umweltfreundlichkeit und Langlebigkeit. Sie reduziert den Energieverlust durch Außenwände um 80 %.",
+  "beachDescription": "<b>1. Beheizter Salzwasserpool mit Salz aus dem Uyuni-Salzsee</b><br/> Das mit Salz aus Uyuni angereicherte Poolwasser benötigt deutlich weniger Chlor und andere Chemikalien. Das Salz ist nicht nur angenehm für die Haut, sondern auch gesundheitsfördernd. Dank der integrierten Heizung genießen Sie jederzeit angenehm warmes Wasser.",
+  
+  "swimmingDescription": "<b>2. Panorama-Infinity-Pool mit Sicherheitsplexiglas</b><br/> Durch das Plexiglas haben Sie einen atemberaubenden Blick auf Santa Cruz. Das Infinity-Design vermittelt das Gefühl, direkt mit der Skyline zu verschmelzen – ein wahres Highlight für alle Sinne.",
+  
+  "highQuality": "<b>3. Hochwertiger Epoxidboden</b><br/> Dieser Bodenbelag ist in Europa und anderen Ländern weit verbreitet. Die Epoxidbeschichtung macht den Boden weich, komfortabel und hygienisch. Er ist leicht zu reinigen und wirkt modern und elegant.",
+  
+  "importedVeneer": "<b>4. Importiertes Furnierholz</b><br/> Für Küchen-, Bad- und Wohnzimmermöbel wird hochwertigstes Furnierholz verwendet. Es besteht aus mindestens 10 Lagen dünner Holzplatten und ist daher stabiler und wasserbeständiger als herkömmliches Melaminholz.",
+  
+  "stableSoundProof": "<b>5. Stabile, schalldichte Türen</b><br/> Unsere Türen bestehen aus hochwertigem Mehrschichtholz. Diese Konstruktion bietet optimalen Schallschutz, Stabilität und eine lange Lebensdauer.",
+  
+  "soundproofAluminum": "<b>6. Schallschutz-Aluminiumfenster</b><br/> Unsere modernen Fenster verfügen über Doppelverglasung mit zusätzlicher Gasfüllung. Sie garantieren hervorragende Isolierung, Schallschutz und Langlebigkeit nach Schweizer Standards.",
+  
+  "airCondition": "<b>7. Deckenklimaanlage</b><br/> Ein modernes Klimasystem mit weniger Außengeräten sorgt für angenehme Temperaturen bei niedrigem Energieverbrauch. Die Innengeräte sind elegant in die Decke integriert und kaum sichtbar.",
+  
+  "importedSeismic": "<b>8. Importierter Baustahl</b><br/> Wir verwenden erdbebensicheren Baustahl, wie er auch für die höchsten Gebäude der Welt verwendet wird. Das sorgt für höchste Sicherheit und Stabilität.",
+  
+  "electricalSystem": "<b>9. Elektroinstallation in deutscher Qualität</b><br/> Die gesamte Elektroinstallation wurde von einem deutschen Bauunternehmen umgesetzt. Das garantiert höchste Sicherheits- und Qualitätsstandards.",
+  
+  "fachadaVentilada": "<b>10. Hinterlüftete Fassade</b><br/> Glaswolldämmung sorgt dafür, dass die Wohnung im Sommer kühl und im Winter warm bleibt. Gleichzeitig bietet sie ausgezeichneten Schallschutz, Feuchtigkeitsschutz und Umweltfreundlichkeit.",
+  
   "floorPlan": "GRUNDRISSE UND PREISE",
   "impression": "IMPRESSIONEN",
   "constructionDescription": "KONSTRUKTIONSBESCHREIBUNG",
