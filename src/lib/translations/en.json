@@ -1,18 +1,31 @@
 {
   "greeting": "Hello",
   "about": "About us",
-  "intro": "<b>In the heart of Santa Cruz,</b> a unique apartment building awaits you.",
-  "intro1": "From innovative Swiss builders to Swiss standards, we offer a new way of living in 10 places that is a first for this type of home in <b>Bolivia</b>.",
-  "beachDescription": "<b>Heated saltwater pool with salt from the Uyuni Salt Flats.</b><br/> Pool water is lightly mixed with Uyuni salt. This means it requires much less chlorine and other chemicals. At the same time, the salt is pleasant and healthy for the body and skin. Thanks to the built-in heating, the salt water is always consistently warm.",
-  "swimmingDescription": "<b>Panoramic infinity pool with safety plexiglass.</b><br /> Through the plexiglass you have a breathtaking view of Santa Cruz.",
-  "highQuality": "High-quality epoxy flooring in every home. This flooring is widely used in Europe and other countries. The epoxy coating makes the floor soft and comfortable. Because it's a continuous surface, the floor is easy to clean and looks neat and smooth.",
-  "importedVeneer": "Imported veneer wood for kitchen, bathroom, and living room furniture. The highest quality veneer wood is used for all furniture and cabinetry. The wood is glued from at least 10 layers of thin wood panels and is therefore much more stable and water-resistant than the melamine wood commonly used in Bolivia, which is glued from wood chips. Our veneer is additionally protected with a wood-colored or white layer. All wood is processed into furniture by a Swiss carpenter to the highest standards here in Bolivia.",
-  "stableSoundProof": "Stable, soundproof doors made of multi-layered wood. Our doors are optimally composed of different types of wood, ensuring they are stable, soundproof, and durable.",
-  "soundproofAluminum": "Soundproof aluminum windows with double glazing: State-of-the-art windows that meet Swiss standards for soundproofing and durability. Our windows are not only double-glazed, but also filled with gas between the panes, providing additional insulation.",
-  "airCondition": "Air conditioning system installed on ceilings. 50-70% fewer outdoor units on facades. State-of-the-art air conditioning system. Our outdoor units can operate several indoor units simultaneously. This means our air conditioners consume less electricity and, at the same time, the home looks more pleasant because fewer outdoor appliances are required. Furthermore, our indoor units are not bulky, clumsy objects that usually hang on the wall. Instead, the indoor units are discreetly hidden in the ceiling, allowing only small gaps to be seen.",
-  "importedSeismic": "Imported seismic-resistant structural steel, the same used to build the world's tallest buildings. We use imported original steel used to build the world's finest buildings.",
-  "electricalSystem": "Electrical system installed by a German construction company. The best German quality installation.",
-  "fachadaVentilada": "<b>Fachada ventilada</b><br /> Glass wool insulation ensures that the heat is where it belongs. In summer, the apartment is pleasantly cool, while in winter, the heat stays inside. In addition, the insulation provides excellent sound insulation, moisture protection, environmental friendliness, and durability. It reduces energy loss through exterior walls by 80%.",
+  {
+  "intro": "<b>In the heart of Santa Cruz</b>, a unique residential concept awaits you.",
+  "intro1": "Our apartment building combines Swiss construction quality with modern living comfort – a standard that is unparalleled in Bolivia. Experience an entirely new sense of living with these outstanding highlights:",
+  
+  "beachDescription": "<b>1. Heated saltwater pool with salt from the Uyuni Salt Flats</b><br/> The pool water, enriched with salt from Uyuni, requires significantly less chlorine and other chemicals. The salt is not only pleasant for the skin but also promotes health. Thanks to the integrated heating system, you can enjoy pleasantly warm water at any time.",
+  
+  "swimmingDescription": "<b>2. Panorama infinity pool with safety plexiglass</b><br/> The plexiglass offers you a breathtaking view of Santa Cruz. The infinity design gives you the feeling of merging directly with the skyline – a true highlight for all senses.",
+  
+  "highQuality": "<b>3. High-quality epoxy flooring</b><br/> This type of flooring is widely used in Europe and other countries. The epoxy coating makes the floor soft, comfortable, and hygienic. It is easy to clean and provides a modern and elegant look.",
+  
+  "importedVeneer": "<b>4. Imported veneer wood</b><br/> For kitchens, bathrooms, and living room furniture, we use only the highest quality veneer wood. It consists of at least 10 layers of thin wooden sheets, making it much more stable and water-resistant than conventional melamine wood.",
+  
+  "stableSoundProof": "<b>5. Sturdy, soundproof doors</b><br/> Our doors are made of premium multi-layered wood. This construction ensures optimal sound insulation, stability, and long-lasting durability.",
+  
+  "soundproofAluminum": "<b>6. Soundproof aluminum windows</b><br/> Our modern windows feature double glazing with additional gas filling. They guarantee excellent insulation, soundproofing, and durability that meets Swiss standards.",
+  
+  "airCondition": "<b>7. Ceiling air conditioning</b><br/> A modern climate control system with fewer outdoor units ensures pleasant temperatures while consuming less energy. The indoor units are elegantly integrated into the ceiling and barely visible.",
+  
+  "importedSeismic": "<b>8. Imported seismic-resistant steel</b><br/> We use earthquake-proof steel, the same quality used for constructing the world’s tallest buildings. This ensures maximum safety and stability.",
+  
+  "electricalSystem": "<b>9. Electrical installation with German quality</b><br/> All electrical systems are installed by a German construction company, guaranteeing the highest safety and quality standards.",
+  
+  "fachadaVentilada": "<b>10. Ventilated façade</b><br/> Mineral wool insulation keeps the apartment cool in summer and warm in winter. It also provides excellent soundproofing, moisture protection, and eco-friendliness."
+}
+
   "floorPlan": "FLOOR PLANS AND PRICES",
   "impression": "IMPRESSIONS",
   "constructionDescription": "CONSTRUCTION DESCRIPTION",
