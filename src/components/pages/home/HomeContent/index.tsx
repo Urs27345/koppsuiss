@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import BeachImage from "@/assets/salar01.jpg";
 import SwimmingPoolImage from "@/assets/piscina01.jpg";
+import EpoxiImage from "@/assets/epoxi.jpg";
 import styles from "./style.module.scss";
 import Container from "../../../module/container";
 import SliderComponent from "../../../ui/slider";
@@ -28,6 +29,7 @@ const HomeContent: React.FC<Props> = ({ dict }) => {
     },
     {
       content: <p dangerouslySetInnerHTML={{ __html: dict.highQuality }} />,
+      image: EpoxiImage,
     },
     {
       content: <p dangerouslySetInnerHTML={{ __html: dict.importedVeneer }} />,
