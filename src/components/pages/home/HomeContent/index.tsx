@@ -83,9 +83,7 @@ const HomeContent: React.FC<Props> = ({ dict }) => {
           <div className="grid grid-cols-2 gap-5" key={index}>
             {item.content}
             <div className="w-full">
-              {!!item.image ? (
-                <Image src={item.image} alt={`image-${index}`} className={styles.image} />
-              ) : null}
+              {!!item.image ? <Image src={item.image} alt={`image-${index}`} className={styles.image} /> : null}
             </div>
           </div>
         ))}
