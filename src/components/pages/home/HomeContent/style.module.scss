@@ -3,8 +3,28 @@
     @apply font-medium text-lg leading-7 text-secondaryGray;
   }
 
+  .intro {
+    font-size: 2rem;         /* Größerer Titel */
+    font-weight: 700;        /* Fett */
+    text-align: center;      /* Zentriert */
+    color: #333;             /* Dunklerer Text */
+    margin-bottom: 15px;     /* Abstand nach unten */
+  }
+
+  .intro1 {
+    font-size: 1.2rem;       /* Etwas kleiner */
+    text-align: center;      
+    color: #555;             /* Grau */
+    line-height: 1.6;        
+    margin-bottom: 30px;     
+  }
+
   .image {
-    // width: 570px;
-    // aspect-ratio: auto 570/240;
+    width: 570px;            /* Bildbreite */
+    aspect-ratio: auto 570/240; /* Seitenverhältnis */
+    border-radius: 8px;      /* Runde Ecken für die Bilder */
+    object-fit: cover;       /* Bild füllt den Container */
+    margin: 0 auto;          /* Bild zentrieren */
+    display: block;
   }
 }
