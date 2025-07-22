@@ -7,6 +7,7 @@ import SwimmingPoolImage from "@/assets/piscina01.jpg";
 import EpoxiImage from "@/assets/epoxi.jpg";
 import VeneerImage from "@/assets/veneer.jpg";
 import PuertoImage from "@/assets/puerto.jpg";
+import WindowImage from "@/assets/window.jpg";
 import styles from "./style.module.scss";
 import Container from "../../../module/container";
 import SliderComponent from "../../../ui/slider";
@@ -43,6 +44,7 @@ const HomeContent: React.FC<Props> = ({ dict }) => {
     },
     {
       content: <p dangerouslySetInnerHTML={{ __html: dict.soundproofAluminum }} />,
+      image: WindowImage,
     },
     {
       content: <p dangerouslySetInnerHTML={{ __html: dict.airCondition }} />,
