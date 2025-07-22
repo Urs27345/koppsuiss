@@ -9,6 +9,7 @@ import VeneerImage from "@/assets/veneer.jpg";
 import PuertoImage from "@/assets/puerto.jpg";
 import WindowImage from "@/assets/window.jpg";
 import AirImage from "@/assets/air.jpg";
+import SteelImage from "@/assets/steel.jpg";
 import styles from "./style.module.scss";
 import Container from "../../../module/container";
 import SliderComponent from "../../../ui/slider";
@@ -53,6 +54,7 @@ const HomeContent: React.FC<Props> = ({ dict }) => {
     },
     {
       content: <p dangerouslySetInnerHTML={{ __html: dict.importedSeismic }} />,
+      image: SteelImage,
     },
     {
       content: <p dangerouslySetInnerHTML={{ __html: dict.electricalSystem }} />,
