@@ -86,7 +86,7 @@ export const partnerList = [
 export const floorOverview = [
   {
     floor: 5,
-    label: "5th floor",
+    label: "5th ",
     color: "green",
     room: [
       { no: "501", type: "3", price: "164,118.00" },
@@ -99,7 +99,7 @@ export const floorOverview = [
   },
   {
     floor: 4,
-    label: "4th floor",
+    label: "4th ",
     color: "brown",
     room: [
       { no: "401", type: "2", price: "144,592.00" },
@@ -110,7 +110,7 @@ export const floorOverview = [
   },
   {
     floor: 3,
-    label: "3th floor",
+    label: "3th ",
     color: "gray",
     room: [
       { no: "301", type: "1", price: "83,200.00" },
@@ -123,7 +123,7 @@ export const floorOverview = [
   },
   {
     floor: 2,
-    label: "2th floor",
+    label: "2th ",
     color: "brown",
     room: [
       { no: "201", type: "2", price: "144,592.00" },
@@ -134,7 +134,7 @@ export const floorOverview = [
   },
   {
     floor: 1,
-    label: "1th floor",
+    label: "1th ",
     color: "gray",
     room: [
       { no: "101", type: "1", price: "83,200.00" },

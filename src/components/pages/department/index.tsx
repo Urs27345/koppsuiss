@@ -151,6 +151,7 @@ const Department: React.FC<Props> = ({ id }) => {
                   className={classNames(styles.floorRow, item.floor.toString() === floorNumber ? styles.active : "")}
                 >
                   {item.label}
+                  {dictionary["floor"]}
                 </p>
                 {item.floor.toString() === floorNumber && (
                   <div>
