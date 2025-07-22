@@ -34,7 +34,7 @@ const HomeContent: React.FC<Props> = ({ dict }) => {
     },
     {
       content: <p dangerouslySetInnerHTML={{ __html: dict.importedVeneer }} />,
-      image: veneer,
+      image: veneerImage,
     },
     {
       content: <p dangerouslySetInnerHTML={{ __html: dict.stableSoundProof }} />,
