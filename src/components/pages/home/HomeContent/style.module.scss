@@ -1,15 +1,18 @@
 .wrapper p {
-  @apply font-medium text-lg leading-7 text-secondaryGray mb-6; /* Mehr Abstand nach unten */
+  @apply font-medium text-lg leading-7 text-secondaryGray;
+  margin-bottom: 1.5rem; /* entspricht mb-6 */
 }
 
 /* Intro-Überschrift */
 .intro {
-  @apply text-4xl font-bold text-blue-600 mb-8; /* Größerer Abstand */
+  @apply text-4xl font-bold text-blue-600;
+  margin-bottom: 2rem; /* mb-8 */
 }
 
 /* Intro-Beschreibung */
 .intro1 {
-  @apply text-lg text-gray-600 mb-12 leading-relaxed;
+  @apply text-lg text-gray-600 leading-relaxed;
+  margin-bottom: 3rem; /* mb-12 */
 }
 
 /* Alle Überschriften (1–10) in Blau */
@@ -21,7 +24,7 @@
 .image {
   width: 100%;
   max-width: 570px;
-  border-radius: 8px; /* Abgerundete Ecken */
+  border-radius: 8px;
   object-fit: cover;
-  margin-top: 10px; /* Extra Abstand nach oben */
+  margin-top: 10px;
 }
