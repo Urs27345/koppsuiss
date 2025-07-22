@@ -47,36 +47,42 @@ export const socialLinks = [
 export const partnerList = [
   {
     type: "female",
+    label: "zulma",
     name: "Zulma Diepolder",
     role: "Construction manager",
     phone: "+591 716 34 174",
   },
   {
     type: "man",
+    label: "urs",
     name: "Urs Diepolder",
     role: "Construction manager",
     phone: "+591 716 34 177",
   },
   {
     type: "man",
+    label: "jairo",
     name: "Jairo Flores",
     role: "Engineer",
     phone: "+591 ___ ___ ___",
   },
   {
     type: "man",
+    label: "jefferson",
     name: "Jefferson",
     role: "Engineer",
     phone: "+591 ___ ___ ___",
   },
   {
     type: "female",
+    label: "marcela",
     name: "Marcela",
     role: "architect",
     phone: "+591 716 34 174",
   },
   {
     type: "female",
+    label: "jairo",
     name: "Sarah",
     role: "architect",
     phone: "+591 716 34 174",

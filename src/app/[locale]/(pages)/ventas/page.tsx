@@ -1,10 +1,16 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 import female from "@/assets/santa/female.png";
-import male from "@/assets/santa/man.png";
+import jairo from "@/assets/santa/jairo.png";
+import jefferson from "@/assets/santa/jefferson.png";
+import marcela from "@/assets/santa/marcela.png";
+import sarah from "@/assets/santa/sarah.png";
+import urs from "@/assets/santa/urs.png";
+import zulma from "@/assets/santa/zulma.png";
+
 import map from "@/assets/map.jpeg";
 
 import { partnerList } from "../../../../utils/constant";
@@ -15,6 +21,14 @@ import styles from "./style.module.scss";
 
 const SantaCruz = () => {
   const { dictionary } = useMyContext();
+  const partnerImage: Record<string, StaticImageData> = {
+    jairo,
+    jefferson,
+    marcela,
+    sarah,
+    urs,
+    zulma,
+  };
   return (
     <Container>
       <div className={styles.wrapper}>
@@ -26,7 +40,7 @@ const SantaCruz = () => {
         <div className={styles.imageContent}>
           {partnerList.map((item, index) => (
             <div key={index} className={styles.imageWrapper}>
-              <Image src={item.type === "female" ? female : male} alt={`image-${index}`} className={styles.image} />
+              <Image src={partnerImage?.[item?.label] ?? female} alt={`image-${index}`} className={styles.image} />
               <p className="text-center text-lg text-secondaryGray font-medium">{item.name}</p>
               <p className="text-center text-lg text-secondaryGray font-medium">{item.role}</p>
               <p className="text-center text-lg text-secondaryGray font-medium">{item.phone}</p>
