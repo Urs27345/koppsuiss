@@ -1,18 +1,18 @@
 .wrapper p {
   @apply font-medium text-lg leading-7 text-secondaryGray;
-  margin-bottom: 1.5rem; /* entspricht mb-6 */
+  margin-bottom: 1.5rem;
 }
 
 /* Intro-Überschrift */
 .intro {
   @apply text-4xl font-bold text-blue-600;
-  margin-bottom: 2rem; /* mb-8 */
+  margin-bottom: 2rem;
 }
 
 /* Intro-Beschreibung */
 .intro1 {
   @apply text-lg text-gray-600 leading-relaxed;
-  margin-bottom: 3rem; /* mb-12 */
+  margin-bottom: 3rem;
 }
 
 /* Alle Überschriften (1–10) in Blau */
