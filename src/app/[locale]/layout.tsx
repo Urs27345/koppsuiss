@@ -18,8 +18,8 @@ export default async function Layout({
       <MyContextProvider>
         <HeaderNavigation dict={dict} locale={params.locale} />
         {children}
+        <Footer />
       </MyContextProvider>
-      <Footer />
     </>
   );
 }

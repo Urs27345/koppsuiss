@@ -2,27 +2,27 @@
   "greeting": "Hello",
   "about": "About us",
   "intro": "<b>In the heart of Santa Cruz</b>, a unique residential concept awaits you.",
-"intro1": "Our apartment building combines Swiss construction quality with modern living comfort – a standard that is unparalleled in Bolivia. Experience an entirely new sense of living with these outstanding highlights:",
+  "intro1": "Our apartment building combines Swiss construction quality with modern living comfort – a standard that is unparalleled in Bolivia. Experience an entirely new sense of living with these outstanding highlights:",
 
-"beachDescription": "<b>1. Heated saltwater pool with salt from the Uyuni Salt Flats</b><br/> The pool water, enriched with salt from Uyuni, requires significantly less chlorine and other chemicals. The salt is not only pleasant for the skin but also promotes health. Thanks to the integrated heating system, you can enjoy pleasantly warm water at any time.",
+  "beachDescription": "<b>1. Heated saltwater pool with salt from the Uyuni Salt Flats</b><br/> The pool water, enriched with salt from Uyuni, requires significantly less chlorine and other chemicals. The salt is not only pleasant for the skin but also promotes health. Thanks to the integrated heating system, you can enjoy pleasantly warm water at any time.",
 
-"swimmingDescription": "<b>2. Panorama infinity pool with safety plexiglass</b><br/> The plexiglass offers you a breathtaking view of Santa Cruz. The infinity design gives you the feeling of merging directly with the skyline – a true highlight for all senses.",
+  "swimmingDescription": "<b>2. Panorama infinity pool with safety plexiglass</b><br/> The plexiglass offers you a breathtaking view of Santa Cruz. The infinity design gives you the feeling of merging directly with the skyline – a true highlight for all senses.",
 
-"highQuality": "<b>3. High-quality epoxy flooring</b><br/> This type of flooring is widely used in Europe and other countries. The epoxy coating makes the floor soft, comfortable, and hygienic. It is easy to clean and provides a modern and elegant look.",
+  "highQuality": "<b>3. High-quality epoxy flooring</b><br/> This type of flooring is widely used in Europe and other countries. The epoxy coating makes the floor soft, comfortable, and hygienic. It is easy to clean and provides a modern and elegant look.",
 
-"importedVeneer": "<b>4. Imported veneer wood</b><br/> For kitchens, bathrooms, and living room furniture, we use only the highest quality veneer wood. It consists of at least 10 layers of thin wooden sheets, making it much more stable and water-resistant than conventional melamine wood.",
+  "importedVeneer": "<b>4. Imported veneer wood</b><br/> For kitchens, bathrooms, and living room furniture, we use only the highest quality veneer wood. It consists of at least 10 layers of thin wooden sheets, making it much more stable and water-resistant than conventional melamine wood.",
 
-"stableSoundProof": "<b>5. Sturdy, soundproof doors</b><br/> Our doors are made of premium multi-layered wood. This construction ensures optimal sound insulation, stability, and long-lasting durability.",
+  "stableSoundProof": "<b>5. Sturdy, soundproof doors</b><br/> Our doors are made of premium multi-layered wood. This construction ensures optimal sound insulation, stability, and long-lasting durability.",
 
-"soundproofAluminum": "<b>6. Soundproof aluminum windows</b><br/> Our modern windows feature double glazing with additional gas filling. They guarantee excellent insulation, soundproofing, and durability that meets Swiss standards.",
+  "soundproofAluminum": "<b>6. Soundproof aluminum windows</b><br/> Our modern windows feature double glazing with additional gas filling. They guarantee excellent insulation, soundproofing, and durability that meets Swiss standards.",
 
-"airCondition": "<b>7. Ceiling air conditioning</b><br/> A modern climate control system with fewer outdoor units ensures pleasant temperatures while consuming less energy. The indoor units are elegantly integrated into the ceiling and barely visible.",
+  "airCondition": "<b>7. Ceiling air conditioning</b><br/> A modern climate control system with fewer outdoor units ensures pleasant temperatures while consuming less energy. The indoor units are elegantly integrated into the ceiling and barely visible.",
 
-"importedSeismic": "<b>8. Imported seismic-resistant steel</b><br/> We use earthquake-proof steel, the same quality used for constructing the world’s tallest buildings. This ensures maximum safety and stability.",
+  "importedSeismic": "<b>8. Imported seismic-resistant steel</b><br/> We use earthquake-proof steel, the same quality used for constructing the world’s tallest buildings. This ensures maximum safety and stability.",
 
-"electricalSystem": "<b>9. Electrical installation with German quality</b><br/> All electrical systems are installed by a German construction company, guaranteeing the highest safety and quality standards.",
+  "electricalSystem": "<b>9. Electrical installation with German quality</b><br/> All electrical systems are installed by a German construction company, guaranteeing the highest safety and quality standards.",
 
-"fachadaVentilada": "<b>10. Ventilated façade</b><br/> Mineral wool insulation keeps the apartment cool in summer and warm in winter. It also provides excellent soundproofing, moisture protection, and eco-friendliness.",
+  "fachadaVentilada": "<b>10. Ventilated façade</b><br/> Mineral wool insulation keeps the apartment cool in summer and warm in winter. It also provides excellent soundproofing, moisture protection, and eco-friendliness.",
   "floorPlan": "FLOOR PLANS AND PRICES",
   "impression": "IMPRESSIONS",
   "constructionDescription": "CONSTRUCTION DESCRIPTION",
@@ -123,5 +123,14 @@
   "constructionTitle32": "Purchase and payment processing",
   "constructionTitle33": "Debt financing",
   "constructionTitle34": "Offer",
-  "constructionTitle35": "Dates"
+  "constructionTitle35": "Dates",
+  "Pursue": "Pursue",
+  "KoppSuisseSRL": "Kopp Suisse SRL",
+  "May18th1000SantaCruz": "May 18th 1000 Santa Cruz",
+  "OurContacts": "Our Contacts",
+  "Services": "Services",
+  "Consulting and sale of modern apartments in Santa": "Consulting and sale of modern apartments in Santa",
+  "Cruz/Bolivia": "Cruz/Bolivia",
+  "FollowUs": "Follow Us",
+  "Kopp Suisse SRL © 2025 All rights reserved.": "Kopp Suisse SRL © 2025 All rights reserved."
 }
