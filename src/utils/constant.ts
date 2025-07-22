@@ -150,6 +150,7 @@ export const floorOverview = [
     label: "basement",
     color: "gray",
     room: [
+      { no: "003", type: "1", price: "123,156.00" },
       { no: "001", type: "2", price: "109,776.00" },
       { no: "002", type: "2", price: "141,880.00" },
     ],
@@ -164,12 +165,19 @@ export const apartmentDetails: { [key: string]: any } = {
     elevator: "Yes",
     price: "109,776.00",
   },
-  "020": {
+  "002": {
     type: 2,
     livingSpace: 70.32,
     balcony: 36.71,
     elevator: "Yes",
     price: "141,880.00",
+  },
+  "003": {
+    type: 1,
+    livingSpace: 68.42,
+    balcony: 36.71,
+    elevator: "Yes",
+    price: "123,156.00",
   },
   "101": {
     type: 1,

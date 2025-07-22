@@ -8,6 +8,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { apartmentDetails, floorOverview } from "../../../utils/constant";
 import image010 from "@/assets/department/010.jpg";
 import image020 from "@/assets/department/020.jpg";
+import image003 from "@/assets/department/003.jpg";
 import image101 from "@/assets/department/101.jpg";
 import image102 from "@/assets/department/102.jpg";
 import image103 from "@/assets/department/103.jpg";
@@ -55,6 +56,7 @@ const Department: React.FC<Props> = ({ id }) => {
   const departmentImage: { [key: string]: any } = {
     image001: image010,
     image002: image020,
+    image003: image003,
     image101: image101,
     image102: image102,
     image103: image103,
@@ -165,7 +167,7 @@ const Department: React.FC<Props> = ({ id }) => {
                         key={roomIndex}
                         href={`/${locale}/planos/${room.no}`}
                         className={classNames(
-                          `flex items-center justify-between border-b border-gray-200 py-2 px-1`,
+                          `flex items-center border-b border-gray-200 py-2 px-1`,
                           hoverStyleList[item?.color ?? "green"],
                         )}
                         onMouseOver={() => {
@@ -174,9 +176,9 @@ const Department: React.FC<Props> = ({ id }) => {
                           }
                         }}
                       >
-                        <span className={styles.roomNo}>{room.no}</span>
-                        <span className={styles.roomNo}>{room.type}</span>
-                        <span className={styles.roomPrice}>USD {room.price}</span>
+                        <span className="w-full max-w-[100px]">{room.no === "003" ? "Oficina" : room.no}</span>
+                        <span className="w-full max-w-[20px]">{room.type}</span>
+                        <span className="flex-1 text-end">USD {room.price}</span>
                       </Link>
                     ))}
                   </div>
