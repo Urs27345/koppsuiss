@@ -18,6 +18,7 @@ import Container from "../../../../components/module/container";
 import { useMyContext } from "../../../context/context";
 
 import styles from "./style.module.scss";
+import ContactForm from "../../../../components/module/base/contactForm";
 
 const SantaCruz = () => {
   const { dictionary } = useMyContext();
@@ -52,6 +53,7 @@ const SantaCruz = () => {
             <Image src={map} alt={"map"} className={styles.image} />
           </Link>
         </div>
+        <ContactForm />
       </div>
     </Container>
   );
