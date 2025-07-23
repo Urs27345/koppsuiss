@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import Image from "next/image";
 import classNames from "classnames";
 import Link from "next/link";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { apartmentDetails, floorOverview } from "../../../utils/constant";
 import image010 from "@/assets/department/010.jpg";
@@ -35,9 +35,9 @@ import image503 from "@/assets/department/503.jpg";
 import image504 from "@/assets/department/504.jpg";
 import image505 from "@/assets/department/505.jpg";
 import image506 from "@/assets/department/506.jpg";
+
 import Container from "../../module/container";
 import Configurator from "../../module/configurator";
-
 import { useMyContext } from "../../../app/context/context";
 
 import styles from "./style.module.scss";
@@ -228,11 +228,7 @@ const Department: React.FC<Props> = ({ id }) => {
         <Link href={"/"} target="_blank" className={styles.additionalButton}>
           {dictionary["enquireAboutThisApartment"]}
         </Link>
-        <Link
-          href={"https://koppsuisse.ch/wp-content/uploads/2025/07/101-Grundriss.pdf"}
-          target="_blank"
-          className={styles.additionalButton}
-        >
+        <Link href={`/pdf/${id}.pdf`} target="_blank" className={styles.additionalButton}>
           {dictionary["floorPlanAsPDF"]}
         </Link>
         <Link
