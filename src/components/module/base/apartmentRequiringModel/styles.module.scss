@@ -1,0 +1,29 @@
+.greetingMessage {
+  @apply text-secondBlue py-5;
+}
+
+.button {
+  @apply bg-[#6c5e46] text-white px-6 py-3 font-bold rounded-2xl hover:bg-[#4e4533];
+}
+
+.form {
+  span {
+    @apply text-blue;
+  }
+
+  .messageContext {
+    @apply border border-gray-300 rounded p-2 mb-4 w-full;
+
+    &:focus {
+      @apply outline-none;
+    }
+  }
+
+  .submitButton {
+    @apply w-full max-w-[200px] mx-auto flex justify-center bg-black text-white font-bold py-2 mt-5 px-4 rounded hover:bg-black/50 transition-colors duration-300;
+
+    &:disabled {
+      @apply cursor-not-allowed;
+    }
+  }
+}

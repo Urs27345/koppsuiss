@@ -149,7 +149,7 @@ export const floorOverview = [
   },
   {
     floor: 0,
-    label: "basement",
+    label: "basement ",
     color: "gray",
     room: [
       { no: "003", type: "1", price: "123,156.00" },

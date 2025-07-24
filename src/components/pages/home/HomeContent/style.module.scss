@@ -6,17 +6,19 @@
 
 /* Intro-Überschrift */
 .intro {
-  @apply text-4xl font-bold text-blue mb-8; /* Überschrift blau und Abstand */
+  @apply text-4xl font-bold text-secondBlue text-center my-8; /* Überschrift blau und Abstand */
+  font-size: 30px !important;
 }
 
 /* Intro-Beschreibung */
 .intro1 {
   @apply text-lg text-darkGray mb-12 leading-relaxed; /* Abstand und Schriftgröße */
+  padding-top: 12px !important;
 }
 
 /* Alle Überschriften (1-10) in Blau */
 .wrapper p b {
-  @apply text-blue;
+  @apply text-secondBlue;
 }
 
 /* Bildstil */

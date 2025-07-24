@@ -9,3 +9,7 @@ export const getDictionary = async (locale: string) => {
     return fallback.default;
   }
 };
+
+export function interpolate(str: string, vars: Record<string, string>) {
+  return str.replace(/{{(.*?)}}/g, (_, key) => vars[key.trim()] || "");
+}

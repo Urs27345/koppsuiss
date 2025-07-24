@@ -46,7 +46,8 @@ const BuildingDescription = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerContent}>
-        <p>{dictionary["constructionDescription1"]}</p>
+        <p className={styles.headerLabel}>{dictionary["constructionDescription1"]}</p>
+        <p className={styles.headerDescription}>{dictionary["constructionDescription1_1"]}</p>
       </div>
       <div className={styles.content}>
         <div>
