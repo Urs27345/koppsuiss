@@ -4,8 +4,12 @@
   .headerContent {
     @apply flex flex-col gap-5 mt-5;
 
-    p {
-      @apply text-thirdGray;
+    .headerLabel {
+      @apply text-secondBlue text-center text-[30px] font-bold;
+    }
+
+    .headerDescription {
+      @apply text-secondaryGray text-lg;
     }
   }
 

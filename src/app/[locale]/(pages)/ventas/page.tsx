@@ -34,9 +34,10 @@ const SantaCruz = () => {
     <Container>
       <div className={styles.wrapper}>
         <div className={styles.context}>
-          <p>{dictionary["ventasDescription1"]}</p>
-          <p>{dictionary["ventasDescription2"]}</p>
-          <p>{dictionary["ventasDescription3"]}</p>
+          <p className={styles.headerLabel}>{dictionary["ventasDescription1"]}</p>
+          <p className={styles.headerDescription}>{dictionary["ventasDescription1_1"]}</p>
+          <p className={styles.headerDescription}>{dictionary["ventasDescription2"]}</p>
+          <p className={styles.headerDescription}>{dictionary["ventasDescription3"]}</p>
         </div>
         <div className={styles.imageContent}>
           {partnerList.map((item, index) => (

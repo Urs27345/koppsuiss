@@ -11,7 +11,7 @@ import { useMyContext } from "../../../app/context/context";
 const PageHeaderContent = () => {
   const { dictionary } = useMyContext();
   const pathName = usePathname();
-  const title = headerNavigationList.find((item) => pathName.includes(item.link))?.label ?? "Floorplan";
+  const title = headerNavigationList.find((item) => pathName.includes(item.link))?.label ?? "constructionDescription";
   return (
     <div className={styles.wrapper}>
       <Container className="flex flex-col tablet:flex-row items-center justify-between gap-4 tablet:gap-0">

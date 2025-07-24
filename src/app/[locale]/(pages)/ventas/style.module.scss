@@ -5,8 +5,12 @@
   .context {
     @apply max-w-[1000px] mx-auto text-center flex flex-col gap-5 py-2;
 
-    p {
-      @apply text-secondaryGray text-[18px] font-medium leading-7;
+    .headerLabel {
+      @apply text-secondBlue text-center text-[30px] font-bold pt-6;
+    }
+
+    .headerDescription {
+      @apply text-secondaryGray text-lg font-medium leading-7;
     }
   }
 
