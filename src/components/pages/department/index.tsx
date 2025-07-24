@@ -196,11 +196,7 @@ const Department: React.FC<Props> = ({ id }) => {
         <Link href={`/pdf/${id}.pdf`} target="_blank" className={styles.additionalButton}>
           {dictionary["floorPlanAsPDF"]}
         </Link>
-        <Link
-          href={"https://koppsuisse.ch/wp-content/uploads/2025/07/preisliste.pdf"}
-          className={styles.additionalButton}
-          target="_blank"
-        >
+        <Link href={`/price/${id}.pdf`} className={styles.additionalButton} target="_blank">
           {dictionary["completePriceList"]}
         </Link>
         <Link href={`/${locale}/buildingDescription`} className={styles.additionalButton}>
