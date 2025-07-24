@@ -8,10 +8,6 @@ export const headerNavigationList = [
     link: "/impresiones",
   },
   {
-    label: "constructionDescription",
-    link: "/buildingDescription",
-  },
-  {
     label: "holyCross",
     link: "/santaCruz",
   },
