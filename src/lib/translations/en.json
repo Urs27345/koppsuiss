@@ -1,5 +1,5 @@
 {
-  "greeting": "Hello",
+  "greeting": "We are interested in apartment {{floorNumber}}, and please send us more details",
   "about": "About us",
   "intro": "<b>In the heart of Santa Cruz</b>, a unique residential concept awaits you.",
   "intro1": "Our apartment building combines Swiss construction quality with modern living comfort – a standard that is unparalleled in Bolivia. Experience an entirely new sense of living with these outstanding highlights:",
