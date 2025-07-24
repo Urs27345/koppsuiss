@@ -41,6 +41,7 @@ import Configurator from "../../module/configurator";
 import { useMyContext } from "../../../app/context/context";
 
 import styles from "./style.module.scss";
+import { ApartmentRequiringModal } from "../../module/base/apartmentRequiringModel";
 
 type Props = {
   id: string;
@@ -91,6 +92,8 @@ const Department: React.FC<Props> = ({ id }) => {
     gray: "hover:bg-secondaryGray/30",
     brown: "hover:bg-[#C4BD97]",
   };
+
+  // const greeting = interpolate(dictionary["greeting"], { floorNumber: "123" });
 
   return (
     <Container>
@@ -190,9 +193,7 @@ const Department: React.FC<Props> = ({ id }) => {
         </div>
       </div>
       <div className={styles.bottomContent}>
-        <Link href={"/"} target="_blank" className={styles.additionalButton}>
-          {dictionary["enquireAboutThisApartment"]}
-        </Link>
+        <ApartmentRequiringModal roomNumber={id} />
         <Link href={`/pdf/${id}.pdf`} target="_blank" className={styles.additionalButton}>
           {dictionary["floorPlanAsPDF"]}
         </Link>

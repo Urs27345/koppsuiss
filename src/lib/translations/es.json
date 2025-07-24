@@ -129,5 +129,7 @@
   "lastName": "Apellido",
   "email": "Correo electrónico",
   "message": "Mensaje",
-  "submit": "Entregar"
+  "submit": "Entregar",
+  "address": "DIRECCIÓN",
+  "phone": "Teléfono"
 }

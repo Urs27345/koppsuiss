@@ -139,5 +139,7 @@
   "lastName": "Nachname",
   "email": "E-Mail",
   "message": "Nachricht",
-  "submit": "Einreichen"
+  "submit": "Einreichen",
+  "address": "Adresse",
+  "phone": "Telefon"
 }

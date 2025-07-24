@@ -16,9 +16,9 @@ import map from "@/assets/map.jpeg";
 import { partnerList } from "../../../../utils/constant";
 import Container from "../../../../components/module/container";
 import { useMyContext } from "../../../context/context";
+import ContactForm from "../../../../components/module/base/contactForm";
 
 import styles from "./style.module.scss";
-import ContactForm from "../../../../components/module/base/contactForm";
 
 const SantaCruz = () => {
   const { dictionary } = useMyContext();

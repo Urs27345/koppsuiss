@@ -1,17 +1,28 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { Oval } from "react-loader-spinner";
 
 import InputBox from "../../../ui/inputBox";
 
 import styles from "./style.module.scss";
 import { useMyContext } from "../../../../app/context/context";
+import { sendMail } from "../../../../app/actions/sendEmail";
 
 const ContactForm = () => {
   const { control, register, handleSubmit } = useForm();
   const { dictionary } = useMyContext();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    setIsLoading(true);
+    try {
+      const result = await sendMail({ from: data.email, subject: data.firstName, text: data.message });
+      console.log("result", result);
+    } catch (error) {
+      console.log("error", error);
+    }
+    setIsLoading(false);
     console.log("Form Data Submitted:", data);
   };
 
@@ -52,8 +63,21 @@ const ContactForm = () => {
             render={({ field }) => <textarea {...field} required className={styles.messageContext}></textarea>}
           />
         </div>
-        <button type="submit" className={styles.submitButton}>
-          {dictionary["submit"]}
+        <button type="submit" className={styles.submitButton} disabled={isLoading}>
+          {isLoading ? (
+            <Oval
+              visible={true}
+              height="25"
+              width="25"
+              color="white"
+              ariaLabel="oval-loading"
+              wrapperStyle={{}}
+              strokeWidth="4"
+              secondaryColor="white"
+            />
+          ) : (
+            dictionary["submit"]
+          )}
         </button>
       </form>
     </div>

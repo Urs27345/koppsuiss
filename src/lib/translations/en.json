@@ -140,5 +140,7 @@
   "lastName": "Last Name",
   "email": "Email",
   "message": "Message",
-  "submit": "Submit"
+  "submit": "Submit",
+  "address": "Address",
+  "phone": "Phone"
 }
