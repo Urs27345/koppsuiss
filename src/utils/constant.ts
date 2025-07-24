@@ -8,10 +8,6 @@ export const headerNavigationList = [
     link: "/impresiones",
   },
   {
-    label: "constructionDescription",
-    link: "/buildingDescription",
-  },
-  {
     label: "holyCross",
     link: "/santaCruz",
   },
@@ -47,36 +43,42 @@ export const socialLinks = [
 export const partnerList = [
   {
     type: "female",
+    label: "zulma",
     name: "Zulma Diepolder",
     role: "Construction manager",
     phone: "+591 716 34 174",
   },
   {
     type: "man",
+    label: "urs",
     name: "Urs Diepolder",
     role: "Construction manager",
     phone: "+591 716 34 177",
   },
   {
     type: "man",
+    label: "jairo",
     name: "Jairo Flores",
     role: "Engineer",
     phone: "+591 ___ ___ ___",
   },
   {
     type: "man",
+    label: "jefferson",
     name: "Jefferson",
     role: "Engineer",
     phone: "+591 ___ ___ ___",
   },
   {
     type: "female",
+    label: "marcela",
     name: "Marcela",
     role: "architect",
     phone: "+591 716 34 174",
   },
   {
     type: "female",
+    label: "jairo",
     name: "Sarah",
     role: "architect",
     phone: "+591 716 34 174",
@@ -86,7 +88,7 @@ export const partnerList = [
 export const floorOverview = [
   {
     floor: 5,
-    label: "5th floor",
+    label: "5th ",
     color: "green",
     room: [
       { no: "501", type: "3", price: "164,118.00" },
@@ -99,7 +101,7 @@ export const floorOverview = [
   },
   {
     floor: 4,
-    label: "4th floor",
+    label: "4th ",
     color: "brown",
     room: [
       { no: "401", type: "2", price: "144,592.00" },
@@ -110,7 +112,7 @@ export const floorOverview = [
   },
   {
     floor: 3,
-    label: "3th floor",
+    label: "3th ",
     color: "gray",
     room: [
       { no: "301", type: "1", price: "83,200.00" },
@@ -123,7 +125,7 @@ export const floorOverview = [
   },
   {
     floor: 2,
-    label: "2th floor",
+    label: "2th ",
     color: "brown",
     room: [
       { no: "201", type: "2", price: "144,592.00" },
@@ -134,7 +136,7 @@ export const floorOverview = [
   },
   {
     floor: 1,
-    label: "1th floor",
+    label: "1th ",
     color: "gray",
     room: [
       { no: "101", type: "1", price: "83,200.00" },
@@ -150,6 +152,7 @@ export const floorOverview = [
     label: "basement",
     color: "gray",
     room: [
+      { no: "003", type: "1", price: "123,156.00" },
       { no: "001", type: "2", price: "109,776.00" },
       { no: "002", type: "2", price: "141,880.00" },
     ],
@@ -164,12 +167,19 @@ export const apartmentDetails: { [key: string]: any } = {
     elevator: "Yes",
     price: "109,776.00",
   },
-  "020": {
+  "002": {
     type: 2,
     livingSpace: 70.32,
     balcony: 36.71,
     elevator: "Yes",
     price: "141,880.00",
+  },
+  "003": {
+    type: 1,
+    livingSpace: 68.42,
+    balcony: 36.71,
+    elevator: "Yes",
+    price: "123,156.00",
   },
   "101": {
     type: 1,

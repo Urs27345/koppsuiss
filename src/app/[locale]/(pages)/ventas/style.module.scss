@@ -21,4 +21,12 @@
       }
     }
   }
+
+  .mapWrapper {
+    @apply w-full max-w-[900px] mx-auto my-8;
+
+    .image {
+      @apply w-full h-[400px] rounded-lg object-cover;
+    }
+  }
 }

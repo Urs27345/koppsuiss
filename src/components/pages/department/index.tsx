@@ -3,11 +3,12 @@ import React, { Fragment, useState } from "react";
 import Image from "next/image";
 import classNames from "classnames";
 import Link from "next/link";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import { apartmentDetails, floorOverview } from "../../../utils/constant";
 import image010 from "@/assets/department/010.jpg";
 import image020 from "@/assets/department/020.jpg";
+import image003 from "@/assets/department/003.jpg";
 import image101 from "@/assets/department/101.jpg";
 import image102 from "@/assets/department/102.jpg";
 import image103 from "@/assets/department/103.jpg";
@@ -34,9 +35,9 @@ import image503 from "@/assets/department/503.jpg";
 import image504 from "@/assets/department/504.jpg";
 import image505 from "@/assets/department/505.jpg";
 import image506 from "@/assets/department/506.jpg";
+
 import Container from "../../module/container";
 import Configurator from "../../module/configurator";
-
 import { useMyContext } from "../../../app/context/context";
 
 import styles from "./style.module.scss";
@@ -55,6 +56,7 @@ const Department: React.FC<Props> = ({ id }) => {
   const departmentImage: { [key: string]: any } = {
     image001: image010,
     image002: image020,
+    image003: image003,
     image101: image101,
     image102: image102,
     image103: image103,
@@ -151,6 +153,7 @@ const Department: React.FC<Props> = ({ id }) => {
                   className={classNames(styles.floorRow, item.floor.toString() === floorNumber ? styles.active : "")}
                 >
                   {item.label}
+                  {dictionary["floor"]}
                 </p>
                 {item.floor.toString() === floorNumber && (
                   <div>
@@ -164,7 +167,7 @@ const Department: React.FC<Props> = ({ id }) => {
                         key={roomIndex}
                         href={`/${locale}/planos/${room.no}`}
                         className={classNames(
-                          `flex items-center justify-between border-b border-gray-200 py-2 px-1`,
+                          `flex items-center border-b border-gray-200 py-2 px-1`,
                           hoverStyleList[item?.color ?? "green"],
                         )}
                         onMouseOver={() => {
@@ -173,9 +176,9 @@ const Department: React.FC<Props> = ({ id }) => {
                           }
                         }}
                       >
-                        <span className={styles.roomNo}>{room.no}</span>
-                        <span className={styles.roomNo}>{room.type}</span>
-                        <span className={styles.roomPrice}>USD {room.price}</span>
+                        <span className="w-full max-w-[100px]">{room.no === "003" ? "Oficina" : room.no}</span>
+                        <span className="w-full max-w-[20px]">{room.type}</span>
+                        <span className="flex-1 text-end">USD {room.price}</span>
                       </Link>
                     ))}
                   </div>
@@ -186,50 +189,11 @@ const Department: React.FC<Props> = ({ id }) => {
           </div>
         </div>
       </div>
-      {/* <div className={styles.wrapper}>
-        <div className={styles.content}>
-          <h2>{dictionary["apartmentDetails"]}</h2>
-          <div className={styles.apartmentContent}>
-            <div className={styles.detailsRow}>
-              <p className={styles.label}>{dictionary["type"]}:</p>
-              <p className={styles.value}>{apartmentDetails?.[id]?.type} bedroom</p>
-            </div>
-            <div className={styles.detailsRow}>
-              <p className={styles.label}>{dictionary["livingSpace"]}:</p>
-              <p className={styles.value}>{apartmentDetails?.[id]?.livingSpace} m²</p>
-            </div>
-            <div className={styles.detailsRow}>
-              <p className={styles.label}>{dictionary["balcony"]}:</p>
-              <p className={styles.value}>{apartmentDetails?.[id]?.balcony} m²</p>
-            </div>
-            <div className={styles.detailsRow}>
-              <p className={styles.label}>{dictionary["totalArea"]}:</p>
-              <p className={styles.value}>
-                {floorNumber}st {dictionary["floor"]}
-              </p>
-            </div>
-            <div className={styles.detailsRow}>
-              <p className={styles.label}>{dictionary["elevator"]}:</p>
-              <p className={styles.value}>{apartmentDetails?.[id]?.elevator}</p>
-            </div>
-            <div className={styles.detailsRow}>
-              <p className={styles.label}>{dictionary["price"]}:</p>
-              <p className={styles.value}>USD {apartmentDetails?.[id]?.price}.–</p>
-            </div>
-          </div>
-        </div>
-        <div className="w-full"></div>
-        <div className="w-full"></div>
-      </div> */}
       <div className={styles.bottomContent}>
         <Link href={"/"} target="_blank" className={styles.additionalButton}>
           {dictionary["enquireAboutThisApartment"]}
         </Link>
-        <Link
-          href={"https://koppsuisse.ch/wp-content/uploads/2025/07/101-Grundriss.pdf"}
-          target="_blank"
-          className={styles.additionalButton}
-        >
+        <Link href={`/pdf/${id}.pdf`} target="_blank" className={styles.additionalButton}>
           {dictionary["floorPlanAsPDF"]}
         </Link>
         <Link
@@ -239,11 +203,7 @@ const Department: React.FC<Props> = ({ id }) => {
         >
           {dictionary["completePriceList"]}
         </Link>
-        <Link
-          href={"https://koppsuisse.ch/wp-content/uploads/2025/07/baubeschrieb.pdf"}
-          className={styles.additionalButton}
-          target="_blank"
-        >
+        <Link href={`/${locale}/buildingDescription`} className={styles.additionalButton}>
           {dictionary["constructionDescriptionLower"]}
         </Link>
       </div>

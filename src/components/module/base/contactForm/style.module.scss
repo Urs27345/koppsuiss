@@ -1,0 +1,31 @@
+.wrapper {
+  @apply mx-auto my-4 w-full max-w-[600px] p-4 bg-white rounded-xl shadow-lg border border-secondaryGray/45;
+
+  h2 {
+    @apply text-2xl font-bold mb-4 text-center text-black;
+  }
+
+  .form {
+    @apply flex flex-col gap-5;
+
+    span {
+      @apply text-blue;
+    }
+
+    .messageContext {
+      @apply border border-gray-300 rounded p-2 mb-4 w-full;
+
+      &:focus {
+        @apply outline-none;
+      }
+    }
+
+    .submitButton {
+      @apply w-full max-w-[300px] mx-auto bg-black text-white font-bold py-2 px-4 rounded hover:bg-black/50 transition-colors duration-300;
+
+      &:disabled {
+        @apply bg-gray-400 cursor-not-allowed;
+      }
+    }
+  }
+}

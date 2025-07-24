@@ -1,0 +1,7 @@
+.input {
+  @apply w-full p-2 border border-gray-300 rounded;
+
+  &:focus {
+    @apply outline-none;
+  }
+}

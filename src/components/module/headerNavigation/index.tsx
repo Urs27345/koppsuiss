@@ -20,7 +20,7 @@ const HeaderNavigation = ({ dict, locale }: { dict: any; locale: string }) => {
   }, [dict]);
 
   return (
-    <div>
+    <>
       <nav className="bg-white py-3 sticky top-0 z-50 hidden tablet:block">
         <Container className="flex flex-wrap items-center">
           {headerNavigationList.map((item, index) => (
@@ -76,7 +76,7 @@ const HeaderNavigation = ({ dict, locale }: { dict: any; locale: string }) => {
           <SelectLanguageBox />
         </nav>
       </div>
-    </div>
+    </>
   );
 };
 
