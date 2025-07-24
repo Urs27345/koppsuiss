@@ -31,13 +31,17 @@ const Footer = () => {
           <div className={styles.contacts}>
             <h3>{dictionary["OurContacts"]}</h3>
             <a className="flex items-center gap-2" href="tel:+591 71634174">
-              <Icon name="Phone" className="w-7 h-7 text-green" />
+              <Icon name="Phone" className="w-6 h-6 text-green" />
               <p>+591 716 34 177</p>
+            </a>
+            <a className="flex items-center gap-2" href="mailto:casa@koppsuisse.ch">
+              <Icon name="Mail" className="w-6 h-6 text-green" />
+              <p>casa@koppsuisse.ch</p>
             </a>
           </div>
           <div className={styles.services}>
             <h3>{dictionary["Services"]}</h3>
-            <p>{dictionary["Consulting and sale of modern apartments in Santa"]}</p>
+            <p dangerouslySetInnerHTML={{ __html: dictionary["Consulting and sale of modern apartments in Santa"] }} />
           </div>
           <div className={styles.content}>
             <h3>{dictionary["FollowUs"]}</h3>
