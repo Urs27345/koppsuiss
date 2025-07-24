@@ -108,7 +108,9 @@ const Department: React.FC<Props> = ({ id }) => {
             <div className={styles.apartmentContent}>
               <div className={styles.detailsRow}>
                 <p className={styles.label}>{dictionary["type"]}:</p>
-                <p className={styles.value}>{apartmentDetails?.[id]?.type} bedroom</p>
+                <p className={styles.value}>
+                  {apartmentDetails?.[id]?.type} {dictionary["bedroom"]}
+                </p>
               </div>
               <div className={styles.detailsRow}>
                 <p className={styles.label}>{dictionary["livingSpace"]}:</p>
@@ -161,9 +163,9 @@ const Department: React.FC<Props> = ({ id }) => {
                 {item.floor.toString() === floorNumber && (
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <div>Nr</div>
-                      <div>Zimmer</div>
-                      <div>Verkaufspreis</div>
+                      <div>{dictionary["no"]}</div>
+                      <div>{dictionary["room"]}</div>
+                      <div>{dictionary["salesPrice"]}</div>
                     </div>
                     {item.room?.map((room, roomIndex) => (
                       <Link
