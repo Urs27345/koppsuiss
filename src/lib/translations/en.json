@@ -131,7 +131,7 @@
   "May18th1000SantaCruz": "May 18th 1000 Santa Cruz",
   "OurContacts": "Our Contacts",
   "Services": "Services",
-  "Consulting and sale of modern apartments in Santa": "Consulting and sale of modern<br /> apartments in Santa/Cruz",
+  "Consulting and sale of modern apartments in Santa": "Consulting and sale of modern<br /> apartments in Santa Cruz",
   "Cruz/Bolivia": "Cruz/Bolivia",
   "FollowUs": "Follow Us",
   "Kopp Suisse SRL © 2025 All rights reserved.": "Kopp Suisse SRL © 2025 All rights reserved.",
@@ -146,5 +146,6 @@
   "bedroom": "bedroom",
   "no": "No.",
   "room": "Room",
-  "salesPrice": "Sales price"
+  "salesPrice": "Sales price",
+  "basement": "basement"
 }

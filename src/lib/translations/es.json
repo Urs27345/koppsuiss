@@ -120,7 +120,7 @@
   "May18th1000SantaCruz": "18 de mayo de 1000 Santa Cruz",
   "OurContacts": "Nuestras Contactos",
   "Services": "Servicios",
-  "Consulting and sale of modern apartments in Santa": "Asesoría y venta de apartamentos<br /> modernos en Santa/Cruz",
+  "Consulting and sale of modern apartments in Santa": "Asesoría y venta de apartamentos<br /> modernos en Santa Cruz",
   "Cruz/Bolivia": "Cruz/Bolivia",
   "FollowUs": "Síganos",
   "Kopp Suisse SRL © 2025 All rights reserved.": "Kopp Suisse SRL © 2025 Todos los derechos reservados.",
@@ -135,5 +135,6 @@
   "bedroom": "dormitorio",
   "no": "N.°",
   "room": "Habitación",
-  "salesPrice": "Precio de venta"
+  "salesPrice": "Precio de venta",
+  "basement": "Planta baja"
 }
