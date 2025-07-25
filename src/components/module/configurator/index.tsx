@@ -305,8 +305,27 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
         setCubeHighlight(hoveredRoomRef.current, false);
       }
 
+      // Remove highlight from previously linked mesh
+      if (linkedHoveredGroupRef.current) {
+        setCubeHighlight(linkedHoveredGroupRef.current, false);
+        linkedHoveredGroupRef.current = null;
+      }
+
       setCubeHighlight(hoveredMesh, true);
       hoveredRoomRef.current = hoveredMesh;
+
+      // 👇 If it's Mesh_5_X, also highlight Mesh_6_X
+      if (hoveredMesh?.name.startsWith("Mesh_5_")) {
+        const parts = hoveredMesh.name.split("_");
+        if (parts.length === 3) {
+          const linkedName = `Mesh_6_${parts[2]}`;
+          const linkedMesh = cubeGroupsRef.current.find((group) => group.name === linkedName);
+          if (linkedMesh) {
+            setCubeHighlight(linkedMesh, true);
+            linkedHoveredGroupRef.current = linkedMesh;
+          }
+        }
+      }
     }
   }, [hoveredRoom]);
 
