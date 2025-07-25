@@ -19,6 +19,7 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
   const containerRef = useRef<any>();
   const cubeGroupsRef = useRef<any[]>([]);
   const hoveredCubeGroupRef = useRef<any>(null);
+  const linkedHoveredGroupRef = useRef<any>(null);
   const hoveredRoomRef = useRef<any>(null);
 
   const previousMovedGroupsRef = useRef<any[]>([]);
@@ -190,9 +191,25 @@ const Configurator: React.FC<Props> = ({ hoveredRoom }) => {
             setCubeHighlight(hoveredCubeGroupRef.current, false);
             resetFloorPositions();
           }
+          if (linkedHoveredGroupRef.current) {
+            setCubeHighlight(linkedHoveredGroupRef.current, false);
+            linkedHoveredGroupRef.current = null;
+          }
           setCubeHighlight(mesh, true);
           moveUpperFloorsUp(mesh);
           hoveredCubeGroupRef.current = mesh;
+
+          if (mesh.name.startsWith("Mesh_5_")) {
+            const parts = mesh.name.split("_");
+            if (parts.length === 3) {
+              const linkedName = `Mesh_6_${parts[2]}`;
+              const linkedMesh = cubeGroupsRef.current.find((group) => group.name === linkedName);
+              if (linkedMesh) {
+                setCubeHighlight(linkedMesh, true);
+                linkedHoveredGroupRef.current = linkedMesh;
+              }
+            }
+          }
         }
       } else {
         if (hoveredCubeGroupRef.current) {

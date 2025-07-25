@@ -135,5 +135,6 @@
   "bedroom": "dormitorio",
   "no": "N.°",
   "room": "Habitación",
-  "salesPrice": "Precio de venta"
+  "salesPrice": "Precio de venta",
+  "basement": "Planta baja"
 }

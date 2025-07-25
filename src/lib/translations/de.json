@@ -32,7 +32,7 @@
   "visualization": "3D-Visualisierung",
   "floorPlanApartment": "Grundriss Wohnung",
   "floorOverview": "Etagenübersicht",
-  "floor": "Stockwerk",
+  "floor": "Obergeschoss",
   "apartmentDetails": "Wohnungsdetails",
   "type": "Typ",
   "livingSpace": "Wohnfläche",
@@ -145,5 +145,6 @@
   "bedroom": "Schlafzimmer",
   "no": "Nr",
   "room": "Zimmer",
-  "salesPrice": "Verkaufspreis"
+  "salesPrice": "Verkaufspreis",
+  "basement": "Erdgeschoss"
 }
