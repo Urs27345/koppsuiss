@@ -38,6 +38,7 @@ import icon32 from "@/assets/buildingDescription/31.png";
 import icon33 from "@/assets/buildingDescription/32.png";
 import icon34 from "@/assets/buildingDescription/33.png";
 import icon35 from "@/assets/buildingDescription/34.png";
+import PageMeta from "../../../../components/module/pageMeta";
 
 import styles from "./style.module.scss";
 
@@ -45,8 +46,9 @@ const BuildingDescription = () => {
   const { dictionary } = useMyContext();
   return (
     <div className={styles.wrapper}>
+      <PageMeta description="" title="" url="" keywords="eatcheap, login, forgot password, account" canonical="" />
       <div className={styles.headerContent}>
-        <p className={styles.headerLabel}>{dictionary["constructionDescription1"]}</p>
+        <h1 className={styles.headerLabel}>{dictionary["constructionDescription1"]}</h1>
         <p className={styles.headerDescription}>{dictionary["constructionDescription1_1"]}</p>
       </div>
       <div className={styles.content}>

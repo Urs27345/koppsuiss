@@ -100,7 +100,7 @@ const Department: React.FC<Props> = ({ id }) => {
       <div className={styles.wrapper}>
         <div className={classNames(styles.content, "tablet:max-w-[450px]")}>
           <div>
-            <h2>{dictionary["visualization"]}</h2>
+            <h1>{dictionary["visualization"]}</h1>
             <Configurator hoveredRoom={hoveredRoom} />
           </div>
           <div className="mt-4">

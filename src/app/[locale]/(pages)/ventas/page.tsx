@@ -34,7 +34,7 @@ const SantaCruz = () => {
     <Container>
       <div className={styles.wrapper}>
         <div className={styles.context}>
-          <p className={styles.headerLabel}>{dictionary["ventasDescription1"]}</p>
+          <h1 className={styles.headerLabel}>{dictionary["ventasDescription1"]}</h1>
           <p className={styles.headerDescription}>{dictionary["ventasDescription1_1"]}</p>
           <p className={styles.headerDescription}>{dictionary["ventasDescription2"]}</p>
           <p className={styles.headerDescription}>{dictionary["ventasDescription3"]}</p>
