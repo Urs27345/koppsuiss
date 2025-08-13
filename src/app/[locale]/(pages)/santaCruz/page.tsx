@@ -31,7 +31,7 @@ const Impressions = () => {
     <Container>
       <div className={styles.wrapper}>
         <div className={styles.context}>
-          <p>{dictionary["santaCruzDescription1"]}</p>
+          <h1>{dictionary["santaCruzDescription1"]}</h1>
           <p>{dictionary["santaCruzDescription2"]}</p>
           <p>{dictionary["santaCruzDescription3"]}</p>
         </div>

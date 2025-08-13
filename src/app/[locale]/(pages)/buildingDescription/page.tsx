@@ -48,7 +48,7 @@ const BuildingDescription = () => {
     <div className={styles.wrapper}>
       <PageMeta description="" title="" url="" keywords="eatcheap, login, forgot password, account" canonical="" />
       <div className={styles.headerContent}>
-        <p className={styles.headerLabel}>{dictionary["constructionDescription1"]}</p>
+        <h1 className={styles.headerLabel}>{dictionary["constructionDescription1"]}</h1>
         <p className={styles.headerDescription}>{dictionary["constructionDescription1_1"]}</p>
       </div>
       <div className={styles.content}>
