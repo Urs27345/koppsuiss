@@ -39,9 +39,10 @@ import image506 from "@/assets/department/506.jpg";
 import Container from "../../module/container";
 import Configurator from "../../module/configurator";
 import { useMyContext } from "../../../app/context/context";
+import { ApartmentRequiringModal } from "../../module/base/apartmentRequiringModel";
+import PageMeta from "../../module/pageMeta";
 
 import styles from "./style.module.scss";
-import { ApartmentRequiringModal } from "../../module/base/apartmentRequiringModel";
 
 type Props = {
   id: string;
@@ -97,6 +98,13 @@ const Department: React.FC<Props> = ({ id }) => {
 
   return (
     <Container>
+      <PageMeta
+        title={dictionary["departmentSeoTitle"]}
+        description={dictionary["departmentSeoDescription"]}
+        url={dictionary["departmentSeoUrl"]}
+        keywords={dictionary["departmentSeoKeyword"]}
+        canonical={dictionary["departmentSeoUrl"]}
+      />
       <div className={styles.wrapper}>
         <div className={classNames(styles.content, "tablet:max-w-[450px]")}>
           <div>

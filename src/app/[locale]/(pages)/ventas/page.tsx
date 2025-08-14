@@ -17,6 +17,7 @@ import { partnerList } from "../../../../utils/constant";
 import Container from "../../../../components/module/container";
 import { useMyContext } from "../../../context/context";
 import ContactForm from "../../../../components/module/base/contactForm";
+import PageMeta from "../../../../components/module/pageMeta";
 
 import styles from "./style.module.scss";
 
@@ -32,6 +33,13 @@ const SantaCruz = () => {
   };
   return (
     <Container>
+      <PageMeta
+        title={dictionary["ventasSeoTitle"]}
+        description={dictionary["ventasSeoDescription"]}
+        url={dictionary["ventasSeoUrl"]}
+        keywords={dictionary["ventasSeoKeyword"]}
+        canonical={dictionary["ventasSeoUrl"]}
+      />
       <div className={styles.wrapper}>
         <div className={styles.context}>
           <h1 className={styles.headerLabel}>{dictionary["ventasDescription1"]}</h1>

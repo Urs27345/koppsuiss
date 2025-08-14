@@ -12,12 +12,20 @@ import image6 from "@/assets/impression/6.png";
 import styles from "./style.module.scss";
 import Container from "../../../../components/module/container";
 import { useMyContext } from "../../../context/context";
+import PageMeta from "../../../../components/module/pageMeta";
 
 const Impressions = () => {
   const { dictionary } = useMyContext();
   const imageList = [image1, image2, image3, image4, image5, image6];
   return (
     <Container>
+      <PageMeta
+        title={dictionary["impressionSeoTitle"]}
+        description={dictionary["impressionSeoDescription"]}
+        url={dictionary["impressionSeoUrl"]}
+        keywords={dictionary["impressionSeoKeyword"]}
+        canonical={dictionary["impressionSeoUrl"]}
+      />
       <div className={styles.wrapper}>
         <h1>{dictionary["Impressions"]}</h1>
         <div className={styles.context}>
