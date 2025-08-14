@@ -88,8 +88,8 @@ const Department: React.FC<Props> = ({ id }) => {
   };
 
   const hoverStyleList: { [key: string]: string } = {
-    pink: "hover:bg-[##F2DCDA]",
-    green: "hover:bg-[##92D050]",
+    pink: "hover:bg-[#F2DCDA]",
+    green: "hover:bg-[#92D050]",
     gray: "hover:bg-secondaryGray/30",
     brown: "hover:bg-[#C4BD97]",
   };
@@ -150,7 +150,7 @@ const Department: React.FC<Props> = ({ id }) => {
             {dictionary["floorPlanApartment"]} {id}
           </h2>
           <div>
-            <Image src={departmentImage[`image${id}`]} alt="101" className="w-full" />
+            <Image src={departmentImage[`image${id}`]} alt={`image${id}`} className="w-full" />
           </div>
         </div>
         <div className={classNames(styles.content, "max-w-[350px]")}>
