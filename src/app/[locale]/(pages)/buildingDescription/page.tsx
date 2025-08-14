@@ -46,7 +46,13 @@ const BuildingDescription = () => {
   const { dictionary } = useMyContext();
   return (
     <div className={styles.wrapper}>
-      <PageMeta description="" title="" url="" keywords="eatcheap, login, forgot password, account" canonical="" />
+      <PageMeta
+        title={dictionary["homeSeoTitle"]}
+        description={dictionary["homeSeoDescription"]}
+        url={dictionary["homeSeoUrl"]}
+        keywords={dictionary["homeSeoKeyword"]}
+        canonical={dictionary["homeSeoUrl"]}
+      />
       <div className={styles.headerContent}>
         <h1 className={styles.headerLabel}>{dictionary["constructionDescription1"]}</h1>
         <p className={styles.headerDescription}>{dictionary["constructionDescription1_1"]}</p>

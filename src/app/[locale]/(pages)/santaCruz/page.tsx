@@ -8,6 +8,7 @@ import image3 from "@/assets/ventas/3.jpg";
 
 import Container from "../../../../components/module/container";
 import { useMyContext } from "../../../context/context";
+import PageMeta from "../../../../components/module/pageMeta";
 
 import styles from "./style.module.scss";
 
@@ -29,6 +30,13 @@ const Impressions = () => {
   ];
   return (
     <Container>
+      <PageMeta
+        title={dictionary["santaCruzSeoTitle"]}
+        description={dictionary["santaCruzSeoDescription"]}
+        url={dictionary["santaCruzSeoUrl"]}
+        keywords={dictionary["santaCruzSeoKeyword"]}
+        canonical={dictionary["santaCruzSeoUrl"]}
+      />
       <div className={styles.wrapper}>
         <div className={styles.context}>
           <h1>{dictionary["santaCruzDescription1"]}</h1>
