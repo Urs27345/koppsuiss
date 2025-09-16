@@ -206,10 +206,18 @@ const Department: React.FC<Props> = ({ id }) => {
       </div>
       <div className={styles.bottomContent}>
         <ApartmentRequiringModal roomNumber={id} />
-        <Link href={`/pdf/${id}.pdf`} target="_blank" className={styles.additionalButton}>
+        <Link
+          href={`/pdf/${locale?.toString()?.toUpperCase()}_${id}.pdf`}
+          target="_blank"
+          className={styles.additionalButton}
+        >
           {dictionary["floorPlanAsPDF"]}
         </Link>
-        <Link href={`/price/${id}.pdf`} className={styles.additionalButton} target="_blank">
+        <Link
+          href={`/pdf/${locale?.toString()?.toUpperCase()}_Pricelist.pdf`}
+          className={styles.additionalButton}
+          target="_blank"
+        >
           {dictionary["completePriceList"]}
         </Link>
         <Link href={`/${locale}/buildingDescription`} className={styles.additionalButton}>
