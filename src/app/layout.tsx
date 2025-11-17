@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { MyContextProvider } from "./context/context";
+import { getDictionary } from "../lib/getDictionary";
+import Header from "../components/module/header";
+import Footer from "../components/module/footer";
+import HeaderNavigation from "../components/module/headerNavigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -42,16 +47,24 @@ export const metadata: Metadata = {
   description: "Luxury apartments in Santa Cruz with pool, sauna and solar panels. Buy direct from the developer.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
 }>) {
+  // Load Spanish dictionary by default for Google Ads compatibility
+  const dict = await getDictionary("es");
+
   return (
-    <html lang={params.locale ?? "en"}>
-      <body className={`${geistSans.variable} ${jost.className} antialiased`}>{children}</body>
+    <html lang="es">
+      <body className={`${geistSans.variable} ${jost.className} antialiased`}>
+        <MyContextProvider>
+          <Header />
+          <HeaderNavigation dict={dict} locale="es" />
+          {children}
+          <Footer />
+        </MyContextProvider>
+      </body>
     </html>
   );
 }
