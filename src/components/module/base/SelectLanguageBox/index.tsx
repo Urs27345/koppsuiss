@@ -10,7 +10,7 @@ const SelectLanguageBox = () => {
   const pathName = usePathname();
   const router = useRouter();
   const initialLoaded = useRef<any>(false);
-  const [selectedValue, setSelectedValue] = useState("es");
+  const [selectedValue, setSelectedValue] = useState<string>("");
 
   useEffect(() => {
     setSelectedValue(params.locale as string);
@@ -18,8 +18,8 @@ const SelectLanguageBox = () => {
   }, [params.locale]);
 
   useEffect(() => {
-    if (!!initialLoaded) {
-      const newPath = replaceLocale(pathName, selectedValue);
+    if (!!initialLoaded && selectedValue) {
+      const newPath = replaceLocale(pathName, selectedValue ?? "es");
       router.replace(newPath);
       router.refresh();
     }
@@ -27,7 +27,7 @@ const SelectLanguageBox = () => {
 
   return (
     <Select
-      value={selectedValue}
+      value={selectedValue ?? "es"}
       onValueChange={(e) => {
         setSelectedValue(e);
       }}
