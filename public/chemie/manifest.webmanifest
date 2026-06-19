@@ -1,11 +1,11 @@
 {
-  "name": "Aqua Quest - Lernspiel Wasser",
+  "name": "Aqua Quest – Chemie Lernspiel",
   "short_name": "Aqua Quest",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#071016",
+  "background_color": "#081018",
   "theme_color": "#0f766e",
-  "description": "Lernspiel fuer 2. Sekundarschule: Wasser, H2O, Eigenschaften, Zustandsaenderungen, Osmose, pH und Wasserkreislauf.",
+  "description": "Bilinguales Chemie-Lernspiel / juego bilingüe de química con cambio DE/ES.",
   "icons": [
     {
       "src": "icon-192.png",

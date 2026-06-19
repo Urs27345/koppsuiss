@@ -1,43 +1,23 @@
-# Aqua Quest - Lernspiel Wasser
+# Aqua Quest – bilinguales Lernspiel / juego bilingüe
 
-Installierbare Web-App/PWA fuer Samsung, PC und Tablet.
+Diese Version ist zweisprachig.
 
-## Inhalte
+- Umschalter DE/ES unten rechts
+- Sprachwechsel jederzeit, auch mitten im Level
+- Bilder aus den Unterlagen enthalten
+- mehrere Spielarten: Quiz, Molekül-Labor, Memory, Sortieren, Klassifizieren, Final-Test
+- Comic-Spezialeffekte bei richtigen und falschen Antworten
 
-Das Spiel basiert auf den hochgeladenen Unterlagen zum Thema Wasser:
-- H2O und Wasseranteile
-- Molekuel, Dipol, Wasserstoffbruecken
-- Eigenschaften des Wassers
-- Zustandsaenderungen
-- Wasserkreislauf
-- Osmose und pH
-- gemischte Pruefungssimulation
+## Einbau in eure Homepage
 
-## Installation online
+Ordnerinhalt nach:
 
-Kopiere diesen Ordner nach:
+public/chemie/
 
-public/aqua-quest/
+kopieren und die bisherigen Dateien ersetzen.
 
-Dann ist die App erreichbar unter:
+Dann committen und pushen.
 
-https://DEINE-DOMAIN/aqua-quest/index.html
+## Online-Pfad
 
-Auf Samsung:
-Chrome oder Samsung Internet -> Menue -> App installieren / Zum Startbildschirm hinzufuegen.
-
-## Dateien
-
-- index.html: komplette App
-- manifest.webmanifest: PWA-Information
-- service-worker.js: Offline-Cache
-- assets/page-01.jpg bis page-13.jpg: Bilder aus den Unterlagen
-- icon-192.png / icon-512.png: App-Icons
-
-
-## Version mit Spezialeffekten
-
-Diese Version enthält zusätzliche Comic-Effekte:
-- richtige Antworten: Sterne, Regentropfen, Combo-Effekte
-- falsche Antworten: Blubb-Alarm, Professorin Aqua, Bildschirm-Wackeln, Labortür, Wiederholungswolke
-- alles ist bewusst cartoonartig und ohne echte Gewalt dargestellt
+/chemie/index.html

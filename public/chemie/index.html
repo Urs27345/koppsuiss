@@ -1,381 +1,236 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0f766e">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Aqua Quest - Lernspiel Wasser</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icon-192.png">
-  <style>
-    :root{
-      --bg:#071016; --panel:#111c24; --panel2:#172733; --line:#2b4250; --text:#eff8fb; --muted:#a8bac3;
-      --accent:#0f766e; --accent2:#14b8a6; --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444; --blue:#38bdf8;
-      --purple:#a78bfa; --yellow:#facc15;
-    }
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    html,body{margin:0;min-height:100%;background:linear-gradient(180deg,#071016,#0b1820);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
-    body{padding-bottom:30px;}
-    header{position:sticky;top:0;z-index:20;background:rgba(7,16,22,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 14px;}
-    .top{max-width:1100px;margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:space-between}
-    .brand h1{font-size:20px;margin:0;line-height:1.1}.brand div{font-size:12px;color:var(--muted);margin-top:2px}
-    .scoreBox{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
-    .pill{display:inline-flex;gap:5px;align-items:center;border:1px solid var(--line);background:#0b141b;color:var(--muted);border-radius:999px;padding:5px 8px;font-size:12px;white-space:nowrap}
-    main{max-width:1100px;margin:0 auto;padding:14px;}
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:14px;box-shadow:0 14px 30px rgba(0,0,0,.22)}
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-    @media(max-width:760px){.grid,.grid2,.grid4{grid-template-columns:1fr}.top{align-items:flex-start}.scoreBox{justify-content:flex-start}.brand h1{font-size:18px}}
-    button{border:0;border-radius:13px;padding:12px 14px;background:var(--panel2);color:var(--text);font-size:15px;font-weight:760;cursor:pointer}
-    button:active{transform:translateY(1px);opacity:.92} button.primary{background:var(--accent)} button.ok{background:var(--ok);color:#04140a} button.warn{background:var(--warn);color:#1c1000} button.bad{background:var(--bad)}
-    button.choice{text-align:left;min-height:54px;background:#0c1720;border:1px solid var(--line);font-weight:650} button.choice.correct{border-color:#22c55e;background:#0b2918} button.choice.wrong{border-color:#ef4444;background:#351216}
-    .levelCard{display:flex;flex-direction:column;gap:8px;min-height:180px;position:relative;overflow:hidden}.levelCard h3{margin:0;font-size:18px}.levelCard p{color:var(--muted);font-size:13px;margin:0;line-height:1.35}.levelType{font-size:12px;color:#cffafe}.progressBar{height:8px;background:#071016;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:auto}.progressBar div{height:100%;background:linear-gradient(90deg,var(--accent2),var(--blue));width:0%}
-    .hidden{display:none!important}.muted{color:var(--muted)}.small{font-size:12px;color:var(--muted);line-height:1.35}.big{font-size:28px;font-weight:900}.center{text-align:center}.dangerText{color:#fecaca}.okText{color:#bbf7d0}.warnText{color:#fde68a}
-    .studyImage{width:100%;max-height:360px;object-fit:contain;border-radius:14px;border:1px solid var(--line);background:#fff;margin-top:10px}.thumb{width:100%;height:120px;object-fit:cover;border-radius:12px;border:1px solid var(--line);filter:contrast(.95)}
-    .questionBox{background:#0b141b;border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}.questionTitle{font-size:20px;font-weight:850;line-height:1.25;margin-bottom:8px}.feedback{min-height:45px;margin-top:10px;font-size:14px;line-height:1.35;color:#e5eef2}
-    .navBtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;margin-top:12px}.navBtns .rightBtns{display:flex;gap:8px;flex-wrap:wrap}
-    .memoryGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}@media(max-width:620px){.memoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    .memCard{min-height:90px;background:#0c1720;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-size:13px;font-weight:750}.memCard.open{background:#0f2f35;border-color:var(--accent2)}.memCard.done{background:#0d2b18;border-color:#22c55e;color:#bbf7d0}
-    .termBank{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.termBtn{background:#0c1720;border:1px solid var(--line)}.termBtn.selected{background:var(--accent);border-color:var(--accent2)}.dropLine{padding:12px;margin:8px 0;background:#0b141b;border:1px solid var(--line);border-radius:13px}.dropLine b{color:#cffafe}.ordered{display:flex;gap:8px;flex-wrap:wrap;min-height:44px;padding:8px;background:#0b141b;border:1px solid var(--line);border-radius:13px;margin-top:8px}
-    .moleculeLab{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.moleculeLab{grid-template-columns:1fr}}.atomBox{background:#0b141b;border:1px solid var(--line);border-radius:15px;padding:14px;text-align:center}.atom{display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border-radius:50%;margin:6px;font-size:24px;font-weight:950}.H{background:#e0f2fe;color:#075985}.O{background:#fecaca;color:#7f1d1d}.built{min-height:150px;display:flex;align-items:center;justify-content:center}.bond{display:inline-flex;align-items:center;gap:2px}.bond .atom{margin:0}.bondLine{width:30px;height:3px;background:#dbeafe}
-    .classGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}@media(max-width:700px){.classGrid{grid-template-columns:1fr}}.classCol{min-height:150px;background:#0b141b;border:1px solid var(--line);border-radius:15px;padding:10px}.classCol h4{margin:0 0 8px;color:#cffafe}.classItem{background:#0c1720;border:1px solid var(--line);border-radius:12px;padding:10px;margin:7px 0;font-size:14px}.classItem.selected{border-color:var(--accent2);background:#10323a}.classItem.correct{border-color:#22c55e;background:#0d2b18}.classItem.wrong{border-color:#ef4444;background:#351216}
-    .installBox{background:#102622;border:1px solid #0f766e;border-radius:14px;padding:10px;margin-bottom:14px;color:#ddfffb}
-    dialog{border:1px solid var(--line);border-radius:18px;background:#0b141b;color:var(--text);max-width:94vw;width:900px;padding:0} dialog::backdrop{background:rgba(0,0,0,.72)}.dialogHead{padding:10px 12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}.dialogBody{padding:12px;max-height:82vh;overflow:auto}.dialogBody img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:white}
-    .pageGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}@media(max-width:700px){.pageGrid{grid-template-columns:1fr 1fr}}.pageCard{background:#0b141b;border:1px solid var(--line);border-radius:14px;padding:8px}.pageCard img{width:100%;height:180px;object-fit:cover;border-radius:10px;background:white}.pageCard button{width:100%;margin-top:6px;font-size:13px;padding:8px}
-
-    /* Lustige Lern-Effekte */
-    .fxLayer{position:fixed;inset:0;pointer-events:none;z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px}
-    .fxPopup{min-width:min(92vw,420px);background:rgba(12,23,30,.96);border:2px solid var(--accent2);border-radius:22px;box-shadow:0 18px 60px rgba(0,0,0,.45);padding:18px;text-align:center;animation:fxPop .95s ease both}
-    .fxTitle{font-size:22px;font-weight:950;margin-bottom:4px}.fxText{font-size:14px;color:#dceef3}.fxEmoji{font-size:66px;line-height:1;margin:4px 0 8px}
-    .fxTeacher{width:170px;height:190px;margin:4px auto 10px;position:relative}
-    .fxTeacher .head{position:absolute;left:55px;top:8px;width:62px;height:62px;border-radius:50%;background:#ffd6b4;border:3px solid #55351e}
-    .fxTeacher .hair{position:absolute;left:47px;top:0;width:78px;height:42px;border-radius:50% 50% 35% 35%;background:#3b2f2f}
-    .fxTeacher .body{position:absolute;left:32px;top:68px;width:110px;height:92px;border-radius:52px 52px 30px 30px;background:#7c3aed;border:3px solid #e9d5ff}
-    .fxTeacher .coat{position:absolute;left:43px;top:75px;width:88px;height:92px;border-radius:20px;background:#e5e7eb;border:3px solid #94a3b8}
-    .fxTeacher .eye{position:absolute;top:31px;width:7px;height:7px;border-radius:50%;background:#111}.fxTeacher .eye.l{left:76px}.fxTeacher .eye.r{left:98px}
-    .fxTeacher .mouth{position:absolute;left:83px;top:45px;width:26px;height:10px;border-bottom:3px solid #7f1d1d;border-radius:50%}
-    .fxTeacher .arm{position:absolute;top:88px;width:52px;height:12px;border-radius:8px;background:#ffd6b4;border:2px solid #55351e}
-    .fxTeacher .arm.l{left:6px;transform:rotate(-25deg)}.fxTeacher .arm.r{right:1px;transform:rotate(25deg)}
-    .fxTeacher .ruler{position:absolute;right:-4px;top:76px;width:66px;height:9px;background:#facc15;border:2px solid #7c2d12;transform:rotate(18deg);border-radius:4px}
-    .fxDoor{width:140px;height:190px;margin:0 auto 12px;border:4px solid #8b5e34;border-radius:8px;background:#6b3f20;position:relative;animation:doorSwing .95s ease both}
-    .fxDoor:after{content:'';position:absolute;right:16px;top:88px;width:10px;height:10px;border-radius:50%;background:#fde68a}
-    .fxFountain{font-size:78px;animation:fountainBounce 1s ease both}
-    .fxStars{position:fixed;inset:0;pointer-events:none;z-index:10000}
-    .fxStar{position:absolute;font-size:26px;animation:starFloat 900ms ease-out forwards}
-    body.screenShake{animation:screenShake .35s linear}
-    body.flashOk{animation:flashOk .45s ease}
-    body.flashBad{animation:flashBad .45s ease}
-    @keyframes fxPop{0%{opacity:0;transform:scale(.75) translateY(22px)}70%{opacity:1;transform:scale(1.04) translateY(0)}100%{opacity:0;transform:scale(.96) translateY(-18px)}}
-    @keyframes starFloat{0%{opacity:1;transform:translateY(0) scale(.7) rotate(0)}100%{opacity:0;transform:translateY(-130px) scale(1.4) rotate(220deg)}}
-    @keyframes screenShake{0%,100%{transform:translate(0)}20%{transform:translate(-8px,3px)}40%{transform:translate(7px,-3px)}60%{transform:translate(-5px,-2px)}80%{transform:translate(5px,2px)}}
-    @keyframes flashOk{0%{box-shadow:inset 0 0 0 9999px rgba(34,197,94,.18)}100%{box-shadow:none}}
-    @keyframes flashBad{0%{box-shadow:inset 0 0 0 9999px rgba(239,68,68,.18)}100%{box-shadow:none}}
-    @keyframes doorSwing{0%{transform:perspective(400px) rotateY(0)}60%{transform:perspective(400px) rotateY(-24deg)}100%{transform:perspective(400px) rotateY(0)}}
-    @keyframes fountainBounce{0%{transform:translateY(28px) scale(.75);opacity:0}45%{transform:translateY(-14px) scale(1.12);opacity:1}100%{transform:translateY(0) scale(1);opacity:0}}
-
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<title>Aqua Quest – Chemie Lernspiel</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--bg:#081018;--panel:#12202a;--panel2:#182a35;--line:#305060;--text:#eef7fb;--muted:#a9bcc6;--accent:#0f766e;--accent2:#14b8a6;--ok:#22c55e;--warn:#f59e0b;--bad:#ef4444;--blue:#38bdf8;--purple:#a78bfa;--yellow:#facc15;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:linear-gradient(180deg,#071016,#0d1720);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+body{padding-bottom:24px}
+header{position:sticky;top:0;z-index:30;background:rgba(8,16,24,.95);backdrop-filter:blur(9px);border-bottom:1px solid var(--line);padding:12px 14px}
+main{max-width:1120px;margin:0 auto;padding:14px}
+.top{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.brand h1{margin:0;font-size:20px;line-height:1.15}.brand .sub{font-size:12px;color:var(--muted);margin-top:3px}
+.headerRight{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.pill{display:inline-flex;align-items:center;gap:6px;background:#0a1218;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:6px 10px;font-size:12px;white-space:nowrap}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:14px;box-shadow:0 14px 30px rgba(0,0,0,.22)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media(max-width:800px){.grid,.grid2,.grid4{grid-template-columns:1fr}.top{flex-direction:column}.headerRight{justify-content:flex-start}}
+button{border:0;border-radius:13px;padding:12px 14px;background:var(--panel2);color:var(--text);font-size:15px;font-weight:760;cursor:pointer}
+button.primary{background:var(--accent)} button.ok{background:var(--ok);color:#04140a} button.warn{background:var(--warn);color:#211200} button.bad{background:var(--bad)} button.smallBtn{padding:8px 10px;font-size:13px}
+button.choice{text-align:left;width:100%;background:#0c1720;border:1px solid var(--line);margin-top:8px;min-height:54px} button.choice.correct{background:#0d2b18;border-color:#22c55e} button.choice.wrong{background:#351216;border-color:#ef4444}
+.hidden{display:none!important}.center{text-align:center}.small{font-size:12px;color:var(--muted);line-height:1.4}.muted{color:var(--muted)} .big{font-size:30px;font-weight:900}
+.thumb{width:100%;height:120px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#fff}.studyImage{width:100%;max-height:360px;object-fit:contain;border-radius:14px;border:1px solid var(--line);background:#fff;margin-top:10px}
+.levelCard{display:flex;flex-direction:column;gap:8px;min-height:210px}.levelCard h3{margin:0;font-size:18px}.levelCard p{margin:0;font-size:13px;line-height:1.35;color:var(--muted)}.levelType{font-size:12px;color:#cffafe}.progressBar{height:8px;background:#071016;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:auto}.progressBar div{height:100%;background:linear-gradient(90deg,var(--accent2),var(--blue));width:0%}
+.questionBox{background:#0b141b;border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}.questionTitle{font-size:20px;font-weight:850;line-height:1.25;margin-bottom:8px}.feedback{min-height:48px;font-size:14px;line-height:1.4;margin-top:10px}
+.navBtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;margin-top:14px}.rightBtns{display:flex;gap:8px;flex-wrap:wrap}
+.moleculeLab{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:760px){.moleculeLab{grid-template-columns:1fr}}
+.atomBox{background:#0b141b;border:1px solid var(--line);border-radius:15px;padding:14px;text-align:center}.atom{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;margin:6px;font-size:24px;font-weight:950}.H{background:#dbeafe;color:#075985}.O{background:#fecaca;color:#7f1d1d}.bond{display:inline-flex;align-items:center;gap:2px}.bondLine{width:30px;height:3px;background:#dbeafe}.built{min-height:150px;display:flex;align-items:center;justify-content:center}
+.memoryGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}@media(max-width:640px){.memoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}} .memCard{min-height:96px;background:#0c1720;border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-size:13px;font-weight:750}.memCard.open{background:#10323a;border-color:var(--accent2)}.memCard.done{background:#0d2b18;border-color:#22c55e;color:#bbf7d0}
+.termBank{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.termBtn{background:#0c1720;border:1px solid var(--line)}.termBtn.selected{background:var(--accent);border-color:var(--accent2)}.ordered{display:flex;gap:8px;flex-wrap:wrap;min-height:46px;background:#0b141b;border:1px solid var(--line);border-radius:14px;padding:10px}.orderChip{background:#0c1720;border:1px solid var(--line);border-radius:999px;padding:8px 12px}
+.classGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}@media(max-width:760px){.classGrid{grid-template-columns:1fr}} .classCol{background:#0b141b;border:1px solid var(--line);border-radius:15px;padding:10px;min-height:170px}.classCol h4{margin:0 0 8px;color:#cffafe}.classItem{background:#0c1720;border:1px solid var(--line);border-radius:12px;padding:10px;margin:7px 0;font-size:14px}.classItem.selected{background:#10323a;border-color:var(--accent2)}.classItem.correct{background:#0d2b18;border-color:#22c55e}.classItem.wrong{background:#351216;border-color:#ef4444}
+.pageGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}@media(max-width:760px){.pageGrid{grid-template-columns:1fr 1fr}} .pageCard{background:#0b141b;border:1px solid var(--line);border-radius:14px;padding:8px}.pageCard img{width:100%;height:180px;object-fit:cover;border-radius:10px;background:#fff}.pageCard button{width:100%;margin-top:6px;font-size:13px;padding:8px}
+dialog{border:1px solid var(--line);border-radius:18px;background:#0b141b;color:var(--text);max-width:96vw;width:920px;padding:0}dialog::backdrop{background:rgba(0,0,0,.72)}.dialogHead{padding:10px 12px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px}.dialogBody{padding:12px;max-height:82vh;overflow:auto}.dialogBody img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff}
+.installBox{background:#102622;border:1px solid #0f766e;border-radius:14px;padding:10px;margin-bottom:14px;color:#ddfffb}
+.langToggle{position:fixed;right:14px;bottom:14px;z-index:40;border-radius:999px;background:#0f766e;color:#fff;border:2px solid #14b8a6;padding:11px 14px;font-size:14px;font-weight:900;box-shadow:0 10px 22px rgba(0,0,0,.3)}
+.fxLayer{position:fixed;inset:0;pointer-events:none;z-index:9999;display:flex;align-items:center;justify-content:center;padding:18px}.fxPopup{min-width:min(92vw,420px);background:rgba(12,23,30,.96);border:2px solid var(--accent2);border-radius:22px;box-shadow:0 18px 60px rgba(0,0,0,.45);padding:18px;text-align:center;animation:fxPop .95s ease both}.fxTitle{font-size:22px;font-weight:950;margin-bottom:4px}.fxText{font-size:14px;color:#dceef3}.fxEmoji{font-size:66px;line-height:1;margin:4px 0 8px}
+.fxTeacher{width:170px;height:190px;margin:4px auto 10px;position:relative}.fxTeacher .head{position:absolute;left:55px;top:8px;width:62px;height:62px;border-radius:50%;background:#ffd6b4;border:3px solid #55351e}.fxTeacher .hair{position:absolute;left:47px;top:0;width:78px;height:42px;border-radius:50% 50% 35% 35%;background:#3b2f2f}.fxTeacher .body{position:absolute;left:32px;top:68px;width:110px;height:92px;border-radius:52px 52px 30px 30px;background:#7c3aed;border:3px solid #e9d5ff}.fxTeacher .coat{position:absolute;left:43px;top:75px;width:88px;height:92px;border-radius:20px;background:#e5e7eb;border:3px solid #94a3b8}.fxTeacher .eye{position:absolute;top:31px;width:7px;height:7px;border-radius:50%;background:#111}.fxTeacher .eye.l{left:76px}.fxTeacher .eye.r{left:98px}.fxTeacher .mouth{position:absolute;left:83px;top:45px;width:26px;height:10px;border-bottom:3px solid #7f1d1d;border-radius:50%}.fxTeacher .arm{position:absolute;top:88px;width:52px;height:12px;border-radius:8px;background:#ffd6b4;border:2px solid #55351e}.fxTeacher .arm.l{left:6px;transform:rotate(-25deg)}.fxTeacher .arm.r{right:1px;transform:rotate(25deg)}.fxTeacher .ruler{position:absolute;right:-4px;top:76px;width:66px;height:9px;background:#facc15;border:2px solid #7c2d12;transform:rotate(18deg);border-radius:4px}.fxDoor{width:140px;height:190px;margin:0 auto 12px;border:4px solid #8b5e34;border-radius:8px;background:#6b3f20;position:relative;animation:doorSwing .95s ease both}.fxDoor:after{content:'';position:absolute;right:16px;top:88px;width:10px;height:10px;border-radius:50%;background:#fde68a}.fxFountain{font-size:78px;animation:fountainBounce 1s ease both}.fxStars{position:fixed;inset:0;pointer-events:none;z-index:10000}.fxStar{position:absolute;font-size:26px;animation:starFloat 900ms ease-out forwards}
+body.screenShake{animation:screenShake .35s linear} body.flashOk{animation:flashOk .45s ease} body.flashBad{animation:flashBad .45s ease}
+@keyframes fxPop{0%{opacity:0;transform:scale(.75) translateY(22px)}70%{opacity:1;transform:scale(1.04) translateY(0)}100%{opacity:0;transform:scale(.96) translateY(-18px)}}
+@keyframes starFloat{0%{opacity:1;transform:translateY(0) scale(.7) rotate(0)}100%{opacity:0;transform:translateY(-130px) scale(1.4) rotate(220deg)}}
+@keyframes screenShake{0%,100%{transform:translate(0)}20%{transform:translate(-8px,3px)}40%{transform:translate(7px,-3px)}60%{transform:translate(-5px,-2px)}80%{transform:translate(5px,2px)}}
+@keyframes flashOk{0%{box-shadow:inset 0 0 0 9999px rgba(34,197,94,.18)}100%{box-shadow:none}} @keyframes flashBad{0%{box-shadow:inset 0 0 0 9999px rgba(239,68,68,.18)}100%{box-shadow:none}}
+@keyframes doorSwing{0%{transform:perspective(400px) rotateY(0)}60%{transform:perspective(400px) rotateY(-24deg)}100%{transform:perspective(400px) rotateY(0)}}
+@keyframes fountainBounce{0%{transform:translateY(28px) scale(.75);opacity:0}45%{transform:translateY(-14px) scale(1.12);opacity:1}100%{transform:translateY(0) scale(1);opacity:0}}
+</style>
 </head>
 <body>
 <header>
   <div class="top">
-    <div class="brand"><h1>Aqua Quest - Lernspiel Wasser</h1><div>2. Sekundarschule - Prüfungstraining mit Bildern aus den Unterlagen</div></div>
-    <div class="scoreBox"><span class="pill">⭐ Punkte: <b id="totalScore">0</b></span><span class="pill">🏆 Level: <b id="levelDone">0/7</b></span><span class="pill">📱 offline-fähig</span></div>
+    <div class="brand">
+      <h1 id="brandTitle"></h1>
+      <div id="brandSub" class="sub"></div>
+    </div>
+    <div class="headerRight">
+      <div class="pill"><span>🏆</span><span id="totalScore">0</span></div>
+      <div class="pill"><span>✅</span><span id="levelDone">0/6</span></div>
+      <button id="openPagesBtn" class="smallBtn"></button>
+    </div>
   </div>
 </header>
 <main>
-  <div id="installBox" class="installBox hidden">Diese Lern-App kann auf Samsung installiert werden. <button id="installBtn" class="primary">App installieren</button></div>
+  <div id="installBox" class="installBox hidden">
+    <div id="installText"></div>
+    <div style="margin-top:8px"><button id="installBtn" class="primary"></button></div>
+  </div>
 
   <section id="menuScreen">
-    <div class="card">
-      <h2 style="margin:0 0 6px">Start</h2>
-      <p class="muted" style="margin:0">Wähle ein Level. Jedes Level nutzt eine andere Spielart, passend zum Thema: Quiz, Memory, Molekül-Labor, Sortieren, Klassifizieren und Prüfungssimulation.</p>
+    <div class="card center">
+      <div class="big" id="welcomeTitle"></div>
+      <div class="small" id="welcomeText"></div>
     </div>
     <div class="grid" id="levelGrid"></div>
     <div class="card">
-      <h3 style="margin:0 0 8px">Unterlagen ansehen</h3>
-      <p class="small">Die Bilder stammen aus dem hochgeladenen Lernmaterial. Tippe ein Bild an, wenn du dich an die Seite erinnern willst.</p>
-      <div class="pageGrid" id="pageGrid"></div>
+      <h3 id="pagesTitle"></h3>
+      <div class="small" id="pagesText"></div>
+      <div class="pageGrid" id="pageGrid" style="margin-top:10px"></div>
     </div>
   </section>
 
   <section id="gameScreen" class="hidden">
     <div class="card">
-      <div class="navBtns">
-        <button id="backMenu">← Menü</button>
-        <div class="rightBtns"><button id="showStudyImage">📄 Lernbild</button><button id="restartLevel">↻ Level neu</button></div>
-      </div>
-      <h2 id="levelTitle" style="margin:12px 0 4px"></h2>
-      <div class="small" id="levelDesc"></div>
-      <div class="grid4" style="margin-top:12px">
-        <div class="card" style="margin:0"><div class="small">Levelpunkte</div><div class="big" id="levelScore">0</div></div>
-        <div class="card" style="margin:0"><div class="small">Richtig</div><div class="big okText" id="correctCount">0</div></div>
-        <div class="card" style="margin:0"><div class="small">Fehler</div><div class="big dangerText" id="wrongCount">0</div></div>
-        <div class="card" style="margin:0"><div class="small">Fortschritt</div><div class="big" id="progressText">0%</div></div>
+      <div class="grid2">
+        <div>
+          <div class="small" id="levelTypeLabel"></div>
+          <h2 id="levelTitle" style="margin:4px 0 6px"></h2>
+          <div class="small" id="levelDesc"></div>
+        </div>
+        <div class="grid4">
+          <div class="card center" style="margin:0"><div class="small" id="scoreLabel"></div><div id="levelScore" class="big">0</div></div>
+          <div class="card center" style="margin:0"><div class="small" id="correctLabel"></div><div id="correctCount" class="big">0</div></div>
+          <div class="card center" style="margin:0"><div class="small" id="wrongLabel"></div><div id="wrongCount" class="big">0</div></div>
+          <div class="card center" style="margin:0"><div class="small" id="progressLabel"></div><div id="progressText" class="big">0%</div></div>
+        </div>
       </div>
     </div>
-    <div id="playArea"></div>
+    <div class="card" id="engineHost"></div>
+    <div class="navBtns">
+      <button id="backMenuBtn"></button>
+      <div class="rightBtns">
+        <button id="showPagesBtn" class="warn"></button>
+        <button id="nextBtn" class="primary hidden"></button>
+      </div>
+    </div>
   </section>
-
-  <dialog id="imageDialog"><div class="dialogHead"><b id="dialogTitle">Lernbild</b><button id="closeDialog">Schließen</button></div><div class="dialogBody" id="dialogBody"></div></dialog>
-
-  <div id="fxLayer" class="fxLayer hidden"></div>
-  <div id="fxStars" class="fxStars hidden"></div>
-
 </main>
+<button id="langBtn" class="langToggle">ES</button>
+<div id="fxLayer" class="fxLayer hidden"></div>
+<div id="fxStars" class="fxStars hidden"></div>
+<dialog id="pagesDialog">
+  <div class="dialogHead"><strong id="dialogTitle"></strong><button onclick="document.getElementById('pagesDialog').close()">✕</button></div>
+  <div class="dialogBody" id="dialogBody"></div>
+</dialog>
 <script>
-const PAGE_IMAGES = [
-  "assets/page-01.jpg","assets/page-02.jpg","assets/page-03.jpg","assets/page-04.jpg","assets/page-05.jpg","assets/page-06.jpg","assets/page-07.jpg","assets/page-08.jpg","assets/page-09.jpg","assets/page-10.jpg","assets/page-11.jpg","assets/page-12.jpg","assets/page-13.jpg"
-];
 const $ = id => document.getElementById(id);
-let progress = JSON.parse(localStorage.getItem('aquaQuestProgress') || '{}');
+const langState = { current: localStorage.getItem('aquaQuestLang') || 'de' };
+const progress = JSON.parse(localStorage.getItem('aquaQuestProgressBi') || '{}');
+let deferredPrompt = null;
 let currentLevel = null, game = null;
+const PAGE_IMAGES = Array.from({length:13},(_,i)=>`assets/page-${String(i+1).padStart(2,'0')}.jpg`);
+const txt = (de,es)=>({de,es});
+const pick = v => typeof v==='string' ? v : (v[langState.current] ?? v.de ?? v.es ?? '');
+const UI = {
+ brandTitle: txt('Aqua Quest – Chemie Lernspiel','Aqua Quest – Juego de Química'),
+ brandSub: txt('Wasser, H₂O, Zustände, Osmose, pH und Wasserkreislauf','Agua, H₂O, estados, ósmosis, pH y ciclo del agua'),
+ openPagesBtn: txt('Unterlagen','Apuntes'),
+ installText: txt('Diese App kann auf dem Samsung installiert werden. Tippe auf Installieren.','Esta app se puede instalar en Samsung. Toca Instalar.'),
+ installBtn: txt('App installieren','Instalar app'),
+ welcomeTitle: txt('Lerne den Prüfungsstoff spielerisch','Aprende el material del examen jugando'),
+ welcomeText: txt('Wechsle jederzeit unten rechts zwischen Deutsch und Spanisch – sogar während eines Levels.','Puedes cambiar en cualquier momento entre alemán y español con el botón de abajo a la derecha, incluso durante un nivel.'),
+ pagesTitle: txt('Bilder aus den Unterlagen','Imágenes de los apuntes'),
+ pagesText: txt('Öffne die Seiten als Gedächtnisstütze. Die Bilder helfen beim Wiedererkennen des Stoffes.','Abre las páginas como apoyo de memoria. Las imágenes ayudan a reconocer el contenido.'),
+ levelTypeLabel: txt('Spielart','Tipo de juego'), scoreLabel: txt('Punkte','Puntos'), correctLabel: txt('Richtig','Correctas'), wrongLabel: txt('Falsch','Incorrectas'), progressLabel: txt('Fortschritt','Progreso'),
+ backMenuBtn: txt('Zurück zum Menü','Volver al menú'), showPagesBtn: txt('Unterlagen anzeigen','Ver apuntes'), nextBtn: txt('Weiter','Siguiente'),
+ showPage: txt('Seite öffnen','Abrir página'), dialogTitle: txt('Unterlagen','Apuntes'),
+ quizHint: txt('Wähle die richtige Antwort.','Elige la respuesta correcta.'),
+ memoryHint: txt('Finde immer Begriff und Erklärung als Paar.','Encuentra siempre el concepto y su explicación como pareja.'),
+ orderHint: txt('Tippe die Begriffe in der richtigen Reihenfolge an.','Toca los términos en el orden correcto.'),
+ classifyHint: txt('Wähle zuerst einen Begriff und dann die passende Spalte.','Primero elige un concepto y luego la columna correcta.'),
+ moleculeHint: txt('Baue H₂O und beantworte dann die Frage.','Construye H₂O y luego responde la pregunta.'),
+ finishLevel: txt('Level abschließen','Terminar nivel'),
+ restart: txt('Neu starten','Reiniciar'),
+ selectAnswer: txt('Bitte wähle eine Antwort.','Por favor elige una respuesta.'),
+ chooseTerm: txt('Bitte zuerst einen Begriff wählen.','Primero elige un término.'),
+ correctFx: txt('Sehr gut!','¡Muy bien!'), comboFx: txt('Mehrere richtige Antworten hintereinander: Bonus-Stimmung im Labor!','¡Varias respuestas correctas seguidas: ambiente de bonus en el laboratorio!'),
+ wrong1: txt('Das Reagenzglas wird rot. Lies die Erklärung und probiere weiter.','El tubo de ensayo se pone rojo. Lee la explicación y sigue intentando.'),
+ wrong2: txt('Noch kein Drama: einmal tief durchatmen und logisch denken.','Todavía no es drama: respira hondo y piensa con lógica.'),
+ wrong3: txt('Der Bildschirm wackelt. Die nächste Antwort zählt.','La pantalla tiembla. La próxima respuesta cuenta.'),
+ wrong4: txt('Comic-Strafe: 5 Sekunden Denkpause im Flur.','Castigo cómico: 5 segundos de pausa para pensar en el pasillo.'),
+ wrong5: txt('Eine Wasserfontäne katapultiert dich in die Wiederholung. Erklärung lesen!','Una fuente de agua te catapulta a la nube de repaso. ¡Lee la explicación!'),
+ levelDoneFx: txt('Level geschafft!','¡Nivel superado!'),
+ finalDoneFx: txt('Prüfung bestanden!','¡Examen superado!'),
+ completed: txt('abgeschlossen','completado'),
+ result: txt('Ergebnis','Resultado')
+};
 
 const LEVELS = [
- {id:'water', title:'Level 1 - Wasser-Basics', type:'Quiz', pages:[0,1], desc:'Was ist Wasser? Körperanteile, Organe, Pflanzen und Tiere.', engine:'quiz', questions:[
-  {q:'Aus welchen Atomen besteht ein Wassermolekül H₂O?', a:['1 Sauerstoff + 2 Wasserstoff','2 Sauerstoff + 1 Wasserstoff','1 Sauerstoff + 1 Wasserstoff','2 Sauerstoff + 2 Wasserstoff'], c:0, exp:'H₂O bedeutet: zwei H-Atome und ein O-Atom.'},
-  {q:'Wie viel des menschlichen Körpers ist ungefähr Wasser?', a:['ca. 5-10 %','ca. 50-70 %','ca. 90-100 %','genau 25 %'], c:1, exp:'In den Unterlagen steht ungefähr 65 %, mit Variation nach Alter.'},
-  {q:'Welche Aussage ist richtig?', a:['Erwachsene haben meist 50-65 % Wasser','Alte Menschen haben immer mehr Wasser als Babys','Knochen bestehen fast vollständig aus Wasser','Fettgewebe enthält besonders viel Wasser'], c:0, exp:'Erwachsene liegen ungefähr bei 50-65 %. Babys haben mehr, ältere Menschen weniger.'},
-  {q:'Welche Probe enthält laut Unterlage ungefähr 93 % Wasser?', a:['Pino','Espinacas','Maíz','Tabaco'], c:1, exp:'Espinacas werden mit 93 % angegeben.'},
-  {q:'Welche Eigenschaft passt zu reinem Wasser?', a:['dicht wie Metall','Dichte ungefähr 1 g/ml','immer sauer','immer gasförmig'], c:1, exp:'Eine wichtige Grundangabe: Dichte ungefähr 1 g/ml.'}
+ {id:'quiz1', type:txt('Quiz','Quiz'), title:txt('Level 1 – Wasser Grundlagen','Nivel 1 – Fundamentos del agua'), desc:txt('H₂O, Wasseranteil im Körper und allgemeine Grundfragen.','H₂O, porcentaje de agua en el cuerpo y preguntas básicas.'), pages:[0,1,2], engine:'quiz', questions:[
+  {q:txt('Wofür steht H₂O?','¿Qué significa H₂O?'), a:[txt('Zwei Wasserstoff- und ein Sauerstoffatom','Dos átomos de hidrógeno y uno de oxígeno'), txt('Ein Wasserstoff- und zwei Sauerstoffatome','Un átomo de hidrógeno y dos de oxígeno'), txt('Nur Sauerstoff','Solo oxígeno'), txt('Nur Wasserstoff','Solo hidrógeno')], c:0, exp:txt('Ein Wassermolekül besteht aus zwei H-Atomen und einem O-Atom.','Una molécula de agua está formada por dos átomos de H y uno de O.')},
+  {q:txt('Wie viel Wasser enthält der menschliche Körper ungefähr?','¿Cuánta agua contiene aproximadamente el cuerpo humano?'), a:[txt('Etwa 10 %','Aproximadamente 10 %'), txt('Etwa 30 %','Aproximadamente 30 %'), txt('Etwa 60–70 %','Aproximadamente 60–70 %'), txt('Etwa 95 %','Aproximadamente 95 %')], c:2, exp:txt('Der menschliche Körper besteht zu einem großen Teil aus Wasser.','El cuerpo humano está compuesto en gran parte por agua.')},
+  {q:txt('Welches Organ enthält besonders viel Wasser?','¿Qué órgano contiene mucha agua?'), a:[txt('Gehirn','Cerebro'), txt('Zähne','Dientes'), txt('Nägel','Uñas'), txt('Knochen außen','Parte exterior de los huesos')], c:0, exp:txt('Besonders Gehirn und Blut haben einen hohen Wasseranteil.','Especialmente el cerebro y la sangre tienen un alto porcentaje de agua.')},
+  {q:txt('Warum ist Wasser für Lebewesen wichtig?','¿Por qué es importante el agua para los seres vivos?'), a:[txt('Es transportiert Stoffe und reguliert Temperatur','Transporta sustancias y regula la temperatura'), txt('Es ersetzt Sauerstoff vollständig','Reemplaza completamente el oxígeno'), txt('Es ist nur für Pflanzen wichtig','Solo es importante para las plantas'), txt('Es hat keine Funktion','No tiene función')], c:0, exp:txt('Wasser dient als Transportmittel und hilft bei der Temperaturregelung.','El agua sirve como medio de transporte y ayuda a regular la temperatura.')}
  ]},
- {id:'molecule', title:'Level 2 - Molekül-Labor', type:'Bauen + Fragen', pages:[1,2], desc:'Baue H₂O und erkenne Dipol, Winkel und Wasserstoffbrücken.', engine:'molecule'},
- {id:'properties', title:'Level 3 - Eigenschaften-Memory', type:'Memory', pages:[3,4,5], desc:'Kohäsion, Adhäsion, Oberflächenspannung, Kapillarität und Lösefähigkeit.', engine:'memory', pairs:[
-  ['Kohäsion','Wassermoleküle halten durch Wasserstoffbrücken zusammen.'],
-  ['Adhäsion','Wasser haftet an anderen polaren Oberflächen.'],
-  ['Oberflächenspannung','Die Oberfläche wirkt wie eine gespannte Haut.'],
-  ['Kapillarität','Wasser steigt in engen Röhrchen oder Pflanzenleitungen.'],
-  ['Dichte','Reines Wasser hat ungefähr 1 g/cm³.'],
-  ['Lösemittel','Wasser löst viele polare oder ionische Stoffe.']
+ {id:'molecule', type:txt('Molekül-Labor','Laboratorio molecular'), title:txt('Level 2 – Das H₂O-Molekül','Nivel 2 – La molécula H₂O'), desc:txt('Baue das Molekül und beantworte Fragen zu Polarität und Wasserstoffbrücken.','Construye la molécula y responde preguntas sobre polaridad y puentes de hidrógeno.'), pages:[3,4], engine:'molecule', questions:[
+   {q:txt('Warum ist Wasser ein Dipol?','¿Por qué el agua es un dipolo?'), a:[txt('Weil Sauerstoff Elektronen stärker anzieht','Porque el oxígeno atrae los electrones con más fuerza'), txt('Weil es aus Metall besteht','Porque está formada por metal'), txt('Weil H₂O unpolar ist','Porque H₂O es apolar')], c:0, exp:txt('O ist etwas negativer, die H-Atome etwas positiver.','El oxígeno es algo más negativo y los H algo más positivos.')},
+   {q:txt('Welche Anziehung hält Wassermoleküle untereinander zusammen?','¿Qué atracción mantiene unidas a las moléculas de agua?'), a:[txt('Wasserstoffbrücken','Puentes de hidrógeno'), txt('Magnete','Imanes'), txt('Keine','Ninguna')], c:0, exp:txt('Zwischen Wassermolekülen entstehen Wasserstoffbrücken.','Entre las moléculas de agua se forman puentes de hidrógeno.')}
  ]},
- {id:'states', title:'Level 4 - Zustandswechsel', type:'Schnellquiz', pages:[8,10], desc:'Fusión, solidificación, vaporización, condensación, sublimación und deposición.', engine:'stateQuiz'},
- {id:'cycle', title:'Level 5 - Wasserkreislauf sortieren', type:'Sortieren', pages:[9,11,12], desc:'Evaporación, condensación, precipitación, infiltración und escorrentía in der richtigen Reihenfolge.', engine:'order'},
- {id:'osmosis', title:'Level 6 - Osmose und pH', type:'Klassifizieren', pages:[6,7], desc:'Sauer/neutral/basisch, hypertonisch/isotonisch/hypotonisch, Osmose.', engine:'classify'},
- {id:'final', title:'Final - Prüfungssimulation', type:'20-Fragen-Test', pages:[0,1,2,3,4,5,6,7,8,9,10,11,12], desc:'Gemischte Fragen wie bei einer Prüfung.', engine:'quiz', final:true, questions:[
-  {q:'Wie heißt der Wechsel von fest zu flüssig?', a:['Fusión','Condensación','Deposición','Escorrentía'], c:0, exp:'Fest zu flüssig = Fusión / Schmelzen.'},
-  {q:'Wie heißt der Wechsel von gasförmig zu flüssig?', a:['Vaporización','Condensación','Sublimación','Infiltración'], c:1, exp:'Gas zu Flüssigkeit = Condensación.'},
-  {q:'Welcher Prozess ist endotherm?', a:['Solidificación','Condensación','Fusión','Deposición'], c:2, exp:'Fusión braucht Wärmeaufnahme.'},
-  {q:'Was passiert mit der Temperatur während eines Zustandswechsels?', a:['Sie bleibt konstant','Sie verdoppelt sich','Sie wird immer 0 °C','Sie ist egal'], c:0, exp:'Während des Zustandswechsels bleibt die Temperatur konstant.'},
-  {q:'Was ist Osmose?', a:['aktive Bewegung von Salz','passive Diffusion von Wasser durch semipermeable Membran','Verbrennung von Wasser','Zersetzung von Sauerstoff'], c:1, exp:'Osmose ist eine passive Wasserbewegung durch eine semipermeable Membran.'},
-  {q:'pH 7 bedeutet...', a:['sauer','basisch','neutral','gasförmig'], c:2, exp:'Wasser ist mit pH 7 neutral.'},
-  {q:'pH kleiner als 7 ist...', a:['sauer','basisch','neutral','plasma'], c:0, exp:'Kleinere pH-Werte sind sauer.'},
-  {q:'pH größer als 7 ist...', a:['sauer','neutral','alkalisch/basisch','fest'], c:2, exp:'Größere pH-Werte sind basisch/alkalisch.'},
-  {q:'Warum schwimmt Eis auf Wasser?', a:['Eis ist dichter','Eis hat geringere Dichte als flüssiges Wasser','Eis ist gasförmig','Eis enthält kein H₂O'], c:1, exp:'Eis ist weniger dicht und schwimmt daher.'},
-  {q:'Wie hoch ist der Siedepunkt von Wasser ungefähr bei Normaldruck?', a:['0 °C','50 °C','100 °C','200 °C'], c:2, exp:'Wasser kocht bei Normaldruck bei ca. 100 °C.'},
-  {q:'Wie heißt Wasserverdunstung durch Pflanzen?', a:['Transpiración','Escorrentía','Deposición','Hemólisis'], c:0, exp:'Pflanzen geben Wasserdampf ab: Transpiración.'},
-  {q:'Wie heißt Wasser, das in den Boden einsickert?', a:['Infiltración','Condensación','Fusión','Tensión superficial'], c:0, exp:'Einsickern in den Boden = Infiltración.'},
-  {q:'Was ist Kapillarität?', a:['Wasser steigt/sinkt in engen Röhrchen','Wasser brennt','Wasser wird zu Metall','Wasser verliert Sauerstoff'], c:0, exp:'Kapillarität beruht auf Kohäsion und Adhäsion.'},
-  {q:'Was erklärt, dass Insekten auf Wasser laufen können?', a:['Oberflächenspannung','Ionisation','Sublimation','pH 14'], c:0, exp:'Die Oberflächenspannung trägt leichte Insekten.'},
-  {q:'Welche Bindungen halten Wassermoleküle untereinander anziehend zusammen?', a:['Wasserstoffbrücken','Metallbindungen','Gummibänder','keine'], c:0, exp:'Zwischen Wassermolekülen entstehen Wasserstoffbrücken.'},
-  {q:'Was bedeutet Dipol beim Wasser?', a:['Es hat positive und negative Teilladungen','Es besteht nur aus Sauerstoff','Es hat keinen Winkel','Es ist immer fest'], c:0, exp:'Wasser hat Teilladungen: O eher negativ, H eher positiv.'},
-  {q:'Welche Zustände der Materie werden genannt?', a:['fest, flüssig, gasförmig, Plasma','nur fest und flüssig','nur Wasser und Eis','nur Moleküle'], c:0, exp:'Die Unterlagen nennen sólido, líquido, gas und plasma.'},
-  {q:'Was ist Präzipitation im Wasserkreislauf?', a:['Wasser fällt als Regen/Schnee/Hagel','Wasser verdampft','Wasser wird sauer','Wasser wird blau'], c:0, exp:'Precipitación = Niederschlag.'},
-  {q:'Was passiert bei Condensación im Wasserkreislauf?', a:['Wasserdampf bildet Tropfen/Wolken','Eis wird direkt Gas','Wasser versickert','Fluss fließt ins Meer'], c:0, exp:'Wasserdampf kühlt ab und bildet Wolken.'},
-  {q:'Warum ist Wasser ein gutes Lösungsmittel?', a:['wegen Polarität und Wasserstoffbrücken','weil es schwarz ist','weil es immer kocht','weil es unpolar ist'], c:0, exp:'Die Polarität hilft beim Lösen ionischer/polarer Stoffe.'}
+ {id:'memory', type:txt('Memory','Memoria'), title:txt('Level 3 – Eigenschaften des Wassers','Nivel 3 – Propiedades del agua'), desc:txt('Begriffe und Erklärungen als Paare finden.','Encuentra los conceptos y sus explicaciones como parejas.'), pages:[5], engine:'memory', pairs:[
+   [txt('Kohäsion','Cohesión'), txt('Wassermoleküle ziehen einander an.','Las moléculas de agua se atraen entre sí.')],
+   [txt('Adhäsion','Adhesión'), txt('Wasser haftet an anderen Oberflächen.','El agua se adhiere a otras superficies.')],
+   [txt('Oberflächenspannung','Tensión superficial'), txt('Die Oberfläche wirkt wie eine gespannte Haut.','La superficie actúa como una piel tensa.')],
+   [txt('Kapillarität','Capilaridad'), txt('Wasser steigt in engen Röhrchen.','El agua sube en tubos estrechos.')],
+   [txt('Dichte','Densidad'), txt('Reines Wasser hat ungefähr 1 g/cm³.','El agua pura tiene aproximadamente 1 g/cm³.')],
+   [txt('Lösungsmittel','Disolvente'), txt('Wasser löst viele polare und ionische Stoffe.','El agua disuelve muchas sustancias polares e iónicas.')]
+ ]},
+ {id:'states', type:txt('Schnellquiz','Quiz rápido'), title:txt('Level 4 – Zustandsänderungen','Nivel 4 – Cambios de estado'), desc:txt('Fusión, solidificación, vaporización, condensación, sublimación und deposición.','Fusión, solidificación, vaporización, condensación, sublimación y deposición.'), pages:[8,10], engine:'quiz', questions:[
+  {q:txt('Wie heißt der Wechsel von fest zu flüssig?','¿Cómo se llama el cambio de sólido a líquido?'), a:[txt('Fusión / Schmelzen','Fusión'), txt('Condensación / Kondensation','Condensación'), txt('Deposición','Deposición')], c:0, exp:txt('Fest zu flüssig = Schmelzen / Fusión.','De sólido a líquido = fusión.')},
+  {q:txt('Wie heißt der Wechsel von gasförmig zu flüssig?','¿Cómo se llama el cambio de gas a líquido?'), a:[txt('Sublimación','Sublimación'), txt('Condensación','Condensación'), txt('Vaporización','Vaporización')], c:1, exp:txt('Gas zu Flüssigkeit = Kondensation.','De gas a líquido = condensación.')},
+  {q:txt('Welcher Prozess ist endotherm?','¿Qué proceso es endotérmico?'), a:[txt('Fusión','Fusión'), txt('Solidificación','Solidificación'), txt('Condensación','Condensación')], c:0, exp:txt('Fusión braucht Wärmeaufnahme.','La fusión necesita absorber calor.')},
+  {q:txt('Was passiert mit der Temperatur während eines Zustandswechsels?','¿Qué pasa con la temperatura durante un cambio de estado?'), a:[txt('Sie bleibt konstant','Permanece constante'), txt('Sie verdoppelt sich','Se duplica'), txt('Sie wird immer 0 °C','Siempre es 0 °C')], c:0, exp:txt('Während des Phasenwechsels bleibt die Temperatur konstant.','Durante el cambio de fase la temperatura permanece constante.')}
+ ]},
+ {id:'cycle', type:txt('Sortieren','Ordenar'), title:txt('Level 5 – Wasserkreislauf','Nivel 5 – Ciclo del agua'), desc:txt('Ordne die Schritte des Wasserkreislaufs richtig.','Ordena correctamente las etapas del ciclo del agua.'), pages:[9,11,12], engine:'order', terms:[txt('Evaporación','Evaporación'), txt('Condensación','Condensación'), txt('Precipitación','Precipitación'), txt('Infiltración','Infiltración'), txt('Escorrentía','Escorrentía')], correct:[0,1,2,3,4], explain:txt('Typische Reihenfolge: Verdunstung → Kondensation → Niederschlag → Versickerung → Abfluss.','Orden típico: evaporación → condensación → precipitación → infiltración → escorrentía.')},
+ {id:'classify', type:txt('Klassifizieren','Clasificar'), title:txt('Level 6 – Osmose und pH','Nivel 6 – Ósmosis y pH'), desc:txt('Ordne Begriffe zu pH, Osmose und Tonizität.','Relaciona conceptos con pH, ósmosis y tonicidad.'), pages:[6,7], engine:'classify', columns:[txt('pH','pH'),txt('Osmose','Ósmosis'),txt('Tonizität','Tonicidad')], items:[
+    {label:txt('pH 7','pH 7'), col:0}, {label:txt('sauer','ácido'), col:0}, {label:txt('basisch','básico'), col:0},
+    {label:txt('Wasser durch semipermeable Membran','Agua por membrana semipermeable'), col:1}, {label:txt('passiver Transport','transporte pasivo'), col:1}, {label:txt('Konzentrationsausgleich','equilibrio de concentraciones'), col:1},
+    {label:txt('hypertonisch','hipertónico'), col:2}, {label:txt('isotonisch','isotónico'), col:2}, {label:txt('hypotonisch','hipotónico'), col:2}
+ ], explain:txt('pH beschreibt sauer/neutral/basisch. Osmose ist die passive Diffusion von Wasser. Hyper-/iso-/hypotonisch beschreiben Konzentrationsverhältnisse.','El pH describe ácido/neutral/básico. La ósmosis es la difusión pasiva del agua. Hiper-/iso-/hipotónico describen relaciones de concentración.')},
+ {id:'final', type:txt('Prüfungssimulation','Simulación de examen'), title:txt('Final – Prüfung','Final – Examen'), desc:txt('Gemischter Test über alle Themen.','Prueba mixta de todos los temas.'), pages:[0,3,5,8,9,11], engine:'quiz', questions:[
+  {q:txt('Warum schwimmt Eis auf Wasser?','¿Por qué el hielo flota en el agua?'), a:[txt('Es ist dichter','Es más denso'), txt('Es hat eine geringere Dichte','Tiene menor densidad'), txt('Es ist gasförmig','Es gaseoso')], c:1, exp:txt('Eis hat eine geringere Dichte als flüssiges Wasser.','El hielo tiene menor densidad que el agua líquida.')},
+  {q:txt('Was ist Kapillarität?','¿Qué es la capilaridad?'), a:[txt('Wasser steigt in engen Röhrchen','El agua sube en tubos estrechos'), txt('Wasser kocht bei 100 °C','El agua hierve a 100 °C'), txt('Wasser wird basisch','El agua se vuelve básica')], c:0, exp:txt('Kapillarität beruht auf Kohäsion und Adhäsion.','La capilaridad se basa en cohesión y adhesión.')},
+  {q:txt('Was ist Osmose?','¿Qué es la ósmosis?'), a:[txt('Aktiver Salztransport','Transporte activo de sal'), txt('Passive Wasserbewegung durch semipermeable Membran','Movimiento pasivo de agua por membrana semipermeable'), txt('Verbrennung von Wasser','Combustión del agua')], c:1, exp:txt('Osmose ist die passive Diffusion von Wasser.','La ósmosis es la difusión pasiva del agua.')},
+  {q:txt('pH größer als 7 bedeutet...','pH mayor que 7 significa...'), a:[txt('sauer','ácido'), txt('neutral','neutral'), txt('basisch','básico')], c:2, exp:txt('Größere pH-Werte sind basisch.','Los valores de pH mayores son básicos.')},
+  {q:txt('Was ist Präzipitation?','¿Qué es la precipitación?'), a:[txt('Niederschlag','Precipitación / lluvia'), txt('Verdunstung','Evaporación'), txt('Versickerung','Infiltración')], c:0, exp:txt('Präzipitation ist Niederschlag.','La precipitación es la caída de agua como lluvia, nieve o granizo.')},
+  {q:txt('Wie hoch ist der Siedepunkt von Wasser bei Normaldruck?','¿Cuál es el punto de ebullición del agua a presión normal?'), a:[txt('0 °C','0 °C'), txt('50 °C','50 °C'), txt('100 °C','100 °C')], c:2, exp:txt('Wasser kocht bei etwa 100 °C.','El agua hierve a unos 100 °C.')}
  ]}
 ];
 
-
-const fxState = { combo:0, wrongChain:0, activeTimer:null };
-
-function showFx(kind, title, text, graphic){
-  const layer = $('fxLayer');
-  if(!layer) return;
-  layer.classList.remove('hidden');
-  layer.innerHTML = `<div class="fxPopup ${kind}">
-    ${graphic}
-    <div class="fxTitle">${title}</div>
-    <div class="fxText">${text}</div>
-  </div>`;
-  clearTimeout(fxState.activeTimer);
-  fxState.activeTimer = setTimeout(()=>{ layer.classList.add('hidden'); layer.innerHTML=''; }, 1050);
+function setLang(l){ langState.current = l; localStorage.setItem('aquaQuestLang', l); document.documentElement.lang=l; $('langBtn').textContent = l==='de' ? 'ES' : 'DE'; renderStatic(); if(currentLevel) renderEngine(); }
+function renderStatic(){
+  for(const k of ['brandTitle','brandSub','openPagesBtn','installText','installBtn','welcomeTitle','welcomeText','pagesTitle','pagesText','scoreLabel','correctLabel','wrongLabel','progressLabel','backMenuBtn','showPagesBtn']) $(k).textContent = pick(UI[k]);
+  $('levelTypeLabel').textContent = pick(UI.levelTypeLabel);
+  $('dialogTitle').textContent = pick(UI.dialogTitle);
+  updateHeader(); renderMenu(); if(currentLevel){ $('levelTitle').textContent = pick(currentLevel.title); $('levelDesc').textContent = pick(currentLevel.desc); }
 }
-function burstStars(amount=12){
-  const box = $('fxStars'); if(!box) return;
-  box.classList.remove('hidden'); box.innerHTML='';
-  const symbols = ['⭐','💧','🧪','🌈','✅','H₂O'];
-  for(let i=0;i<amount;i++){
-    const s=document.createElement('div'); s.className='fxStar';
-    s.textContent=symbols[Math.floor(Math.random()*symbols.length)];
-    s.style.left=(8+Math.random()*84)+'vw';
-    s.style.top=(55+Math.random()*28)+'vh';
-    s.style.animationDelay=(Math.random()*160)+'ms';
-    box.appendChild(s);
-  }
-  setTimeout(()=>{box.classList.add('hidden'); box.innerHTML='';},1050);
-}
-function positiveEffect(pts){
-  fxState.combo++; fxState.wrongChain=0;
-  document.body.classList.remove('flashOk'); void document.body.offsetWidth; document.body.classList.add('flashOk');
-  burstStars(Math.min(22, 8 + fxState.combo*3));
-  if(fxState.combo>=3){
-    showFx('ok','Combo x'+fxState.combo, 'Mehrere richtige Antworten hintereinander: Bonus-Stimmung im Labor!', '<div class="fxEmoji">🌟💧🌟</div>');
-  }
-}
-function wrongEffect(){
-  fxState.combo=0; fxState.wrongChain++;
-  document.body.classList.remove('flashBad','screenShake'); void document.body.offsetWidth; document.body.classList.add('flashBad','screenShake');
-  const teacher = `<div class="fxTeacher"><div class="hair"></div><div class="body"></div><div class="coat"></div><div class="head"></div><div class="eye l"></div><div class="eye r"></div><div class="mouth"></div><div class="arm l"></div><div class="arm r"></div><div class="ruler"></div></div>`;
-  if(fxState.wrongChain===1){
-    showFx('bad','Blubb-Alarm!', 'Das Reagenzglas wird rot. Lies die Erklärung und probiere weiter.', '<div class="fxEmoji">🧪💥</div>');
-  } else if(fxState.wrongChain===2){
-    showFx('bad','Professorin Aqua schaut streng', 'Noch kein Drama: einmal tief durchatmen und logisch denken.', teacher);
-  } else if(fxState.wrongChain===3){
-    showFx('bad','Molekül-Chaos!', 'Der Bildschirm wackelt. Die nächste Antwort zählt.', '<div class="fxEmoji">🌧️⚗️</div>');
-  } else if(fxState.wrongChain===4){
-    showFx('bad','Kurz vor die Labortür', 'Comic-Strafe: 5 Sekunden Denkpause im Flur.', '<div class="fxDoor"></div>');
-  } else {
-    showFx('bad','Wiederholungswolke!', 'Eine Wasserfontäne katapultiert dich in die Wiederholung. Erklärung lesen!', '<div class="fxFountain">💦☁️</div>');
-    fxState.wrongChain=0;
-  }
-}
-
-function saveProgress(){localStorage.setItem('aquaQuestProgress', JSON.stringify(progress)); updateHeader(); renderMenu();}
-function updateHeader(){
-  const done = LEVELS.filter(l=>progress[l.id]?.done).length;
-  const total = Object.values(progress).reduce((s,p)=>s+(p.score||0),0);
-  $('totalScore').textContent = total; $('levelDone').textContent = done + '/' + LEVELS.length;
-}
-function renderMenu(){
-  const grid = $('levelGrid'); grid.innerHTML = '';
-  LEVELS.forEach((l,idx)=>{
-    const p = progress[l.id] || {}; const pct = p.done ? 100 : (p.pct||0);
-    const card = document.createElement('div'); card.className='card levelCard';
-    const img = PAGE_IMAGES[l.pages[0]];
-    card.innerHTML = `<img class="thumb" src="${img}" alt="Unterlagen Seite"><div class="levelType">${l.type}</div><h3>${l.title}</h3><p>${l.desc}</p><div class="small">Best: ${p.score||0} Punkte ${p.done?'✅':''}</div><div class="progressBar"><div style="width:${pct}%"></div></div><button class="primary">Level starten</button>`;
-    card.querySelector('button').onclick=()=>startLevel(idx);
-    grid.appendChild(card);
-  });
-  const pg = $('pageGrid'); pg.innerHTML = '';
-  PAGE_IMAGES.forEach((src,i)=>{
-    const el = document.createElement('div'); el.className='pageCard';
-    el.innerHTML = `<img src="${src}" alt="Seite ${i+1}"><button>Seite ${i+1} öffnen</button>`;
-    el.querySelector('button').onclick = () => openPages([i], 'Unterlagen - Seite '+(i+1));
-    el.querySelector('img').onclick = () => openPages([i], 'Unterlagen - Seite '+(i+1));
-    pg.appendChild(el);
-  });
-}
+function saveProgress(){ localStorage.setItem('aquaQuestProgressBi', JSON.stringify(progress)); updateHeader(); renderMenu(); }
+function updateHeader(){ const done = LEVELS.filter(l=>progress[l.id]?.done).length; const total = Object.values(progress).reduce((s,p)=>s+(p.score||0),0); $('totalScore').textContent = total; $('levelDone').textContent = done+'/'+LEVELS.length; }
+function renderMenu(){ const grid=$('levelGrid'); grid.innerHTML=''; LEVELS.forEach((l,idx)=>{ const p=progress[l.id]||{}; const pct=p.done?100:(p.pct||0); const card=document.createElement('div'); card.className='card levelCard'; card.innerHTML=`<img class="thumb" src="${PAGE_IMAGES[l.pages[0]]}" alt="page"><div class="levelType">${pick(l.type)}</div><h3>${pick(l.title)}</h3><p>${pick(l.desc)}</p><div class="small">${pick(UI.result)}: ${p.score||0} ${p.done?'✅ '+pick(UI.completed):''}</div><div class="progressBar"><div style="width:${pct}%"></div></div><button class="primary">${langState.current==='de'?'Level starten':'Iniciar nivel'}</button>`; card.querySelector('button').onclick=()=>startLevel(idx); grid.appendChild(card); }); const pg=$('pageGrid'); pg.innerHTML=''; PAGE_IMAGES.forEach((src,i)=>{ const el=document.createElement('div'); el.className='pageCard'; el.innerHTML=`<img src="${src}" alt="Seite ${i+1}"><button>${pick(UI.showPage)} ${i+1}</button>`; el.querySelector('button').onclick=()=>openPages([i], `${pick(UI.dialogTitle)} – ${i+1}`); el.querySelector('img').onclick=()=>openPages([i], `${pick(UI.dialogTitle)} – ${i+1}`); pg.appendChild(el); }); }
 function showMenu(){ $('menuScreen').classList.remove('hidden'); $('gameScreen').classList.add('hidden'); currentLevel=null; }
-function startLevel(idx){ currentLevel = LEVELS[idx]; game = {score:0, correct:0, wrong:0, progress:0, step:0, answered:false}; $('menuScreen').classList.add('hidden'); $('gameScreen').classList.remove('hidden'); $('levelTitle').textContent=currentLevel.title; $('levelDesc').textContent=currentLevel.desc; updateStats(); renderEngine(); }
+function startLevel(idx){ currentLevel = LEVELS[idx]; game={score:0,correct:0,wrong:0,progress:0,step:0,answered:false, selectedTerm:null, classified:{}, order:[], memoryOpen:[], memoryDone:[], moleculeBuilt:[]}; $('menuScreen').classList.add('hidden'); $('gameScreen').classList.remove('hidden'); $('levelTitle').textContent=pick(currentLevel.title); $('levelDesc').textContent=pick(currentLevel.desc); $('nextBtn').classList.add('hidden'); updateStats(); renderEngine(); }
 function updateStats(){ $('levelScore').textContent=game.score; $('correctCount').textContent=game.correct; $('wrongCount').textContent=game.wrong; $('progressText').textContent=Math.round(game.progress)+'%'; }
 function addScore(pts){ game.score += pts; if(game.score<0) game.score=0; updateStats(); if(pts>0) positiveEffect(pts); if(pts<0) wrongEffect(); }
-function finishLevel(){
-  const old = progress[currentLevel.id] || {};
-  const pct = Math.max(game.progress, 100);
-  progress[currentLevel.id] = {done:true, score:Math.max(old.score||0, game.score), pct};
-  saveProgress();
-  const area = $('playArea');
-  area.innerHTML = `<div class="card center"><h2>Level abgeschlossen</h2><p class="big okText">${game.score} Punkte</p><p class="muted">Richtig: ${game.correct} | Fehler: ${game.wrong}</p><button class="primary" onclick="showMenu()">Zurück zum Menü</button></div>`;
-}
-function openPages(pages, title){
-  $('dialogTitle').textContent=title || 'Lernbild';
-  $('dialogBody').innerHTML = pages.map(p=>`<div class="small" style="margin:6px 0">Seite ${p+1}</div><img src="${PAGE_IMAGES[p]}" alt="Seite ${p+1}">`).join('');
-  $('imageDialog').showModal();
-}
-$('closeDialog').onclick=()=> $('imageDialog').close(); $('backMenu').onclick=showMenu; $('showStudyImage').onclick=()=>openPages(currentLevel.pages, currentLevel.title+' - Lernbilder'); $('restartLevel').onclick=()=>startLevel(LEVELS.indexOf(currentLevel));
-
-function renderEngine(){
-  if(currentLevel.engine==='quiz') renderQuiz();
-  if(currentLevel.engine==='molecule') renderMolecule();
-  if(currentLevel.engine==='memory') renderMemory();
-  if(currentLevel.engine==='stateQuiz') renderStateQuiz();
-  if(currentLevel.engine==='order') renderOrder();
-  if(currentLevel.engine==='classify') renderClassify();
-}
-function renderQuiz(){
-  const qs = currentLevel.questions; game.step=0; game.max=qs.length;
-  function showQ(){
-    const q=qs[game.step]; game.answered=false; game.progress = 100*game.step/game.max; updateStats();
-    $('playArea').innerHTML = `<div class="card"><div class="questionBox"><div class="small">Frage ${game.step+1}/${game.max}</div><div class="questionTitle">${q.q}</div><div class="grid2" id="choices"></div><div class="feedback" id="feedback"></div></div><img class="studyImage" src="${PAGE_IMAGES[currentLevel.pages[Math.min(currentLevel.pages.length-1, game.step % currentLevel.pages.length)]]}"><div class="navBtns"><button onclick="openPages(currentLevel.pages, currentLevel.title+' - Unterlagen')">Unterlagen öffnen</button><div class="rightBtns"><button id="nextQ" class="primary hidden">Weiter</button></div></div></div>`;
-    q.a.forEach((ans,i)=>{ const b=document.createElement('button'); b.className='choice'; b.textContent=ans; b.onclick=()=>{
-      if(game.answered) return; game.answered=true;
-      [...document.querySelectorAll('.choice')].forEach((x,j)=>{ if(j===q.c) x.classList.add('correct'); if(j===i&&j!==q.c) x.classList.add('wrong'); });
-      if(i===q.c){ game.correct++; addScore(10 + (currentLevel.final?2:0)); $('feedback').innerHTML='✅ Richtig. '+q.exp; } else { game.wrong++; addScore(-3); $('feedback').innerHTML='❌ Nicht richtig. '+q.exp; }
-      game.progress = 100*(game.step+1)/game.max; updateStats(); $('nextQ').classList.remove('hidden');
-    }; $('choices').appendChild(b); });
-    $('nextQ').onclick=()=>{game.step++; if(game.step>=game.max) finishLevel(); else showQ();};
-  }
-  showQ();
-}
-function renderMolecule(){
-  game.H=0; game.O=0; game.part=0;
-  const checks = [
-    {q:'Welche Teilladung hat der Sauerstoff im Wassermolekül eher?', a:['δ−','δ+','gar keine'], c:0, exp:'Sauerstoff zieht Elektronen stärker an und ist daher eher δ−.'},
-    {q:'Warum ist Wasser bei Raumtemperatur flüssig?', a:['Wegen Wasserstoffbrücken zwischen Molekülen','Weil H₂O sehr schwer ist','Weil es keine Anziehung gibt'], c:0, exp:'Wasserstoffbrücken erhöhen die Anziehung zwischen Molekülen.'},
-    {q:'Der Winkel im H₂O-Molekül liegt ungefähr bei...', a:['104,5°','45°','180°'], c:0, exp:'Die Unterlagen zeigen ungefähr 104,5°.'}
-  ];
-  function draw(){
-    const correctBuild = game.H===2 && game.O===1;
-    game.progress = correctBuild ? 35 + game.part*20 : Math.min(30,(game.H+game.O)*10); updateStats();
-    $('playArea').innerHTML = `<div class="card moleculeLab"><div class="atomBox"><h3>1. Baue H₂O</h3><p class="small">Tippe Atome an. Ziel: 2 H und 1 O.</p><button class="atom H" id="addH">H</button><button class="atom O" id="addO">O</button><div style="margin-top:8px"><button id="clearAtoms">Löschen</button></div><p>H: <b>${game.H}</b> / O: <b>${game.O}</b></p><div class="built">${correctBuild?'<div class="bond"><span class="atom H">H</span><span class="bondLine"></span><span class="atom O">O</span><span class="bondLine"></span><span class="atom H">H</span></div>':'<span class="muted">Noch nicht korrekt gebaut</span>'}</div></div><div class="atomBox"><h3>2. Wissenscheck</h3><div id="molQuestion">${correctBuild ? '' : '<p class="muted">Baue zuerst H₂O korrekt.</p>'}</div></div></div><div class="card"><img class="studyImage" src="${PAGE_IMAGES[1]}"></div>`;
-    $('addH').onclick=()=>{game.H++; draw();}; $('addO').onclick=()=>{game.O++; draw();}; $('clearAtoms').onclick=()=>{game.H=0;game.O=0;draw();};
-    if(correctBuild){ if(!game.buildAwarded){game.correct++; addScore(15); game.buildAwarded=true;} showMolQ(); }
-  }
-  function showMolQ(){
-    if(game.part>=checks.length){ finishLevel(); return; }
-    const q=checks[game.part]; const box=$('molQuestion');
-    box.innerHTML=`<div class="questionTitle">${q.q}</div><div class="grid" id="molChoices"></div><div class="feedback" id="molFeedback"></div>`;
-    q.a.forEach((ans,i)=>{const b=document.createElement('button'); b.className='choice'; b.textContent=ans; b.onclick=()=>{
-      if(i===q.c){game.correct++; addScore(12); b.classList.add('correct'); $('molFeedback').innerHTML='✅ '+q.exp;}else{game.wrong++; addScore(-3); b.classList.add('wrong'); $('molFeedback').innerHTML='❌ '+q.exp;}
-      setTimeout(()=>{game.part++; draw();},900);
-    }; $('molChoices').appendChild(b);});
-  }
-  draw();
-}
-function renderMemory(){
-  const pairs = currentLevel.pairs; let cards=[]; pairs.forEach((p,i)=>{cards.push({id:i,t:'term',text:p[0]}); cards.push({id:i,t:'def',text:p[1]});}); cards=cards.sort(()=>Math.random()-.5);
-  let open=[]; let done=0;
-  function draw(){ game.progress = 100*done/pairs.length; updateStats(); $('playArea').innerHTML=`<div class="card"><h3>Memory: Begriff und Erklärung finden</h3><p class="small">Tippe zwei Karten an. Richtige Paare bleiben offen.</p><div class="memoryGrid" id="memGrid"></div><img class="studyImage" src="${PAGE_IMAGES[3]}"></div>`;
-    const grid=$('memGrid'); cards.forEach((c,idx)=>{const b=document.createElement('button'); b.className='memCard '+(c.done?'done':(open.includes(idx)?'open':'')); b.innerHTML=(c.done||open.includes(idx))?c.text:'?'; b.onclick=()=>{ if(c.done||open.includes(idx)||open.length>=2)return; open.push(idx); if(open.length===2){ const [a,bidx]=open; if(cards[a].id===cards[bidx].id && cards[a].t!==cards[bidx].t){cards[a].done=cards[bidx].done=true; done++; game.correct++; addScore(12); setTimeout(()=>{open=[]; if(done===pairs.length)finishLevel(); else draw();},650);}else{game.wrong++; addScore(-2); setTimeout(()=>{open=[]; draw();},900);} } draw();}; grid.appendChild(b);});
-  } draw();
-}
-function renderStateQuiz(){
-  const items = [
-    {from:'Sólido',to:'Líquido',ans:'Fusión',kind:'Endotérmico',exp:'Schmelzen braucht Wärme.'},
-    {from:'Líquido',to:'Sólido',ans:'Solidificación',kind:'Exotérmico',exp:'Gefrieren gibt Wärme ab.'},
-    {from:'Líquido',to:'Gas',ans:'Vaporización',kind:'Endotérmico',exp:'Verdampfen braucht Wärme.'},
-    {from:'Gas',to:'Líquido',ans:'Condensación',kind:'Exotérmico',exp:'Kondensation gibt Wärme ab.'},
-    {from:'Sólido',to:'Gas',ans:'Sublimación',kind:'Endotérmico',exp:'Direkt fest zu gasförmig braucht Energie.'},
-    {from:'Gas',to:'Sólido',ans:'Deposición',kind:'Exotérmico',exp:'Gas wird direkt fest und gibt Wärme ab.'}
-  ].sort(()=>Math.random()-.5);
-  game.step=0; game.max=items.length;
-  function show(){
-    const it=items[game.step]; game.progress=100*game.step/game.max; updateStats();
-    const opts=['Fusión','Solidificación','Vaporización','Condensación','Sublimación','Deposición'].sort(()=>Math.random()-.5);
-    $('playArea').innerHTML=`<div class="card center"><h3>Wie heißt dieser Zustandswechsel?</h3><div class="big">${it.from} → ${it.to}</div><div class="termBank" id="stateOpts"></div><div id="stateKind" class="hidden"><p>Wärmeprozess?</p><button class="choice" data-k="Endotérmico">Endotérmico</button><button class="choice" data-k="Exotérmico">Exotérmico</button></div><div class="feedback" id="stateFeedback"></div><img class="studyImage" src="${PAGE_IMAGES[8]}"></div>`;
-    opts.forEach(o=>{const b=document.createElement('button'); b.className='termBtn'; b.textContent=o; b.onclick=()=>{ if(o===it.ans){game.correct++; addScore(10); b.classList.add('selected'); $('stateFeedback').innerHTML='✅ Richtig. Jetzt Endo/Exo wählen.'; $('stateKind').classList.remove('hidden');} else {game.wrong++; addScore(-2); $('stateFeedback').innerHTML='❌ Noch einmal: '+it.exp; b.classList.add('bad');} }; $('stateOpts').appendChild(b);});
-    document.querySelectorAll('#stateKind button').forEach(b=>b.onclick=()=>{ if(b.dataset.k===it.kind){game.correct++; addScore(6); $('stateFeedback').innerHTML='✅ '+it.exp; setTimeout(()=>{game.step++; if(game.step>=game.max)finishLevel(); else show();},900);} else {game.wrong++; addScore(-2); $('stateFeedback').innerHTML='❌ Prüfe, ob Wärme aufgenommen oder abgegeben wird.';} });
-  } show();
-}
-function renderOrder(){
-  const correct = ['Evaporación','Condensación','Precipitación','Infiltración','Escorrentía']; let bank=[...correct].sort(()=>Math.random()-.5); let chosen=[];
-  function draw(){ game.progress=100*chosen.length/correct.length; updateStats(); $('playArea').innerHTML=`<div class="card"><h3>Ordne den Wasserkreislauf</h3><p class="small">Tippe die Begriffe in sinnvoller Reihenfolge an.</p><div class="termBank" id="cycleBank"></div><div class="ordered" id="cycleChosen"></div><div class="feedback" id="cycleFeedback"></div><img class="studyImage" src="${PAGE_IMAGES[11]}"></div>`;
-    const bankEl=$('cycleBank'), chosenEl=$('cycleChosen'); bank.forEach((t,i)=>{const b=document.createElement('button'); b.className='termBtn'; b.textContent=t; b.onclick=()=>{ chosen.push(t); bank.splice(i,1); draw(); }; bankEl.appendChild(b);});
-    chosen.forEach((t,i)=>{const b=document.createElement('button'); b.className='termBtn selected'; b.textContent=(i+1)+'. '+t; b.onclick=()=>{bank.push(t); chosen.splice(i,1); draw();}; chosenEl.appendChild(b);});
-    if(chosen.length===correct.length){ const ok=chosen.every((x,i)=>x===correct[i]); if(ok){game.correct+=5; addScore(50); $('cycleFeedback').innerHTML='✅ Richtig: Verdunstung → Wolken → Niederschlag → Versickerung → Abfluss.'; setTimeout(finishLevel,1000);} else {game.wrong++; addScore(-5); $('cycleFeedback').innerHTML='❌ Reihenfolge noch nicht korrekt. Tippe Begriffe unten an, um sie zurückzunehmen.';} }
-  } draw();
-}
-function renderClassify(){
-  const items=[
-    {text:'pH 2', cat:'Sauer'}, {text:'pH 7', cat:'Neutral'}, {text:'pH 12', cat:'Basisch'},
-    {text:'Zelle verliert Wasser in konzentrierter Lösung', cat:'Hypertonisch'},
-    {text:'Zelle ist ausgeglichen, keine Netto-Bewegung', cat:'Isotonisch'},
-    {text:'Wasser tritt in die Zelle ein, Zelle wird turgid', cat:'Hypotonisch'},
-    {text:'H₃O⁺ und OH⁻ entstehen sehr schwach im Wasser', cat:'Ionisation'},
-    {text:'Wasser diffundiert durch semipermeable Membran', cat:'Osmose'}
-  ];
-  const cats=['Sauer','Neutral','Basisch','Hypertonisch','Isotonisch','Hypotonisch','Ionisation','Osmose']; let idx=0;
-  function show(){
-    if(idx>=items.length){finishLevel();return;} const it=items[idx]; game.progress=100*idx/items.length; updateStats();
-    $('playArea').innerHTML=`<div class="card"><h3>Klassifiziere</h3><div class="questionTitle">${it.text}</div><div class="grid4" id="catGrid"></div><div class="feedback" id="catFeedback"></div><img class="studyImage" src="${PAGE_IMAGES[idx<3?6:7]}"></div>`;
-    cats.forEach(c=>{const b=document.createElement('button'); b.className='choice'; b.textContent=c; b.onclick=()=>{ if(c===it.cat){game.correct++; addScore(10); b.classList.add('correct'); $('catFeedback').innerHTML='✅ Richtig.'; setTimeout(()=>{idx++; show();},650);} else {game.wrong++; addScore(-2); b.classList.add('wrong'); $('catFeedback').innerHTML='❌ Nicht passend. Prüfe pH/Osmose-Bild in den Unterlagen.';} }; $('catGrid').appendChild(b);});
-  } show();
-}
-
-// install prompt
-let deferredPrompt=null; window.addEventListener('beforeinstallprompt', e=>{e.preventDefault();deferredPrompt=e;$('installBox').classList.remove('hidden');}); $('installBtn').onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; $('installBox').classList.add('hidden');};
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));}
-updateHeader(); renderMenu();
+const fxState = { combo:0, wrongChain:0, activeTimer:null };
+function showFx(kind,title,text,graphic){ const layer=$('fxLayer'); layer.classList.remove('hidden'); layer.innerHTML=`<div class="fxPopup ${kind}">${graphic}<div class="fxTitle">${title}</div><div class="fxText">${text}</div></div>`; clearTimeout(fxState.activeTimer); fxState.activeTimer=setTimeout(()=>{layer.classList.add('hidden'); layer.innerHTML='';},1050); }
+function burstStars(amount=12){ const box=$('fxStars'); box.classList.remove('hidden'); box.innerHTML=''; const sy=['⭐','💧','🧪','🌈','✅','H₂O']; for(let i=0;i<amount;i++){ const s=document.createElement('div'); s.className='fxStar'; s.textContent=sy[Math.floor(Math.random()*sy.length)]; s.style.left=(8+Math.random()*84)+'vw'; s.style.top=(55+Math.random()*28)+'vh'; s.style.animationDelay=(Math.random()*160)+'ms'; box.appendChild(s); } setTimeout(()=>{box.classList.add('hidden'); box.innerHTML='';},1050); }
+function positiveEffect(pts){ fxState.combo++; fxState.wrongChain=0; document.body.classList.remove('flashOk'); void document.body.offsetWidth; document.body.classList.add('flashOk'); burstStars(Math.min(22,8+fxState.combo*3)); if(fxState.combo>=3){ showFx('ok','Combo x'+fxState.combo,pick(UI.comboFx),'<div class="fxEmoji">🌟💧🌟</div>'); } }
+function wrongEffect(){ fxState.combo=0; fxState.wrongChain++; document.body.classList.remove('flashBad','screenShake'); void document.body.offsetWidth; document.body.classList.add('flashBad','screenShake'); const teacher='<div class="fxTeacher"><div class="hair"></div><div class="body"></div><div class="coat"></div><div class="head"></div><div class="eye l"></div><div class="eye r"></div><div class="mouth"></div><div class="arm l"></div><div class="arm r"></div><div class="ruler"></div></div>'; if(fxState.wrongChain===1){showFx('bad','Blubb-Alarm!',pick(UI.wrong1),'<div class="fxEmoji">🧪💥</div>');} else if(fxState.wrongChain===2){showFx('bad','Professorin Aqua',pick(UI.wrong2),teacher);} else if(fxState.wrongChain===3){showFx('bad','Molekül-Chaos!',pick(UI.wrong3),'<div class="fxEmoji">🌧️⚗️</div>');} else if(fxState.wrongChain===4){showFx('bad',langState.current==='de'?'Labortür':'Puerta del laboratorio',pick(UI.wrong4),'<div class="fxDoor"></div>');} else {showFx('bad',langState.current==='de'?'Wiederholungswolke!':'¡Nube de repaso!',pick(UI.wrong5),'<div class="fxFountain">💦☁️</div>'); fxState.wrongChain=0;} }
+function openPages(arr,title){ $('dialogTitle').textContent=title; $('dialogBody').innerHTML = arr.map(i=>`<div style="margin-bottom:12px"><div class="small" style="margin-bottom:6px">${langState.current==='de'?'Seite':'Página'} ${i+1}</div><img src="${PAGE_IMAGES[i]}" alt="Page"></div>`).join(''); $('pagesDialog').showModal(); }
+function renderEngine(){ const host=$('engineHost'); $('nextBtn').classList.add('hidden'); if(currentLevel.engine==='quiz') renderQuiz(host); else if(currentLevel.engine==='memory') renderMemory(host); else if(currentLevel.engine==='order') renderOrder(host); else if(currentLevel.engine==='classify') renderClassify(host); else if(currentLevel.engine==='molecule') renderMolecule(host); updateStats(); }
+function finishLevel(){ const best = progress[currentLevel.id]?.score || 0; progress[currentLevel.id] = {score: Math.max(best, game.score), done:true, pct:100}; saveProgress(); showFx('ok', currentLevel.id==='final'?pick(UI.finalDoneFx):pick(UI.levelDoneFx), `${pick(currentLevel.title)} – ${pick(UI.result)}: ${game.score}`, '<div class="fxEmoji">🏅💧</div>'); $('nextBtn').textContent = pick(UI.backMenuBtn); $('nextBtn').onclick = ()=>showMenu(); $('nextBtn').classList.remove('hidden'); }
+function renderQuiz(host){ const qs=currentLevel.questions; const q=qs[game.step]; host.innerHTML=`<div class="small">${pick(UI.quizHint)}</div><img class="studyImage" src="${PAGE_IMAGES[currentLevel.pages[Math.min(game.step, currentLevel.pages.length-1)]]}"><div class="questionBox"><div class="questionTitle">${pick(q.q)}</div><div id="answerBox"></div><div id="feedback" class="feedback"></div></div>`; const box=host.querySelector('#answerBox'); q.a.forEach((ans,idx)=>{ const b=document.createElement('button'); b.className='choice'; b.textContent=pick(ans); b.onclick=()=>{ if(game.answered) return; game.answered=true; if(idx===q.c){ b.classList.add('correct'); game.correct++; addScore(10); host.querySelector('#feedback').innerHTML=`<span style="color:#bbf7d0">✔ ${pick(q.exp)}</span>`; } else { b.classList.add('wrong'); box.children[q.c].classList.add('correct'); game.wrong++; addScore(-3); host.querySelector('#feedback').innerHTML=`<span style="color:#fecaca">✘ ${pick(q.exp)}</span>`; } game.step++; game.progress = (game.step/qs.length)*100; updateStats(); $('nextBtn').textContent = game.step<qs.length ? pick(UI.nextBtn) : pick(UI.finishLevel); $('nextBtn').onclick = ()=>{ game.answered=false; if(game.step<qs.length){ renderQuiz(host); } else { finishLevel(); } }; $('nextBtn').classList.remove('hidden'); }; box.appendChild(b); }); }
+function renderMolecule(host){ const qs=currentLevel.questions; const q=qs[Math.min(game.step, qs.length-1)]; host.innerHTML=`<div class="small">${pick(UI.moleculeHint)}</div><img class="studyImage" src="${PAGE_IMAGES[currentLevel.pages[Math.min(game.step,currentLevel.pages.length-1)]]}"><div class="moleculeLab"><div class="atomBox"><h3>${langState.current==='de'?'Bauteile':'Piezas'}</h3><div><button class="smallBtn" id="addH">+ H</button> <button class="smallBtn" id="addO">+ O</button> <button class="smallBtn warn" id="clearMol">${pick(UI.restart)}</button></div><div class="built" id="builtMol"></div><div class="small">${langState.current==='de'?'Baue zuerst H-O-H.':'Primero construye H-O-H.'}</div></div><div class="atomBox"><h3>${pick(q.q)}</h3><div id="molAnswers"></div><div class="feedback" id="molFeedback"></div></div></div>`; const built = host.querySelector('#builtMol'); const renderBuilt=()=>{ const arr=game.moleculeBuilt; if(arr.length===0){ built.innerHTML='<div class="small">H + O + H</div>'; return;} built.innerHTML=''; arr.forEach((a,i)=>{ const atom=document.createElement('div'); atom.className='atom '+a; atom.textContent=a; built.appendChild(atom); if(i<arr.length-1){ const line=document.createElement('div'); line.className='bondLine'; built.appendChild(line);} }); if(arr.length===3 && arr.join('')==='HOH'){ renderAnswers(); } }; host.querySelector('#addH').onclick=()=>{ if(game.moleculeBuilt.length<3){ game.moleculeBuilt.push('H'); renderBuilt(); } }; host.querySelector('#addO').onclick=()=>{ if(game.moleculeBuilt.length<3){ game.moleculeBuilt.push('O'); renderBuilt(); } }; host.querySelector('#clearMol').onclick=()=>{ game.moleculeBuilt=[]; renderBuilt(); }; const renderAnswers=()=>{ const box=host.querySelector('#molAnswers'); box.innerHTML=''; q.a.forEach((ans,idx)=>{ const b=document.createElement('button'); b.className='choice'; b.textContent=pick(ans); b.onclick=()=>{ if(game.answered) return; game.answered=true; if(idx===q.c){ b.classList.add('correct'); game.correct++; addScore(12); host.querySelector('#molFeedback').innerHTML=`<span style="color:#bbf7d0">✔ ${pick(q.exp)}</span>`; } else { b.classList.add('wrong'); box.children[q.c].classList.add('correct'); game.wrong++; addScore(-3); host.querySelector('#molFeedback').innerHTML=`<span style="color:#fecaca">✘ ${pick(q.exp)}</span>`; } game.step++; game.progress=(game.step/qs.length)*100; updateStats(); $('nextBtn').textContent = game.step<qs.length ? pick(UI.nextBtn) : pick(UI.finishLevel); $('nextBtn').onclick=()=>{ game.answered=false; game.moleculeBuilt=[]; if(game.step<qs.length){ renderMolecule(host);} else finishLevel(); }; $('nextBtn').classList.remove('hidden'); }; box.appendChild(b); }); }; renderBuilt(); }
+function renderMemory(host){ if(!game.memoryDeck){ game.memoryDeck=[]; currentLevel.pairs.forEach((p,i)=>{ game.memoryDeck.push({id:i, text:pick(p[0])}); game.memoryDeck.push({id:i, text:pick(p[1])}); }); game.memoryDeck.sort(()=>Math.random()-.5); }
+ host.innerHTML=`<div class="small">${pick(UI.memoryHint)}</div><img class="studyImage" src="${PAGE_IMAGES[currentLevel.pages[0]]}"><div class="memoryGrid" id="memGrid"></div><div class="feedback" id="memFeedback"></div>`; const grid=host.querySelector('#memGrid'); game.memoryDeck.forEach((card,idx)=>{ const d=document.createElement('button'); d.className='memCard'; const open=game.memoryOpen.includes(idx); const done=game.memoryDone.includes(idx); if(done){ d.classList.add('done'); d.textContent=card.text; } else if(open){ d.classList.add('open'); d.textContent=card.text; } else { d.textContent='?'; } d.onclick=()=>{ if(done || open || game.memoryOpen.length===2) return; game.memoryOpen.push(idx); renderMemory(host); if(game.memoryOpen.length===2){ const [a,b]=game.memoryOpen; setTimeout(()=>{ if(game.memoryDeck[a].id===game.memoryDeck[b].id){ game.memoryDone.push(a,b); game.correct++; addScore(8); host.querySelector('#memFeedback').innerHTML=`<span style="color:#bbf7d0">✔ ${langState.current==='de'?'Paar gefunden!':'¡Pareja encontrada!'}</span>`; } else { game.wrong++; addScore(-2); host.querySelector('#memFeedback').innerHTML=`<span style="color:#fecaca">✘ ${langState.current==='de'?'Kein Paar.':'No es pareja.'}</span>`; } game.memoryOpen=[]; game.progress=(game.memoryDone.length/game.memoryDeck.length)*100; updateStats(); if(game.memoryDone.length===game.memoryDeck.length){ $('nextBtn').textContent=pick(UI.finishLevel); $('nextBtn').onclick=()=>finishLevel(); $('nextBtn').classList.remove('hidden'); } renderMemory(host); }, 650); } }; grid.appendChild(d); }); }
+function renderOrder(host){ host.innerHTML=`<div class="small">${pick(UI.orderHint)}</div><img class="studyImage" src="${PAGE_IMAGES[currentLevel.pages[0]]}"><div class="termBank" id="termBank"></div><div class="ordered" id="ordered"></div><div class="feedback" id="orderFeedback"></div><div style="margin-top:10px"><button class="warn" id="resetOrder">${pick(UI.restart)}</button></div>`; const bank=host.querySelector('#termBank'); currentLevel.terms.forEach((t,idx)=>{ if(game.order.includes(idx)) return; const b=document.createElement('button'); b.className='termBtn'; b.textContent=pick(t); b.onclick=()=>{ game.order.push(idx); renderOrder(host); if(game.order.length===currentLevel.terms.length){ const ok=JSON.stringify(game.order)===JSON.stringify(currentLevel.correct); if(ok){ game.correct++; addScore(18); host.querySelector('#orderFeedback').innerHTML=`<span style="color:#bbf7d0">✔ ${pick(currentLevel.explain)}</span>`; game.progress=100; $('nextBtn').textContent=pick(UI.finishLevel); $('nextBtn').onclick=()=>finishLevel(); $('nextBtn').classList.remove('hidden'); } else { game.wrong++; addScore(-4); host.querySelector('#orderFeedback').innerHTML=`<span style="color:#fecaca">✘ ${pick(currentLevel.explain)}</span>`; } updateStats(); } }; bank.appendChild(b); }); const ordered=host.querySelector('#ordered'); game.order.forEach(idx=>{ const chip=document.createElement('div'); chip.className='orderChip'; chip.textContent=pick(currentLevel.terms[idx]); ordered.appendChild(chip); }); host.querySelector('#resetOrder').onclick=()=>{ game.order=[]; renderOrder(host); }; }
+function renderClassify(host){ if(!game.classSelected) game.classSelected=null; host.innerHTML=`<div class="small">${pick(UI.classifyHint)}</div><img class="studyImage" src="${PAGE_IMAGES[currentLevel.pages[0]]}"><div class="termBank" id="classBank"></div><div class="classGrid" id="classGrid"></div><div class="feedback" id="classFeedback"></div>`; const bank=host.querySelector('#classBank'); currentLevel.items.forEach((it,idx)=>{ if(game.classified[idx]!==undefined) return; const b=document.createElement('button'); b.className='termBtn'+(game.classSelected===idx?' selected':''); b.textContent=pick(it.label); b.onclick=()=>{ game.classSelected=idx; renderClassify(host); }; bank.appendChild(b); }); const grid=host.querySelector('#classGrid'); currentLevel.columns.forEach((col,cidx)=>{ const box=document.createElement('div'); box.className='classCol'; box.innerHTML=`<h4>${pick(col)}</h4>`; Object.entries(game.classified).forEach(([idx,val])=>{ idx=Number(idx); if(val===cidx){ const d=document.createElement('div'); d.className='classItem '+(currentLevel.items[idx].col===cidx?'correct':'wrong'); d.textContent=pick(currentLevel.items[idx].label); box.appendChild(d); } }); const btn=document.createElement('button'); btn.className='primary'; btn.textContent=langState.current==='de'?'Hier zuordnen':'Asignar aquí'; btn.onclick=()=>{ if(game.classSelected===null){ host.querySelector('#classFeedback').innerHTML=`<span style="color:#fde68a">${pick(UI.chooseTerm)}</span>`; return; } const idx=game.classSelected; game.classified[idx]=cidx; if(currentLevel.items[idx].col===cidx){ game.correct++; addScore(6); host.querySelector('#classFeedback').innerHTML=`<span style="color:#bbf7d0">✔ ${pick(currentLevel.items[idx].label)}</span>`; } else { game.wrong++; addScore(-2); host.querySelector('#classFeedback').innerHTML=`<span style="color:#fecaca">✘ ${pick(currentLevel.explain)}</span>`; } game.classSelected=null; game.progress=(Object.keys(game.classified).length/currentLevel.items.length)*100; updateStats(); if(Object.keys(game.classified).length===currentLevel.items.length){ $('nextBtn').textContent=pick(UI.finishLevel); $('nextBtn').onclick=()=>finishLevel(); $('nextBtn').classList.remove('hidden'); } renderClassify(host); }; box.appendChild(btn); grid.appendChild(box); }); }
+$('backMenuBtn').onclick=()=>showMenu(); $('showPagesBtn').onclick=()=>{ if(currentLevel) openPages(currentLevel.pages, pick(currentLevel.title)); }; $('openPagesBtn').onclick=()=>openPages([0,1,2,3,4,5,6,7,8,9,10,11,12], pick(UI.dialogTitle)); $('langBtn').onclick=()=>setLang(langState.current==='de'?'es':'de');
+window.addEventListener('beforeinstallprompt', e=>{ e.preventDefault(); deferredPrompt=e; $('installBox').classList.remove('hidden'); }); $('installBtn').onclick = async ()=>{ if(!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt=null; $('installBox').classList.add('hidden'); };
+if('serviceWorker' in navigator){ window.addEventListener('load', ()=> navigator.serviceWorker.register('./service-worker.js').catch(()=>{})); }
+setLang(langState.current); showMenu();
 </script>
 </body>
 </html>
