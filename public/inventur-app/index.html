@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>KOPPSUISSE Inventur</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <style>
+    :root { --bg:#101417; --panel:#182126; --panel2:#202b31; --text:#eef5f2; --muted:#a6b3ad; --accent:#0f766e; --accent2:#14b8a6; --danger:#ef4444; --warn:#f59e0b; --ok:#22c55e; --line:#324047; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin:0; height:100%; background:var(--bg); color:var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; overscroll-behavior: none; }
+    body { display:flex; flex-direction:column; }
+    header { padding: 12px 14px 8px; background:linear-gradient(180deg, #172126, #101417); border-bottom:1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+    h1 { margin:0; font-size:20px; line-height:1.15; }
+    .sub { color:var(--muted); font-size:12px; margin-top:3px; }
+    main { padding:12px; max-width:850px; width:100%; margin:0 auto; flex:1; }
+    .tabs { display:flex; gap:8px; margin-bottom:12px; }
+    .tab { flex:1; border:1px solid var(--line); background:var(--panel); color:var(--text); padding:11px 8px; border-radius:12px; font-weight:700; font-size:14px; }
+    .tab.active { background:var(--accent); border-color:var(--accent2); }
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:14px; margin-bottom:12px; box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+    @media(max-width:520px){ .row,.row3 { grid-template-columns:1fr; } }
+    label { display:block; color:var(--muted); font-size:12px; margin-bottom:5px; }
+    input, select, textarea { width:100%; background:#0f1518; color:var(--text); border:1px solid var(--line); border-radius:10px; padding:12px; font-size:16px; outline:none; }
+    textarea { min-height:86px; resize:vertical; }
+    input:focus, textarea:focus { border-color:var(--accent2); }
+    button { border:0; border-radius:12px; padding:12px 14px; font-size:16px; font-weight:750; color:var(--text); background:var(--panel2); }
+    button.primary { background:var(--accent); }
+    button.ok { background:var(--ok); color:#06110a; }
+    button.warn { background:var(--warn); color:#190f02; }
+    button.danger { background:var(--danger); }
+    button:active { transform: translateY(1px); opacity:.9; }
+    .big { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+    .big button { min-height:64px; }
+    .statgrid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; }
+    .stat { background:#0f1518; border:1px solid var(--line); border-radius:14px; padding:12px; }
+    .stat .k { color:var(--muted); font-size:12px; }
+    .stat .v { font-size:28px; font-weight:850; margin-top:2px; }
+    .formula { background:#0f1518; border:1px dashed #51616b; color:#d7e2dd; border-radius:12px; padding:10px; font-size:14px; line-height:1.45; }
+    .hidden { display:none !important; }
+    canvas { width:100%; height:420px; background:#0f1518; border:1px solid var(--line); border-radius:16px; touch-action:none; display:block; }
+    .controls { display:grid; grid-template-columns:80px 80px 80px 1fr; grid-template-rows:58px 58px 58px; gap:8px; align-items:stretch; margin-top:10px; }
+    .controls button { font-size:22px; }
+    .up { grid-column:2; grid-row:1; } .left { grid-column:1; grid-row:2; } .scan { grid-column:2; grid-row:2; background:var(--accent); font-size:15px!important; } .right { grid-column:3; grid-row:2; } .down { grid-column:2; grid-row:3; }
+    .gameActions { grid-column:4; grid-row:1 / span 3; display:grid; gap:8px; }
+    .small { font-size:12px; color:var(--muted); line-height:1.35; }
+    .pill { display:inline-flex; padding:4px 8px; border-radius:999px; background:#0f1518; border:1px solid var(--line); color:var(--muted); font-size:12px; margin:2px 4px 2px 0; }
+    .historyItem { border-bottom:1px solid var(--line); padding:8px 0; font-size:14px; }
+    .historyItem:last-child { border-bottom:0; }
+    .installBox { background: #102320; border:1px solid #1a8177; color:#dffaf5; border-radius:14px; padding:10px; margin-bottom:12px; font-size:14px; line-height:1.35; }
+  </style>
+</head>
+<body>
+<header><h1>KOPPSUISSE Inventur</h1><div class="sub">DTC Slide SS10 500 mm – 1 Einheit = 1 Paar L+R</div></header>
+<main>
+  <div id="installBox" class="installBox hidden">Diese App kann auf dem Samsung installiert werden. Tippe auf <b>Installieren</b>.<div style="margin-top:8px"><button id="installBtn" class="primary">App installieren</button></div></div>
+  <div class="tabs"><button class="tab active" data-tab="inventory">Inventur</button><button class="tab" data-tab="game">Spiel</button><button class="tab" data-tab="info">Info</button></div>
+  <section id="inventory">
+    <div class="card"><div class="row"><div><label>Produkt</label><input id="productName" value="DTC Slide SS10 500 mm – Paar L+R"></div><div><label>Paar pro Karton</label><input id="pairsPerCarton" type="number" min="1" value="10"></div></div><div class="formula" style="margin-top:10px">Regel: <b>1 Karton = 10 Paar = 20 einzelne Schienen.</b><br>Odoo-Menge = Kartons × Paar pro Karton + komplette lose Paare + mögliche Paare aus einzelnen L/R-Schienen.</div></div>
+    <div class="card"><div class="statgrid"><div class="stat"><div class="k">Kartons</div><div id="cartonsVal" class="v">0</div></div><div class="stat"><div class="k">Komplette lose Paare</div><div id="pairsVal" class="v">0</div></div><div class="stat"><div class="k">Lose linke Schienen</div><div id="leftVal" class="v">0</div></div><div class="stat"><div class="k">Lose rechte Schienen</div><div id="rightVal" class="v">0</div></div><div class="stat"><div class="k">Mögliche Paare aus losen Schienen</div><div id="loosePairsVal" class="v">0</div></div><div class="stat"><div class="k">In Odoo bei „Gezählt“ eintragen</div><div id="odooVal" class="v">0</div></div></div>
+      <div class="big"><button class="primary" id="addCarton">+ Karton</button><button id="subCarton">− Karton</button><button class="primary" id="addPair">+ loses Paar</button><button id="subPair">− loses Paar</button><button class="primary" id="addLeft">+ lose L-Schiene</button><button id="subLeft">− lose L-Schiene</button><button class="primary" id="addRight">+ lose R-Schiene</button><button id="subRight">− lose R-Schiene</button></div>
+      <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap"><button class="ok" id="saveCount">Zählung speichern</button><button class="warn" id="resetCount">Zählung leeren</button></div>
+    </div>
+    <div class="card"><label>Notiz für Inventur / Odoo</label><textarea id="noteOut" readonly></textarea><div class="small" style="margin-top:8px">Diese Notiz kann in Odoo bei interne Notizen oder zur Inventur gespeichert werden.</div></div>
+    <div class="card"><h3 style="margin:0 0 8px">Gespeicherte Zählungen</h3><div id="history"></div></div>
+  </section>
+  <section id="game" class="hidden"><div class="card"><canvas id="gameCanvas" width="900" height="420"></canvas><div class="controls"><button class="up" data-dir="up">▲</button><button class="left" data-dir="left">◀</button><button class="scan" id="scanBtn">SCAN</button><button class="right" data-dir="right">▶</button><button class="down" data-dir="down">▼</button><div class="gameActions"><button class="ok" id="newGame">Neues Spiel</button><button class="warn" id="pauseGame">Pause</button><button id="useGameCount">Spielwert in Inventur übernehmen</button></div></div><div class="small" style="margin-top:8px">Touch-Steuerung für Samsung: Fahre zum Karton oder zur Schiene und drücke SCAN.</div></div></section>
+  <section id="info" class="hidden"><div class="card"><h3 style="margin-top:0">Installation auf Samsung</h3><p>Wenn diese App über eine Webseite/HTTPS geöffnet wird, kann sie wie eine App installiert werden:</p><p><b>Chrome oder Samsung Internet → Menü ⋮ → App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b>.</p><p>Wenn du diese Datei nur direkt öffnest, läuft sie als normale Webseite. Für echte App-Installation muss sie auf eine Webseite hochgeladen werden.</p></div><div class="card"><h3 style="margin-top:0">Inventur-Regel</h3><span class="pill">1 Odoo-Einheit = 1 Paar</span><span class="pill">1 Paar = L + R</span><span class="pill">1 Karton = 10 Paar</span><span class="pill">25 Kartons = 250 Paar</span><p class="small">Nicht als 500 einzelne Schienen in Odoo führen, wenn der Verkauf pro Paar/Set erfolgt.</p></div></section>
+</main>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const state = { product: "DTC Slide SS10 500 mm – Paar L+R", pairsPerCarton: 10, cartons: 0, pairs: 0, left: 0, right: 0 };
+  function clamp(n){ return Math.max(0, Number(n)||0); }
+  function loosePairs(){ return Math.min(state.left, state.right); }
+  function odooCount(){ return state.cartons * state.pairsPerCarton + state.pairs + loosePairs(); }
+  function updateUI(){
+    state.product = $("productName").value || state.product; state.pairsPerCarton = Math.max(1, parseInt($("pairsPerCarton").value || "10", 10));
+    $("cartonsVal").textContent = state.cartons; $("pairsVal").textContent = state.pairs; $("leftVal").textContent = state.left; $("rightVal").textContent = state.right; $("loosePairsVal").textContent = loosePairs(); $("odooVal").textContent = odooCount();
+    const unL = Math.max(0, state.left - state.right); const unR = Math.max(0, state.right - state.left);
+    $("noteOut").value = `${state.product}\nBestand wird in Paaren/Sets geführt.\n1 Einheit = 1 Paar/Set = linke + rechte Schiene.\n1 Karton = ${state.pairsPerCarton} Paar = ${state.pairsPerCarton*2} einzelne Schienen.\n\nGezählte Kartons: ${state.cartons}\nKomplette lose Paare: ${state.pairs}\nLose linke Schienen: ${state.left}\nLose rechte Schienen: ${state.right}\nMögliche Paare aus losen Schienen: ${loosePairs()}\nÜbrig ohne Paar: ${unL} linke / ${unR} rechte einzelne Schienen\n\nIn Odoo bei „Gezählt“ eintragen: ${odooCount()} Paar/Set.`;
+    localStorage.setItem("koppsuisseInventoryDraft", JSON.stringify(state));
+  }
+  function loadDraft(){ try { const d = JSON.parse(localStorage.getItem("koppsuisseInventoryDraft") || "{}"); Object.assign(state, d); $("productName").value = state.product; $("pairsPerCarton").value = state.pairsPerCarton; } catch(e){} }
+  function change(k, delta){ state[k] = clamp(state[k] + delta); updateUI(); }
+  [["addCarton","cartons",1],["subCarton","cartons",-1],["addPair","pairs",1],["subPair","pairs",-1],["addLeft","left",1],["subLeft","left",-1],["addRight","right",1],["subRight","right",-1]].forEach(([id,k,d]) => $(id).onclick=()=>change(k,d));
+  $("pairsPerCarton").oninput = updateUI; $("productName").oninput = updateUI;
+  $("resetCount").onclick = () => { if(confirm("Zählung wirklich leeren?")){ state.cartons = state.pairs = state.left = state.right = 0; updateUI(); } };
+  function renderHistory(){ const box = $("history"); const hist = JSON.parse(localStorage.getItem("koppsuisseInventoryHistory") || "[]"); if(!hist.length){ box.innerHTML = '<div class="small">Noch keine Zählung gespeichert.</div>'; return; } box.innerHTML = hist.map(h => `<div class="historyItem"><b>${h.date}</b><br>${h.product}<br>Kartons: ${h.cartons}, lose Paare: ${h.pairs}, L/R: ${h.left}/${h.right}<br><b>Odoo: ${h.odoo} Paar</b></div>`).join(""); }
+  $("saveCount").onclick = () => { const hist = JSON.parse(localStorage.getItem("koppsuisseInventoryHistory") || "[]"); hist.unshift({ date: new Date().toLocaleString("de-DE"), product: state.product, pairsPerCarton: state.pairsPerCarton, cartons: state.cartons, pairs: state.pairs, left: state.left, right: state.right, odoo: odooCount() }); localStorage.setItem("koppsuisseInventoryHistory", JSON.stringify(hist.slice(0,20))); renderHistory(); alert("Zählung gespeichert. Odoo-Menge: " + odooCount() + " Paar."); };
+  document.querySelectorAll(".tab").forEach(btn => { btn.onclick = () => { document.querySelectorAll(".tab").forEach(b => b.classList.remove("active")); btn.classList.add("active"); ["inventory","game","info"].forEach(id => $(id).classList.add("hidden")); $(btn.dataset.tab).classList.remove("hidden"); if(btn.dataset.tab === "game") drawGame(); }; });
+  let deferredPrompt = null; window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferredPrompt = e; $("installBox").classList.remove("hidden"); }); $("installBtn").onclick = async () => { if(!deferredPrompt) return; deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; $("installBox").classList.add("hidden"); };
+  if("serviceWorker" in navigator){ window.addEventListener("load", () => { navigator.serviceWorker.register("./service-worker.js").catch(()=>{}); }); }
+  const canvas = $("gameCanvas"); const ctx = canvas.getContext("2d");
+  const game = { running: true, player: {x:60,y:330,w:38,h:28}, dir: {x:0,y:0}, items: [], cartons:0, pairs:0, left:0, right:0, msg:"Fahre zu einem Teil und drücke SCAN.", target:250 };
+  function resetGame(){ Object.assign(game.player, {x:60,y:330,w:38,h:28}); game.cartons=0; game.pairs=0; game.left=0; game.right=0; game.msg="Fahre zu einem Teil und drücke SCAN."; game.items = []; const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a; function add(type,n){ for(let i=0;i<n;i++) game.items.push({type, x:rand(80,820), y:rand(70,360), scanned:false}); } add("carton",25); add("left",4); add("right",4); }
+  resetGame(); function gameOdoo(){ return game.cartons*10 + game.pairs + Math.min(game.left, game.right); }
+  function drawGame(){ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle="#0f1518"; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.strokeStyle="#25323a"; for(let x=0;x<canvas.width;x+=45){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke(); } for(let y=0;y<canvas.height;y+=45){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke(); } ctx.fillStyle="#eef5f2"; ctx.font="18px Arial"; ctx.fillText(`Kartons ${game.cartons} | L ${game.left} | R ${game.right} | Odoo ${gameOdoo()}/${game.target}`, 16, 28); ctx.fillStyle="#a6b3ad"; ctx.font="14px Arial"; ctx.fillText(game.msg, 16, 50); for(const it of game.items){ if(it.scanned) continue; if(it.type==="carton"){ ctx.fillStyle="#f59e0b"; ctx.fillRect(it.x-22,it.y-16,44,32); ctx.fillStyle="#111"; ctx.font="13px Arial"; ctx.fillText("10", it.x-7, it.y+5); } if(it.type==="left"){ ctx.fillStyle="#38bdf8"; ctx.fillRect(it.x-24,it.y-5,48,10); ctx.fillStyle="#eef"; ctx.fillText("L", it.x-4, it.y-12); } if(it.type==="right"){ ctx.fillStyle="#fde047"; ctx.fillRect(it.x-24,it.y-5,48,10); ctx.fillStyle="#111"; ctx.fillText("R", it.x-4, it.y-12); } } const p = game.player; ctx.fillStyle="#eab308"; ctx.fillRect(p.x,p.y,p.w,p.h); ctx.fillStyle="#93c5fd"; ctx.fillRect(p.x+24,p.y-10,14,14); ctx.strokeStyle="#d1d5db"; ctx.strokeRect(p.x-24,p.y+18,24,4); ctx.strokeRect(p.x-24,p.y+25,24,4); }
+  function step(){ if(game.running){ game.player.x += game.dir.x * 3.2; game.player.y += game.dir.y * 3.2; game.player.x = Math.max(5, Math.min(canvas.width-game.player.w-5, game.player.x)); game.player.y = Math.max(60, Math.min(canvas.height-game.player.h-5, game.player.y)); if(!$("game").classList.contains("hidden")) drawGame(); } requestAnimationFrame(step); } step();
+  function nearest(){ const px=game.player.x+game.player.w/2, py=game.player.y+game.player.h/2; let best=null, bd=9999; for(const it of game.items){ if(it.scanned) continue; const d=Math.hypot(it.x-px,it.y-py); if(d<bd){bd=d;best=it;} } return bd<55 ? best : null; }
+  $("scanBtn").onclick = () => { const it = nearest(); if(!it){ game.msg="Näher zum Packstück fahren."; drawGame(); return; } it.scanned = true; if(it.type==="carton"){ game.cartons++; game.msg="Karton gescannt: +10 Paar."; } if(it.type==="left"){ game.left++; game.msg="Lose linke Schiene gescannt."; } if(it.type==="right"){ game.right++; game.msg="Lose rechte Schiene gescannt."; } if(gameOdoo()===game.target) game.msg="Korrekt: Odoo Gezählt = 250 Paar."; drawGame(); };
+  document.querySelectorAll("[data-dir]").forEach(b => { const setDir = (on) => { const d=b.dataset.dir; if(!on){ game.dir.x=0; game.dir.y=0; return; } game.dir.x = d==="left" ? -1 : d==="right" ? 1 : 0; game.dir.y = d==="up" ? -1 : d==="down" ? 1 : 0; }; b.addEventListener("pointerdown", e=>{e.preventDefault(); setDir(true);}); b.addEventListener("pointerup", e=>{e.preventDefault(); setDir(false);}); b.addEventListener("pointerleave", e=>{setDir(false);}); });
+  $("newGame").onclick = () => { resetGame(); drawGame(); }; $("pauseGame").onclick = () => { game.running = !game.running; $("pauseGame").textContent = game.running ? "Pause" : "Weiter"; }; $("useGameCount").onclick = () => { state.cartons = game.cartons; state.left = game.left; state.right = game.right; state.pairs = game.pairs; updateUI(); document.querySelector('[data-tab="inventory"]').click(); };
+  loadDraft(); updateUI(); renderHistory();
+})();
+</script>
+</body>
+</html>
