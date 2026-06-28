@@ -1,10 +1,17 @@
-# Salut Urs - Download Button
+# Salut Urs Installationspaket
 
-Diese Version enthält eine `index.html` mit einem Button:
+In den Ordner `/blut/` auf koppsuisse.ch hochladen:
 
-App herunterladen -> salut-urs-minimal.apk
+- index.html
+- salut-urs-kleine-app.apk
+
+Danach öffnen:
+https://www.koppsuisse.ch/blut
+
+Der Button lädt:
+https://www.koppsuisse.ch/blut/salut-urs-kleine-app.apk
 
 Wichtig:
-- `index.html` muss in denselben Ordner wie `salut-urs-minimal.apk`.
-- Bei Koppsuisse ist das der Ordner `/blut/`.
-- Danach ist die Adresse: https://www.koppsuisse.ch/blut
+- Die APK auf Android öffnen.
+- Falls Android blockiert: Installation aus unbekannten Quellen für den Browser erlauben.
+- Falls eine alte Salut-Urs-Version installiert ist: vorher deinstallieren.

@@ -3,26 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Salut Urs</title>
+  <title>Salut Urs App</title>
   <style>
-    :root {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #07152f;
-      background: #f3f6fb;
-    }
     body {
       margin: 0;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f6fb;
+      color: #07152f;
       padding: 24px;
       box-sizing: border-box;
     }
     .card {
       width: 100%;
       max-width: 560px;
-      background: white;
+      background: #fff;
       border-radius: 18px;
       box-shadow: 0 18px 45px rgba(20, 30, 55, 0.12);
       padding: 32px 24px;
@@ -37,9 +35,9 @@
       font-size: 18px;
       line-height: 1.4;
     }
-    .status {
+    .ok {
       display: inline-block;
-      margin: 18px 0 10px;
+      margin: 18px 0 8px;
       padding: 9px 16px;
       border-radius: 999px;
       background: #e8f6ec;
@@ -52,14 +50,11 @@
       padding: 16px 24px;
       border-radius: 12px;
       background: #0b5fff;
-      color: white;
+      color: #fff;
       text-decoration: none;
-      font-size: 19px;
-      font-weight: bold;
+      font-size: 20px;
+      font-weight: 700;
       box-shadow: 0 8px 22px rgba(11, 95, 255, 0.28);
-    }
-    .button:active {
-      transform: translateY(1px);
     }
     .hint {
       margin-top: 18px;
@@ -71,18 +66,12 @@
 <body>
   <main class="card">
     <h1>Salut Urs</h1>
-    <p>Browser-Test funktioniert.</p>
-    <p>Bereit für Blutdruck, Medikamente und Verlauf.</p>
-    <div class="status">Minimalversion OK</div>
-
+    <p>Kleine Android-Test-App.</p>
+    <p>Zum Prüfen, ob Download und Installation funktionieren.</p>
+    <div class="ok">Installations-Test</div>
     <br>
-    <a class="button" href="salut-urs-minimal.apk" download>
-      App herunterladen
-    </a>
-
-    <p class="hint">
-      Android: Nach dem Download die APK öffnen und Installation erlauben.
-    </p>
+    <a class="button" href="salut-urs-kleine-app.apk" download>App herunterladen</a>
+    <p class="hint">Android: APK nach dem Download öffnen und Installation erlauben.</p>
   </main>
 </body>
 </html>
