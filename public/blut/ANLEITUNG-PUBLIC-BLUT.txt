@@ -1,0 +1,13 @@
+DIESER ORDNER GEHOERT NACH:
+koppsuiss\public\blut
+
+Danach muessen hier direkt sichtbar sein:
+index.html
+app
+build.gradle
+settings.gradle
+.gitignore
+
+Wichtig:
+Android installiert nur die Datei blutdruck-app.apk.
+Diese APK wird erst durch GitHub Actions gebaut.
