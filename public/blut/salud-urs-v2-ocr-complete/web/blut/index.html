@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Salud Urs – Blutdruck-App installieren</title>
+  <style>
+    body{font-family:Arial,sans-serif;background:#111;color:#eee;margin:0;padding:24px}
+    .box{max-width:720px;margin:auto;background:#1c1c1c;border-radius:18px;padding:28px}
+    h1{font-size:32px;margin-top:0}.btn{display:block;background:#0b57d0;color:white;text-decoration:none;text-align:center;padding:18px;border-radius:12px;font-size:22px;font-weight:bold;margin:24px 0}.note{background:#162234;border-left:6px solid #0b57d0;padding:16px;border-radius:10px}.bad{color:#ff8ab3;font-weight:bold}.small{color:#bbb;font-size:14px;line-height:1.45}li{margin:6px 0}code{background:#333;padding:2px 5px;border-radius:4px}
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Salud Urs – Blutdruck-App installieren</h1>
+    <p>Android-App für Blutdruckwerte, Puls und Verlauf. Die Daten bleiben lokal auf dem Handy.</p>
+
+    <h2>Version 2.1 – Foto-Erkennung</h2>
+    <ul>
+      <li>Foto vom Blutdruckmessgerät aufnehmen</li>
+      <li>Zahlen automatisch erkennen lassen</li>
+      <li>Uhrzeit automatisch speichern</li>
+      <li>Werte vor dem Speichern bestätigen</li>
+      <li>Verlauf lokal speichern</li>
+      <li>CSV teilen</li>
+    </ul>
+
+    <a class="btn" href="blutdruck-app.apk">App herunterladen</a>
+
+    <p class="small">Direkter Download:<br><code>https://www.koppsuisse.ch/blut/blutdruck-app.apk</code></p>
+
+    <div class="note">
+      <b>Auf Android:</b><br>
+      Nach dem Download die APK öffnen. Falls Android blockiert: Installation aus dieser Quelle erlauben.
+      Wenn die App schon installiert ist, auf <b>Aktualisieren</b> tippen.
+    </div>
+
+    <p class="small"><b>Wichtig:</b> Die automatische Erkennung von LCD-Zahlen ist nicht immer perfekt. Deshalb die erkannten Werte immer prüfen und erst dann speichern.</p>
+
+    <p id="apkcheck" class="small">Prüfe APK-Datei…</p>
+  </div>
+<script>
+fetch('blutdruck-app.apk',{method:'HEAD'}).then(r=>{
+  document.getElementById('apkcheck').innerHTML = r.ok ? 'APK gefunden. Download ist bereit.' : '<span class="bad">APK noch nicht gefunden.</span> Die Datei muss unter /blut/blutdruck-app.apk hochgeladen werden.';
+}).catch(()=>{document.getElementById('apkcheck').innerHTML='<span class="bad">APK noch nicht gefunden.</span> Die Datei muss unter /blut/blutdruck-app.apk hochgeladen werden.';});
+</script>
+</body>
+</html>
