@@ -1,0 +1,5 @@
+Die echte APK wird von GitHub Actions automatisch gebaut und danach als Datei abgelegt:
+
+public/blut/salut-urs.apk
+
+Diese Textdatei kann später gelöscht werden.

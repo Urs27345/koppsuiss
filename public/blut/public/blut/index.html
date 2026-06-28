@@ -20,66 +20,62 @@
     .card {
       width: 100%;
       max-width: 560px;
-      background: white;
+      background: #fff;
       border-radius: 18px;
-      box-shadow: 0 18px 45px rgba(20, 30, 55, 0.14);
+      box-shadow: 0 18px 45px rgba(20,30,55,.14);
       padding: 30px 22px;
       text-align: center;
     }
-    h1 {
-      margin: 0 0 14px;
-      font-size: 32px;
-    }
-    p {
-      font-size: 18px;
-      line-height: 1.45;
-      margin: 10px 0;
-    }
+    h1 { margin: 0 0 14px; font-size: 32px; }
+    p { font-size: 18px; line-height: 1.45; margin: 10px 0; }
     .button {
-      display: inline-block;
-      margin-top: 24px;
-      padding: 17px 24px;
-      border-radius: 12px;
+      display: block;
+      margin: 26px auto 14px;
+      max-width: 380px;
+      padding: 18px 20px;
+      border-radius: 14px;
       background: #0b5fff;
-      color: white;
+      color: #fff;
       text-decoration: none;
-      font-size: 20px;
-      font-weight: bold;
-      box-shadow: 0 8px 22px rgba(11, 95, 255, 0.28);
+      font-size: 21px;
+      font-weight: 700;
+      box-shadow: 0 8px 22px rgba(11,95,255,.28);
     }
     .small {
       margin-top: 18px;
       font-size: 14px;
       color: #5b6575;
-      word-break: break-all;
+      word-break: break-word;
     }
     .warn {
-      margin-top: 20px;
-      padding: 12px 14px;
+      margin-top: 18px;
+      padding: 14px;
       background: #fff8df;
       border-radius: 12px;
-      font-size: 15px;
       color: #5e4700;
+      font-size: 15px;
+      line-height: 1.35;
     }
   </style>
 </head>
 <body>
   <main class="card">
     <h1>Salut Urs</h1>
-    <p>Kleine Android-Test-App.</p>
-    <p>Nur zum Prüfen von Download und Installation.</p>
+    <p>Android-App Minimalversion.</p>
+    <p>Nur Startbildschirm zum Testen der Installation.</p>
 
-    <a class="button" href="./salut-urs-android-v1.apk" download="salut-urs-android-v1.apk" type="application/vnd.android.package-archive">
+    <a class="button" href="salut-urs.apk" download>
       Android-App herunterladen
     </a>
 
     <p class="small">
-      Direkter APK-Link:<br>
-      https://www.koppsuisse.ch/blut/salut-urs-android-v1.apk
+      Direkter Link:<br>
+      https://www.koppsuisse.ch/blut/salut-urs.apk
     </p>
 
     <div class="warn">
-      Wichtig: Nicht den Download-Pfeil des Browsers drücken. Den blauen Button auf dieser Seite drücken.
+      Die Datei muss <b>salut-urs.apk</b> heißen. Wenn eine <b>.html</b>-Datei heruntergeladen wird,
+      ist die APK noch nicht gebaut oder noch nicht im Ordner public/blut.
     </div>
   </main>
 </body>

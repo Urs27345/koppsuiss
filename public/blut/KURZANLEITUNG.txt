@@ -1,0 +1,24 @@
+KURZANLEITUNG
+
+Diese ZIP komplett entpacken und alles in GitHub hochladen.
+
+Wichtig:
+Die Ordner müssen erhalten bleiben:
+
+.github/workflows/build-android-apk.yml
+app/
+public/blut/index.html
+
+Dann in GitHub:
+
+Actions
+→ Build Salut Urs Android APK
+→ Run workflow
+
+Nach grünem Build ist die echte App hier:
+
+https://www.koppsuisse.ch/blut/salut-urs.apk
+
+Die Download-Seite ist:
+
+https://www.koppsuisse.ch/blut
