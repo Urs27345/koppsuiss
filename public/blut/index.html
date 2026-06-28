@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Salut Urs App</title>
+  <title>Salut Urs Android App</title>
   <style>
     body {
       margin: 0;
@@ -14,16 +14,16 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #f3f6fb;
       color: #07152f;
-      padding: 24px;
+      padding: 22px;
       box-sizing: border-box;
     }
     .card {
       width: 100%;
       max-width: 560px;
-      background: #fff;
+      background: white;
       border-radius: 18px;
-      box-shadow: 0 18px 45px rgba(20, 30, 55, 0.12);
-      padding: 32px 24px;
+      box-shadow: 0 18px 45px rgba(20, 30, 55, 0.14);
+      padding: 30px 22px;
       text-align: center;
     }
     h1 {
@@ -31,35 +31,35 @@
       font-size: 32px;
     }
     p {
-      margin: 10px 0;
       font-size: 18px;
-      line-height: 1.4;
-    }
-    .ok {
-      display: inline-block;
-      margin: 18px 0 8px;
-      padding: 9px 16px;
-      border-radius: 999px;
-      background: #e8f6ec;
-      color: #145c2e;
-      font-size: 16px;
+      line-height: 1.45;
+      margin: 10px 0;
     }
     .button {
       display: inline-block;
       margin-top: 24px;
-      padding: 16px 24px;
+      padding: 17px 24px;
       border-radius: 12px;
       background: #0b5fff;
-      color: #fff;
+      color: white;
       text-decoration: none;
       font-size: 20px;
-      font-weight: 700;
+      font-weight: bold;
       box-shadow: 0 8px 22px rgba(11, 95, 255, 0.28);
     }
-    .hint {
+    .small {
       margin-top: 18px;
       font-size: 14px;
       color: #5b6575;
+      word-break: break-all;
+    }
+    .warn {
+      margin-top: 20px;
+      padding: 12px 14px;
+      background: #fff8df;
+      border-radius: 12px;
+      font-size: 15px;
+      color: #5e4700;
     }
   </style>
 </head>
@@ -67,11 +67,20 @@
   <main class="card">
     <h1>Salut Urs</h1>
     <p>Kleine Android-Test-App.</p>
-    <p>Zum Prüfen, ob Download und Installation funktionieren.</p>
-    <div class="ok">Installations-Test</div>
-    <br>
-    <a class="button" href="salut-urs-kleine-app.apk" download>App herunterladen</a>
-    <p class="hint">Android: APK nach dem Download öffnen und Installation erlauben.</p>
+    <p>Nur zum Prüfen von Download und Installation.</p>
+
+    <a class="button" href="./salut-urs-android-v1.apk" download="salut-urs-android-v1.apk" type="application/vnd.android.package-archive">
+      Android-App herunterladen
+    </a>
+
+    <p class="small">
+      Direkter APK-Link:<br>
+      https://www.koppsuisse.ch/blut/salut-urs-android-v1.apk
+    </p>
+
+    <div class="warn">
+      Wichtig: Nicht den Download-Pfeil des Browsers drücken. Den blauen Button auf dieser Seite drücken.
+    </div>
   </main>
 </body>
 </html>

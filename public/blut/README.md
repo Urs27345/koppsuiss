@@ -1,17 +1,18 @@
-# Salut Urs Installationspaket
+# Salut Urs Android v1
 
-In den Ordner `/blut/` auf koppsuisse.ch hochladen:
+Diese Dateien in den Ordner `/blut/` hochladen:
 
-- index.html
-- salut-urs-kleine-app.apk
+1. index.html
+2. salut-urs-android-v1.apk
 
-Danach öffnen:
+Danach am Android-Handy öffnen:
+
 https://www.koppsuisse.ch/blut
 
-Der Button lädt:
-https://www.koppsuisse.ch/blut/salut-urs-kleine-app.apk
+Dann den blauen Button "Android-App herunterladen" drücken.
 
-Wichtig:
-- Die APK auf Android öffnen.
-- Falls Android blockiert: Installation aus unbekannten Quellen für den Browser erlauben.
-- Falls eine alte Salut-Urs-Version installiert ist: vorher deinstallieren.
+Direkter APK-Link:
+
+https://www.koppsuisse.ch/blut/salut-urs-android-v1.apk
+
+Wenn wieder eine .html-Datei heruntergeladen wird, wurde nicht die APK-Datei gefunden oder es wurde der Browser-Download-Button benutzt.
