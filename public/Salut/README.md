@@ -1,27 +1,37 @@
-# Salut Urs - PWA für GitHub Pages
+# Salut Urs PWA – Version mit privater Startseite
 
-Diese Version ist eine installierbare Web-App (PWA). Sie wird über eine HTTPS-Adresse geöffnet und kann auf Android über Chrome installiert werden.
+Diese Version zeigt auf der öffentlichen Startseite nur einen Installations-Button.
+Die eigentliche App liegt in `app.html` und wird als PWA gestartet.
 
-## Inhalt
+## Dateien hochladen
+
+Den kompletten Inhalt dieses Ordners in den Webordner hochladen, z. B.:
+
+`public/Salut_Urs/`
+
+Wichtig: Nicht nur `index.html` hochladen. Diese Dateien müssen gemeinsam im selben Ordner liegen:
+
 - `index.html`
+- `app.html`
 - `style.css`
 - `app.js`
 - `manifest.webmanifest`
 - `sw.js`
 - `icons/`
 
-## Installation über GitHub Pages
-1. ZIP entpacken.
-2. Den Inhalt dieses Ordners in einen GitHub-Ordner hochladen, z. B. `public/Salut_Urs/` oder direkt in ein neues Repository.
-3. In GitHub Pages die Veröffentlichung aktivieren.
-4. Die URL am Android-Handy in Chrome öffnen.
-5. Menü `⋮` → `App installieren` oder `Zum Startbildschirm hinzufügen`.
+## Adresse
 
-Beispiel-URL bei Repo `koppsuiss` und GitHub-User `jluzcuber`:
-`https://jluzcuber.github.io/koppsuiss/Salut_Urs/`
+Startseite / Installation:
 
-## Wichtig
-- Die Daten werden lokal im Browser des Handys gespeichert.
-- Keine Cloud-Synchronisation.
-- Foto-OCR nutzt Tesseract.js über CDN. Dafür wird beim ersten Laden Internet benötigt. Werte müssen immer kontrolliert und bestätigt werden.
-- Die App ist ein Dokumentationswerkzeug und ersetzt keine medizinische Beurteilung.
+`https://www.koppsuisse.ch/Salut_Urs/`
+
+## Android-Installation
+
+1. Link mit Google Chrome auf Android öffnen.
+2. Button **App installieren** drücken.
+3. Falls kein Fenster erscheint: Browser-Menü → **App installieren** oder **Zum Startbildschirm hinzufügen**.
+
+## Datenschutz
+
+Die Gesundheitsdaten werden lokal im Browser/auf dem Handy gespeichert. Es wird keine Datenbank auf dem Server verwendet.
+Trotzdem sind die Web-App-Dateien selbst bei einer öffentlichen Website grundsätzlich öffentlich abrufbar. Für echte Zugangssperre wäre später ein Login/PIN-Schutz oder ein privates Hosting nötig.
