@@ -1,7 +1,0 @@
-Version 2.1
-- Downloadseite mit Versionsnummer und Neuerungen hinzugefügt
-- Foto-Erkennung / OCR für Blutdruckmessgerät
-- Bestätigung der erkannten Werte vor dem Speichern
-- Automatischer Zeitstempel
-- Lokaler Verlauf
-- CSV-Export
