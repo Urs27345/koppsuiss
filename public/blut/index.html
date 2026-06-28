@@ -1,3 +1,4 @@
+<!-- Datei muss direkt in public/blut/index.html liegen -->
 <!doctype html>
 <html lang="de">
 <head>
@@ -27,7 +28,7 @@
 
     <a class="btn" href="blutdruck-app.apk">App herunterladen</a>
 
-    <p class="small">Direkter Download:<br><code>https://www.koppsuisse.ch/blut/blutdruck-app.apk</code></p>
+    <p class="small">Direkter Download:<br><code>https://www.koppsuisse.chblutdruck-app.apk</code></p>
 
     <div class="note">
       <b>Auf Android:</b><br>
@@ -41,8 +42,8 @@
   </div>
 <script>
 fetch('blutdruck-app.apk',{method:'HEAD'}).then(r=>{
-  document.getElementById('apkcheck').innerHTML = r.ok ? 'APK gefunden. Download ist bereit.' : '<span class="bad">APK noch nicht gefunden.</span> Die Datei muss unter /blut/blutdruck-app.apk hochgeladen werden.';
-}).catch(()=>{document.getElementById('apkcheck').innerHTML='<span class="bad">APK noch nicht gefunden.</span> Die Datei muss unter /blut/blutdruck-app.apk hochgeladen werden.';});
+  document.getElementById('apkcheck').innerHTML = r.ok ? 'APK gefunden. Download ist bereit.' : '<span class="bad">APK noch nicht gefunden.</span> Die Datei muss unter blutdruck-app.apk hochgeladen werden.';
+}).catch(()=>{document.getElementById('apkcheck').innerHTML='<span class="bad">APK noch nicht gefunden.</span> Die Datei muss unter blutdruck-app.apk hochgeladen werden.';});
 </script>
 </body>
 </html>
