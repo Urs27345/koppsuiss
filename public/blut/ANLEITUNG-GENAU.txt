@@ -1,0 +1,20 @@
+GENAUER ABLAUF
+
+1. ZIP entpacken.
+2. Den Inhalt der ZIP in den Hauptordner vom Repository koppsuiss kopieren.
+   Wichtig: public/blut muss überschrieben/ergänzt werden.
+3. In GitHub Desktop erscheinen Änderungen.
+4. Summary schreiben: blutdruck app
+5. Commit to main klicken.
+6. Push origin klicken.
+7. In GitHub im Browser auf Actions gehen.
+8. Workflow "Blutdruck APK bauen" öffnen und warten, bis er grün ist.
+9. Danach gibt es diese Seite:
+   https://www.koppsuisse.ch/blut/index.html
+10. Der direkte APK-Link ist:
+   https://www.koppsuisse.ch/blut/blutdruck-app.apk
+
+WICHTIG:
+- /blut zeigt bei Next.js manchmal weiter die Homepage.
+- Sicher funktioniert /blut/index.html.
+- Android installiert nicht den Ordner und nicht die Gradle-Dateien, sondern nur blutdruck-app.apk.

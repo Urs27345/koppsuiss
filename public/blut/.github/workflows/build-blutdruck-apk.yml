@@ -1,0 +1,68 @@
+name: Blutdruck APK bauen
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'public/blut/**'
+      - '.github/workflows/build-blutdruck-apk.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repository laden
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Java einrichten
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Android SDK einrichten
+        uses: android-actions/setup-android@v3
+
+      - name: Android SDK Pakete installieren
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Gradle einrichten
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      - name: APK bauen
+        working-directory: public/blut
+        run: gradle assembleDebug
+
+      - name: APK nach public/blut kopieren
+        run: |
+          cp public/blut/app/build/outputs/apk/debug/app-debug.apk public/blut/app-debug.apk
+          cp public/blut/app/build/outputs/apk/debug/app-debug.apk public/blut/blutdruck-app.apk
+
+      - name: APK als Download speichern
+        uses: actions/upload-artifact@v4
+        with:
+          name: blutdruck-app-apk
+          path: |
+            public/blut/app-debug.apk
+            public/blut/blutdruck-app.apk
+
+      - name: APK in Repository zurückschreiben
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/blut/app-debug.apk public/blut/blutdruck-app.apk
+          if git diff --cached --quiet; then
+            echo "Keine neue APK zu speichern."
+          else
+            git commit -m "Blutdruck APK erstellen [skip ci]"
+            git push
+          fi
