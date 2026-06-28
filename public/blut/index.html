@@ -1,61 +1,50 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Salud Urs – Android APK</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Salud Urs – Blutdruck APK</title>
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f4f7fb;color:#111827;line-height:1.5}
-    main{max-width:760px;margin:0 auto;padding:28px 18px}
-    .card{background:#fff;border-radius:18px;padding:24px;box-shadow:0 10px 30px rgba(15,23,42,.08)}
-    h1{margin:0 0 8px;font-size:30px}
-    .version{color:#4b5563;margin:0 0 22px}
-    .download{display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;font-weight:bold;padding:15px 20px;border-radius:12px;margin:12px 0}
-    .download:active{transform:translateY(1px)}
-    .warn{background:#fff7ed;border-left:5px solid #f97316;padding:12px 14px;border-radius:10px;margin:18px 0}
-    .ok{background:#ecfdf5;border-left:5px solid #16a34a;padding:12px 14px;border-radius:10px;margin:18px 0}
-    code{background:#eef2ff;padding:2px 6px;border-radius:6px}
-    ul{padding-left:20px}
+    :root { font-family: Arial, Helvetica, sans-serif; color: #152238; background: #f4f7fb; }
+    body { margin: 0; padding: 24px; }
+    .card { max-width: 720px; margin: 0 auto; background: white; border-radius: 18px; padding: 26px; box-shadow: 0 8px 28px rgba(0,0,0,.08); }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    .sub { margin: 0 0 20px; color: #5c677a; }
+    .btn { display: block; text-align: center; margin: 18px 0; padding: 16px 20px; border-radius: 12px; background: #0f62fe; color: white; font-size: 20px; font-weight: 700; text-decoration: none; }
+    .box { background: #eef4ff; border-left: 5px solid #0f62fe; padding: 14px; border-radius: 10px; margin-top: 18px; }
+    ul { padding-left: 20px; line-height: 1.55; }
+    code { background: #edf1f7; padding: 2px 5px; border-radius: 5px; }
   </style>
 </head>
 <body>
-<main>
-  <section class="card">
-    <h1>Salud Urs</h1>
-    <p class="version">Android-App für Blutdruckdaten · Version 3.0</p>
+  <main class="card">
+    <h1>Salud Urs – Blutdruck</h1>
+    <p class="sub">Native Android-App als APK · Version 3.0</p>
 
-    <a class="download" href="./blutdruck-app.apk" download>APK herunterladen</a>
+    <a class="btn" href="./blutdruck-app.apk" download>APK herunterladen</a>
 
-    <div class="warn">
-      Falls Android warnt: Die App kommt nicht aus dem Play Store. Nur installieren, wenn diese Seite von Koppsuisse stammt.
+    <div class="box">
+      <strong>Installation auf Android:</strong>
+      <ul>
+        <li>APK herunterladen.</li>
+        <li>Falls Android fragt: Installation aus dieser Quelle erlauben.</li>
+        <li>APK öffnen und installieren.</li>
+      </ul>
     </div>
 
     <h2>Funktionen</h2>
     <ul>
-      <li>Blutdruck systolisch/diastolisch speichern</li>
-      <li>Puls speichern</li>
+      <li>Blutdruck systolisch / diastolisch</li>
+      <li>Puls</li>
       <li>Uhrzeit automatisch speichern</li>
       <li>Foto vom Blutdruckmessgerät aufnehmen</li>
-      <li>Texterkennung/OCR der Zahlen</li>
-      <li>Erkannte Werte vor dem Speichern bestätigen</li>
+      <li>OCR-Zahlenerkennung</li>
+      <li>Werte vor dem Speichern bestätigen und korrigieren</li>
       <li>Verlaufsliste lokal auf dem Handy</li>
-      <li>CSV-Export</li>
+      <li>CSV-Export / Teilen</li>
     </ul>
 
-    <div class="ok">
-      Die Daten werden lokal auf dem Android-Handy gespeichert. Es gibt keinen Server-Upload.
-    </div>
-
-    <h2>Installation auf Android</h2>
-    <ol>
-      <li>Auf <strong>APK herunterladen</strong> drücken.</li>
-      <li>Download öffnen.</li>
-      <li>Falls gefragt: Installation aus dieser Quelle erlauben.</li>
-      <li>App installieren und öffnen.</li>
-    </ol>
-
-    <p>Direkter Dateiname: <code>blutdruck-app.apk</code></p>
-  </section>
-</main>
+    <p><small>Hinweis: Wenn der Download noch nicht funktioniert, wurde die APK in GitHub Actions noch nicht erfolgreich gebaut.</small></p>
+  </main>
 </body>
 </html>

@@ -1,15 +1,15 @@
-Salud Urs – Changelog
+Salud Urs – Blutdruck
 
 Version 3.0
-- Neue Android-App von null erstellt.
-- Native APK-Struktur unter public/blut.
+- Native Android-App neu aufgebaut.
+- App-Quellcode isoliert unter public/blut/android.
+- Download-Seite unter public/blut/index.html.
+- APK wird automatisch nach public/blut/blutdruck-app.apk kopiert.
 - Blutdruck systolisch/diastolisch.
 - Puls.
-- Uhrzeit wird automatisch gespeichert.
-- Kameraaufnahme vom Blutdruckmessgerät.
-- OCR-Texterkennung mit Bestätigung vor Übernahme.
-- Manuelle Korrektur vor dem Speichern möglich.
-- Lokale Speicherung auf dem Android-Handy.
-- Verlaufsliste.
-- CSV-Export / Teilen.
-- PDF-Export als spätere Erweiterung vorgemerkt.
+- automatische Uhrzeit.
+- Kameraaufnahme.
+- OCR-Erkennung.
+- Bestätigung/Korrektur vor Speichern.
+- lokaler Verlauf.
+- CSV-Export.

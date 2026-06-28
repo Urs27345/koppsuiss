@@ -1,79 +1,43 @@
-# Salud Urs – Blutdruck Android APK
+# Salud Urs – Blutdruck-App
 
 Version: 3.0
 
-Dieses Verzeichnis liegt in `koppsuisse/public/blut` und enthält die Android-App-Quellen sowie die Download-Seite.
+Dieser Ordner ist komplett eigenständig für die Blutdruck-App.
 
-## Zielstruktur
+## Ordnerstruktur
 
 ```text
-koppsuisse/
-├── .github/
-│   └── workflows/
-│       └── build-blutdruck-apk.yml
-└── public/
-    └── blut/
-        ├── index.html
-        ├── blutdruck-app.apk        # wird automatisch durch GitHub Actions erstellt
-        ├── app/
-        ├── build.gradle
-        ├── settings.gradle
-        ├── README.md
-        └── CHANGELOG.txt
+public/blut/
+├── index.html              # Download-Seite
+├── blutdruck-app.apk       # wird automatisch durch GitHub Actions gebaut
+└── android/                # native Android-App-Quellcode
+    ├── settings.gradle
+    ├── build.gradle
+    ├── gradle.properties
+    └── app/
 ```
 
-## Wichtig
+## Warum diese Struktur?
 
-- `.github/workflows/build-blutdruck-apk.yml` möglichst nur einmal einrichten.
-- Künftige App-Versionen nur in `public/blut` ändern.
-- ZIP für `public/blut` direkt in `public/blut` entpacken, ohne zusätzlichen Oberordner.
-- ZIP für `.github` direkt in `.github` entpacken, ohne zusätzlichen Oberordner.
-- Andere Ordner, z. B. Inventur-App, nicht überschreiben.
+Alles, was zur Blutdruck-App gehört, liegt unter `public/blut`.
+Damit können später weitere Apps separat angelegt werden, z. B.:
+
+```text
+public/inventur/
+public/medikamente/
+public/labor/
+```
+
+Die GitHub-Workflow-Datei liegt technisch zwingend unter `.github/workflows`, ist aber nur für diese App zuständig:
+
+```text
+.github/workflows/build-blutdruck-apk.yml
+```
 
 ## Build
 
-Der GitHub-Workflow baut automatisch die Debug-APK und kopiert sie nach:
+GitHub Actions baut die APK automatisch und kopiert sie nach:
 
 ```text
 public/blut/blutdruck-app.apk
 ```
-
-Download-Seite:
-
-```text
-https://www.koppsuisse.ch/blut/
-```
-
-Falls `/blut/` nicht lädt, direkt testen:
-
-```text
-https://www.koppsuisse.ch/blut/index.html
-```
-
-## Funktionen Version 3.0
-
-- Blutdruck systolisch/diastolisch
-- Puls
-- Uhrzeit automatisch speichern
-- Foto vom Blutdruckmessgerät aufnehmen
-- Zahlen per OCR erkennen
-- erkannte Werte vor dem Speichern bestätigen
-- Verlaufsliste
-- lokale Speicherung auf dem Android-Handy
-- CSV-Export
-- PDF-Export später geplant
-
-## Spätere Erweiterungen
-
-- Blutzucker
-- Sauerstoff
-- Temperatur
-- Gewicht
-- Medikamente
-- Valaxam-D
-- Augentropfen Eliptic Ofteno
-- Augeninnendruck rechts/links
-- Laborwerte
-- Cholesterin/LDL/HDL
-- CT/MRT/EKG/Röntgen-Befunde
-- Diagramme

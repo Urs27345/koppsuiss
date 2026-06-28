@@ -7,7 +7,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'com.koppsuisse.saludurs'
+        applicationId 'com.koppsuisse.saludurs.blut'
         minSdk 23
         targetSdk 35
         versionCode 300
