@@ -1,17 +1,10 @@
-# Salut Urs Browser-Test
+# Salut Urs - Download Button
 
-Dies ist eine minimale Browser-Version der App für GitHub Pages.
+Diese Version enthält eine `index.html` mit einem Button:
 
-## Testen mit GitHub Pages
+App herunterladen -> salut-urs-minimal.apk
 
-1. Neues Repository bei GitHub erstellen, z. B. `salut-urs-test`.
-2. Die Datei `index.html` in das Repository hochladen.
-3. In GitHub: Settings → Pages.
-4. Unter "Build and deployment" auswählen:
-   - Source: Deploy from a branch
-   - Branch: main
-   - Folder: /root
-5. Speichern.
-6. Nach kurzer Zeit zeigt GitHub den Link zur Webseite an.
-
-Wichtig: Die Startdatei muss `index.html` heißen.
+Wichtig:
+- `index.html` muss in denselben Ordner wie `salut-urs-minimal.apk`.
+- Bei Koppsuisse ist das der Ordner `/blut/`.
+- Danach ist die Adresse: https://www.koppsuisse.ch/blut
