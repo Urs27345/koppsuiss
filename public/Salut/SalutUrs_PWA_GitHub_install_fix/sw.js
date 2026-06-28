@@ -1,11 +1,11 @@
-const CACHE_NAME = 'salut-urs-v2';
+const CACHE_NAME = 'salut-urs-v4';
 const ASSETS = [
   './',
+  './?app=1',
   './index.html',
-  './app.html',
-  './style.css',
-  './app.js',
-  './manifest.webmanifest',
+  './style.css?v=4',
+  './app.js?v=4',
+  './manifest.webmanifest?v=4',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];

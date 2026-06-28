@@ -4,12 +4,37 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0f766e" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Salut Urs</title>
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="./manifest.webmanifest?v=4" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <link rel="stylesheet" href="./style.css?v=4" />
+  <style>
+    .public-start { min-height:100vh; display:grid; place-items:center; padding:22px; background:linear-gradient(135deg,#eef7f6,#ffffff); font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:#0f172a; }
+    .install-card { width:min(480px,100%); background:#fff; border-radius:24px; padding:28px; border:1px solid #dbe7e5; box-shadow:0 16px 44px rgba(15,23,42,.12); text-align:center; }
+    .install-logo { width:74px;height:74px;border-radius:22px;margin:0 auto 14px;background:linear-gradient(135deg,#0f766e,#155e75);display:grid;place-items:center;color:#fff;font-size:34px;font-weight:900; }
+    .install-title { font-size:34px; margin:0 0 12px; letter-spacing:-.02em; }
+    .install-btn { width:100%;font-size:19px;border:0;border-radius:16px;padding:16px 18px;background:#0f766e;color:#fff;font-weight:900;cursor:pointer;margin-top:10px; }
+    .install-btn:active { transform:translateY(1px); }
+    .install-hint { display:none; color:#64748b;font-size:14px;line-height:1.35;margin-top:14px;text-align:left;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px; }
+    .install-hint.show { display:block; }
+    #appRoot[hidden], #publicRoot[hidden] { display:none !important; }
+  </style>
 </head>
 <body>
+  <section id="publicRoot" class="public-start">
+    <main class="install-card">
+      <div class="install-logo">SU</div>
+      <h1 class="install-title">Salut Urs</h1>
+      <button id="installBtnPublic" class="install-btn">App installieren</button>
+      <div id="installHint" class="install-hint">
+        Wenn kein Installationsfenster erscheint: in Google Chrome oben/rechts das Menü öffnen und <b>„App installieren“</b> oder <b>„Zum Startbildschirm hinzufügen“</b> wählen. Danach die App über das neue Symbol öffnen.
+      </div>
+    </main>
+  </section>
+
+  <div id="appRoot" hidden>
+
   <header class="app-header">
     <div>
       <h1>Salut Urs</h1>
@@ -169,6 +194,50 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-  <script src="app.js"></script>
+
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    const openAppMode = params.get('app') === '1' || isStandalone;
+    const publicRoot = document.getElementById('publicRoot');
+    const appRoot = document.getElementById('appRoot');
+    const installBtnPublic = document.getElementById('installBtnPublic');
+    const installHint = document.getElementById('installHint');
+    let deferredPrompt = null;
+
+    if (openAppMode) {
+      publicRoot.hidden = true;
+      appRoot.hidden = false;
+      document.body.classList.add('app-mode');
+    } else {
+      publicRoot.hidden = false;
+      appRoot.hidden = true;
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js?v=4', { scope: './' }).catch(() => {});
+    }
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      deferredPrompt = event;
+      if (installBtnPublic) installBtnPublic.textContent = 'App installieren';
+    });
+
+    if (installBtnPublic) {
+      installBtnPublic.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          await deferredPrompt.userChoice;
+          deferredPrompt = null;
+        } else {
+          installHint.classList.add('show');
+        }
+      });
+    }
+  </script>
+  <script src="./app.js?v=4"></script>
 </body>
 </html>
