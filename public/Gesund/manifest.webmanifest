@@ -1,7 +1,8 @@
 {
   "name": "Salut Urs",
   "short_name": "Salut Urs",
-  "description": "Lokales Gesundheitsprotokoll für Blutdruck, Blutzucker, Gewicht, Augenwerte und Medikamente.",
+  "description": "Salut Urs",
+  "id": "./",
   "start_url": "./?app=1",
   "scope": "./",
   "display": "standalone",
