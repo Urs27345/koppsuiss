@@ -1,50 +1,13 @@
-# Salut Urs Android-App
+# Salud Urs Android
 
-Das ist ein komplettes minimales Android-Projekt.
+Echte Android-App, keine HTML-Seite.
 
-Ziel:
-- GitHub baut automatisch eine echte Android-APK.
-- Die APK wird danach in `public/blut/salut-urs.apk` abgelegt.
-- Auf dem Handy kann sie über `https://www.koppsuisse.ch/blut` heruntergeladen werden.
-
-## Wichtig
-
-Das ist keine HTML-App und keine umbenannte Datei.
-Die echte APK entsteht erst, wenn GitHub Actions den Build ausführt.
-
-## So verwenden
-
+## APK bauen mit GitHub
 1. ZIP entpacken.
-2. Den ganzen Inhalt in dein GitHub-Repository hochladen.
-   Wichtig: Die Ordner `.github`, `app` und `public` müssen mit hochgeladen werden.
-3. In GitHub öffnen:
-   `Actions`
-4. Workflow öffnen:
-   `Build Salut Urs Android APK`
-5. Auf `Run workflow` klicken.
-6. Warten, bis der Build grün ist.
-7. Danach liegt die APK im Repository hier:
+2. Inhalt in ein neues GitHub-Repository hochladen.
+3. In GitHub auf **Actions** gehen.
+4. Workflow **Build Android APK** starten oder Push abwarten.
+5. Danach bei **Artifacts** die Datei **SaludUrs-debug-apk** herunterladen.
+6. Darin liegt `app-debug.apk`; diese APK am Android-Handy installieren.
 
-   `public/blut/salut-urs.apk`
-
-8. Dann am Android-Handy öffnen:
-
-   `https://www.koppsuisse.ch/blut`
-
-9. Button `Android-App herunterladen` drücken.
-10. Android sollte dann die Datei `salut-urs.apk` herunterladen und die Installation anbieten.
-
-## Direkter APK-Link nach erfolgreichem Build
-
-`https://www.koppsuisse.ch/blut/salut-urs.apk`
-
-## Wenn es nicht geht
-
-Wenn wieder eine `.html` heruntergeladen wird:
-- Die GitHub Action wurde noch nicht erfolgreich ausgeführt, oder
-- `public/blut/salut-urs.apk` existiert noch nicht, oder
-- der Server/Browser zeigt noch eine alte Version.
-
-Wenn Android sagt `App wurde nicht installiert`:
-- alte Version `Salut Urs` löschen,
-- dann erneut installieren.
+Die App speichert Daten lokal auf dem Gerät.
