@@ -1,1 +1,5 @@
-const CACHE='aquaquest-bilingual-v1';const FILES=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./assets/page-01.jpg','./assets/page-02.jpg','./assets/page-03.jpg','./assets/page-04.jpg','./assets/page-05.jpg','./assets/page-06.jpg','./assets/page-07.jpg','./assets/page-08.jpg','./assets/page-09.jpg','./assets/page-10.jpg','./assets/page-11.jpg','./assets/page-12.jpg','./assets/page-13.jpg'];self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});
+const CACHE = 'salut-urs-chemie-v1';
+const FILES = ['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); });
+self.addEventListener('activate', e => { e.waitUntil(self.clients.claim()); });
+self.addEventListener('fetch', e => { e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))); });
