@@ -47,6 +47,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// BUILD-ID: 2026-06-28-001
 public class MainActivity extends Activity {
     private static final int REQUEST_CAMERA = 1001;
     private static final int REQUEST_PERMISSION_CAMERA = 1002;
@@ -83,7 +84,7 @@ public class MainActivity extends Activity {
         root.addView(title);
 
         TextView subtitle = new TextView(this);
-        subtitle.setText("Blutdruck-App · Version 3.1 · lokal auf dem Android-Handy");
+        subtitle.setText("Blutdruck-App · Version 4.0 · Build 2026-06-28 · lokal auf dem Android-Handy");
         subtitle.setTextSize(14);
         subtitle.setGravity(Gravity.CENTER_HORIZONTAL);
         subtitle.setPadding(0, 0, 0, dp(18));
