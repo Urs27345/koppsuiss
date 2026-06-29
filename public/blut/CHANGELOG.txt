@@ -1,5 +1,0 @@
-Version 3.0
-- OCR mit ML Kit Text Recognition ergänzt
-- Werte werden nach Foto automatisch in Felder übernommen
-- Messzeit wird vom Foto-Aufnahmezeitpunkt gespeichert
-- CSV enthält photo_time
