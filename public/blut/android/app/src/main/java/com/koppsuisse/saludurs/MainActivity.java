@@ -24,6 +24,11 @@ import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,13 +37,17 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends Activity {
     private static final int REQUEST_CAMERA = 1001;
     private static final int REQUEST_PERMISSION_CAMERA = 1002;
-    private static final String PREFS_NAME = "salud_urs_blut_storage_v2";
+    private static final String PREFS_NAME = "salud_urs_blut_storage_v3";
     private static final String PREF_ENTRIES = "blood_pressure_entries";
 
     private EditText systolicInput;
@@ -48,6 +57,7 @@ public class MainActivity extends Activity {
     private TextView historyText;
     private ImageView previewImage;
     private File currentPhotoFile;
+    private String currentPhotoTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +80,7 @@ public class MainActivity extends Activity {
         root.addView(title);
 
         TextView subtitle = new TextView(this);
-        subtitle.setText("Blutdruck-App · Version 2.0 · stabiler Neuaufbau");
+        subtitle.setText("Blutdruck-App · Version 3.0 · Foto-Erkennung");
         subtitle.setTextSize(14);
         subtitle.setGravity(Gravity.CENTER_HORIZONTAL);
         subtitle.setPadding(0, 0, 0, dp(18));
@@ -83,7 +93,7 @@ public class MainActivity extends Activity {
         root.addView(diastolicInput);
         root.addView(pulseInput);
 
-        Button cameraButton = button("Foto aufnehmen");
+        Button cameraButton = button("Foto aufnehmen und Werte erkennen");
         cameraButton.setOnClickListener(v -> startCameraWithPermission());
         root.addView(cameraButton);
 
@@ -106,7 +116,7 @@ public class MainActivity extends Activity {
         root.addView(clearButton);
 
         statusText = new TextView(this);
-        statusText.setText("Bereit. Werte manuell eintragen. Foto ist optional.");
+        statusText.setText("Bereit. Foto aufnehmen oder Werte manuell eintragen.");
         statusText.setTextSize(14);
         statusText.setPadding(0, dp(14), 0, dp(14));
         root.addView(statusText);
@@ -211,9 +221,11 @@ public class MainActivity extends Activity {
 
         try {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            currentPhotoTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.GERMANY).format(new Date());
             previewImage.setImageBitmap(bitmap);
             currentPhotoFile = saveBitmapToInternalFile(bitmap);
-            statusText.setText("Foto gespeichert. Bitte Werte prüfen/eintragen und speichern.");
+            statusText.setText("Foto gespeichert um " + currentPhotoTime + ". Werte-Erkennung läuft...");
+            runOcr(bitmap);
         } catch (Exception e) {
             statusText.setText("Foto konnte nicht gespeichert werden: " + safeError(e));
         }
@@ -231,6 +243,84 @@ public class MainActivity extends Activity {
         }
 
         return file;
+    }
+
+    private void runOcr(Bitmap bitmap) {
+        try {
+            InputImage image = InputImage.fromBitmap(bitmap, 0);
+            TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+
+            recognizer.process(image)
+                    .addOnSuccessListener(visionText -> handleOcrText(visionText.getText()))
+                    .addOnFailureListener(e -> statusText.setText("OCR fehlgeschlagen. Bitte Werte manuell eintragen. Fehler: " + safeError(e)));
+        } catch (Exception e) {
+            statusText.setText("OCR konnte nicht gestartet werden. Bitte Werte manuell eintragen. Fehler: " + safeError(e));
+        }
+    }
+
+    private void handleOcrText(String text) {
+        int[] values = extractLikelyValues(text);
+
+        if (values[0] > 0) systolicInput.setText(String.valueOf(values[0]));
+        if (values[1] > 0) diastolicInput.setText(String.valueOf(values[1]));
+        if (values[2] > 0) pulseInput.setText(String.valueOf(values[2]));
+
+        String message = "Fotozeit: " + (currentPhotoTime == null ? "unbekannt" : currentPhotoTime) + "\n";
+        if (values[0] > 0 || values[1] > 0 || values[2] > 0) {
+            message += "Erkannt: ";
+            message += values[0] > 0 ? values[0] : "?";
+            message += "/";
+            message += values[1] > 0 ? values[1] : "?";
+            message += " · Puls ";
+            message += values[2] > 0 ? values[2] : "?";
+            message += "\nBitte prüfen und speichern.";
+        } else {
+            message += "Keine sicheren Werte erkannt. Bitte manuell eintragen.";
+        }
+        statusText.setText(message);
+    }
+
+    private int[] extractLikelyValues(String text) {
+        String cleaned = text == null ? "" : text.replace(',', ' ').replace('.', ' ');
+        List<Integer> numbers = new ArrayList<>();
+
+        Matcher matcher = Pattern.compile("\\b\\d{2,3}\\b").matcher(cleaned);
+        while (matcher.find()) {
+            try {
+                int n = Integer.parseInt(matcher.group());
+                if (n >= 30 && n <= 260) numbers.add(n);
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        int sys = 0;
+        int dia = 0;
+        int pulse = 0;
+
+        for (int i = 0; i < numbers.size(); i++) {
+            int a = numbers.get(i);
+            int b = i + 1 < numbers.size() ? numbers.get(i + 1) : 0;
+            int c = i + 2 < numbers.size() ? numbers.get(i + 2) : 0;
+
+            if (a >= 80 && a <= 240 && b >= 40 && b <= 160) {
+                sys = a;
+                dia = b;
+                if (c >= 35 && c <= 180) pulse = c;
+                return new int[]{sys, dia, pulse};
+            }
+        }
+
+        for (int n : numbers) {
+            if (sys == 0 && n >= 80 && n <= 240) {
+                sys = n;
+            } else if (dia == 0 && n >= 40 && n <= 160) {
+                dia = n;
+            } else if (pulse == 0 && n >= 35 && n <= 180) {
+                pulse = n;
+            }
+        }
+
+        return new int[]{sys, dia, pulse};
     }
 
     private void saveEntry() {
@@ -270,7 +360,12 @@ public class MainActivity extends Activity {
         try {
             JSONArray entries = getEntries();
             JSONObject entry = new JSONObject();
-            entry.put("timestamp", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.GERMANY).format(new Date()));
+
+            String timestamp = currentPhotoTime != null ? currentPhotoTime :
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.GERMANY).format(new Date());
+
+            entry.put("timestamp", timestamp);
+            entry.put("photo_time", currentPhotoTime == null ? "" : currentPhotoTime);
             entry.put("systolic", sys);
             entry.put("diastolic", dia);
             entry.put("pulse", pulse);
@@ -285,6 +380,7 @@ public class MainActivity extends Activity {
             systolicInput.setText("");
             diastolicInput.setText("");
             pulseInput.setText("");
+            currentPhotoTime = null;
             statusText.setText("Gespeichert.");
             refreshHistory();
         } catch (Exception e) {
@@ -326,9 +422,7 @@ public class MainActivity extends Activity {
                         .append(e.optInt("diastolic")).append(" mmHg")
                         .append(" · Puls ").append(e.optInt("pulse"));
 
-                if (e.has("photo")) {
-                    builder.append("\nFoto: gespeichert");
-                }
+                if (e.has("photo")) builder.append("\nFoto: gespeichert");
 
                 builder.append("\n\n");
             } catch (Exception ignored) {
@@ -347,10 +441,11 @@ public class MainActivity extends Activity {
 
             File exportFile = new File(getCacheDir(), "salud_urs_blutdruck.csv");
             try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(exportFile), StandardCharsets.UTF_8)) {
-                writer.write("timestamp;systolic;diastolic;pulse;photo\n");
+                writer.write("timestamp;photo_time;systolic;diastolic;pulse;photo\n");
                 for (int i = 0; i < entries.length(); i++) {
                     JSONObject e = entries.getJSONObject(i);
                     writer.write(csv(e.optString("timestamp")) + ";");
+                    writer.write(csv(e.optString("photo_time")) + ";");
                     writer.write(e.optInt("systolic") + ";");
                     writer.write(e.optInt("diastolic") + ";");
                     writer.write(e.optInt("pulse") + ";");

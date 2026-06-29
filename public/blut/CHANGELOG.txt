@@ -1,5 +1,5 @@
-Version 2.0
-- Stabiler Neuaufbau
-- Kamera-Foto ohne EXTRA_OUTPUT, dadurch weniger Absturzrisiko beim OK/Wiederholen
-- AndroidX Core Dependency ergänzt
-- Workflow speichert APK als Artifact und committet sie nach public/blut/blutdruck-app.apk
+Version 3.0
+- OCR mit ML Kit Text Recognition ergänzt
+- Werte werden nach Foto automatisch in Felder übernommen
+- Messzeit wird vom Foto-Aufnahmezeitpunkt gespeichert
+- CSV enthält photo_time
