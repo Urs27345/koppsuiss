@@ -1,0 +1,5 @@
+Version 1.0 Neuaufbau
+- Android-Projekt neu erstellt
+- Kamera-Funktion stabiler mit Fehlerprüfung
+- Lokale Speicherung
+- CSV-Export
