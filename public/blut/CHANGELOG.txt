@@ -1,0 +1,6 @@
+Version 4.0
+- Kotlin duplicate classes Fehler behoben
+- OCR bleibt aktiv
+- Werte werden nach Foto automatisch in Felder übernommen
+- Messzeit wird vom Zeitpunkt der Fotoaufnahme gespeichert
+- CSV enthält photo_time
