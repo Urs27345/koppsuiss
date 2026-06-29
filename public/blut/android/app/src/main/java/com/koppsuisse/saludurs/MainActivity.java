@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
         root.addView(title);
 
         TextView subtitle = new TextView(this);
-        subtitle.setText("Blutdruck-App · Version 3.0 · lokal auf dem Android-Handy");
+        subtitle.setText("Blutdruck-App · Version 3.1 · lokal auf dem Android-Handy");
         subtitle.setTextSize(14);
         subtitle.setGravity(Gravity.CENTER_HORIZONTAL);
         subtitle.setPadding(0, 0, 0, dp(18));
@@ -215,27 +215,91 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CAMERA) {
-            if (resultCode == RESULT_OK && photoUri != null) {
-                previewImage.setImageURI(photoUri);
-                statusText.setText("Foto gespeichert. OCR läuft...");
-                runOcr();
+
+        if (requestCode != REQUEST_CAMERA) {
+            return;
+        }
+
+        if (resultCode != RESULT_OK) {
+            statusText.setText("Foto wurde nicht übernommen.");
+            return;
+        }
+
+        if (photoUri == null || currentPhotoFile == null) {
+            statusText.setText("Foto konnte nicht gespeichert werden: Datei fehlt.");
+            return;
+        }
+
+        if (!currentPhotoFile.exists() || currentPhotoFile.length() == 0) {
+            statusText.setText("Foto wurde von der Kamera nicht korrekt gespeichert. Bitte nochmals versuchen.");
+            return;
+        }
+
+        try {
+            Bitmap previewBitmap = decodeSampledBitmap(currentPhotoFile.getAbsolutePath(), 1200, 1200);
+            if (previewBitmap != null) {
+                previewImage.setImageBitmap(previewBitmap);
             } else {
-                statusText.setText("Foto wurde nicht übernommen.");
+                previewImage.setImageURI(photoUri);
             }
+
+            statusText.setText("Foto gespeichert. OCR läuft...");
+            runOcr();
+        } catch (OutOfMemoryError e) {
+            statusText.setText("Foto ist zu groß für die Vorschau. OCR läuft trotzdem...");
+            runOcr();
+        } catch (Exception e) {
+            statusText.setText("Foto wurde gespeichert, aber die Vorschau konnte nicht geladen werden: " + safeError(e));
+            runOcr();
+        }
+    }
+
+    private Bitmap decodeSampledBitmap(String path, int reqWidth, int reqHeight) {
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(path, options);
+
+            int sampleSize = 1;
+            int height = options.outHeight;
+            int width = options.outWidth;
+
+            while ((height / sampleSize) > reqHeight || (width / sampleSize) > reqWidth) {
+                sampleSize *= 2;
+            }
+
+            BitmapFactory.Options decodeOptions = new BitmapFactory.Options();
+            decodeOptions.inSampleSize = sampleSize;
+            return BitmapFactory.decodeFile(path, decodeOptions);
+        } catch (Exception e) {
+            return null;
         }
     }
 
     private void runOcr() {
         try {
+            if (photoUri == null || currentPhotoFile == null || !currentPhotoFile.exists() || currentPhotoFile.length() == 0) {
+                statusText.setText("OCR nicht möglich: Foto-Datei fehlt oder ist leer.");
+                return;
+            }
+
             InputImage image = InputImage.fromFilePath(this, photoUri);
             TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
             recognizer.process(image)
                     .addOnSuccessListener(visionText -> handleOcrText(visionText.getText()))
-                    .addOnFailureListener(e -> statusText.setText("OCR fehlgeschlagen: " + e.getMessage()));
+                    .addOnFailureListener(e -> statusText.setText("OCR fehlgeschlagen. Bitte Werte manuell eintragen. Fehler: " + safeError(e)));
         } catch (IOException e) {
-            statusText.setText("Bild konnte nicht gelesen werden: " + e.getMessage());
+            statusText.setText("Bild konnte nicht gelesen werden. Bitte Werte manuell eintragen. Fehler: " + safeError(e));
+        } catch (Exception e) {
+            statusText.setText("OCR konnte nicht gestartet werden. Bitte Werte manuell eintragen. Fehler: " + safeError(e));
         }
+    }
+
+    private String safeError(Exception e) {
+        if (e == null || e.getMessage() == null || e.getMessage().trim().isEmpty()) {
+            return e == null ? "unbekannt" : e.getClass().getSimpleName();
+        }
+        return e.getMessage();
     }
 
     private void handleOcrText(String text) {
