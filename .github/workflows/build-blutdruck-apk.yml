@@ -57,7 +57,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: blutdruck-app-v44
+          name: blutdruck-app
           path: public/blut/blutdruck-app-v43-v43.apk
 
       - name: Commit APK to repository

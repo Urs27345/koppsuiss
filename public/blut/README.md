@@ -7,7 +7,7 @@ Wichtig:
 - Installiert als neue App neben alten Versionen
 - versionCode: 44
 - versionName: 4.4
-- APK-Datei: public/blut/blutdruck-app-v44.apk
+- APK-Datei bleibt immer: public/blut/blutdruck-app.apk
 
 Verbesserungen:
 - Omron-spezifische OCR-Logik
