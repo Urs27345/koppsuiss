@@ -1,6 +1,6 @@
 # Salud Urs Blutdruck-App
 
-Version 4.1 OCR fixed.
+Version 4.2 OCR fixed.
 
 Eigenschaften:
 - Android APK, keine PWA
@@ -13,3 +13,8 @@ Eigenschaften:
 - CSV Export/Teilen
 - Kotlin Duplicate Classes Build-Fehler behoben
 - GitHub Actions baut APK automatisch und schreibt sie nach public/blut/blutdruck-app.apk
+
+Version 4.2:
+- Es genügt, nur einen einzelnen Wert zu speichern.
+- Puls-Erkennung verbessert.
+- Gespeicherte Teilwerte werden im Verlauf angezeigt.

@@ -1,6 +1,11 @@
-Version 4.1
+Version 4.2
 - Kotlin duplicate classes Fehler behoben
 - OCR bleibt aktiv
 - Werte werden nach Foto automatisch in Felder übernommen
 - Messzeit wird vom Zeitpunkt der Fotoaufnahme gespeichert
 - CSV enthält photo_time
+
+Version 4.2
+- Speichern erlaubt jetzt mindestens einen Wert statt zwingend drei Werte.
+- Puls-Erkennung verbessert.
+- Verlauf listet auch Teilwerte sauber unten auf.

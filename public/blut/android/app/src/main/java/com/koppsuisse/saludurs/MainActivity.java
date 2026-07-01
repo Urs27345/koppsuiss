@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
 public class MainActivity extends Activity {
     private static final int REQUEST_CAMERA = 1001;
     private static final int REQUEST_PERMISSION_CAMERA = 1002;
-    private static final String PREFS_NAME = "salud_urs_blut_storage_v41";
+    private static final String PREFS_NAME = "salud_urs_blut_storage_v42";
     private static final String PREF_ENTRIES = "blood_pressure_entries";
 
     private EditText systolicInput;
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
         root.addView(title);
 
         TextView subtitle = new TextView(this);
-        subtitle.setText("Blutdruck-App · Version 4.1 · OCR fixed");
+        subtitle.setText("Blutdruck-App · Version 4.2 · OCR fixed");
         subtitle.setTextSize(14);
         subtitle.setGravity(Gravity.CENTER_HORIZONTAL);
         subtitle.setPadding(0, 0, 0, dp(18));
@@ -281,9 +281,15 @@ public class MainActivity extends Activity {
     }
 
     private int[] extractLikelyValues(String text) {
-        String cleaned = text == null ? "" : text.replace(',', ' ').replace('.', ' ');
-        List<Integer> numbers = new ArrayList<>();
+        String cleaned = text == null ? "" : text
+                .replace(',', ' ')
+                .replace('.', ' ')
+                .replace(':', ' ')
+                .replace('|', ' ')
+                .replace('O', '0')
+                .replace('o', '0');
 
+        List<Integer> numbers = new ArrayList<>();
         Matcher matcher = Pattern.compile("\\b\\d{2,3}\\b").matcher(cleaned);
         while (matcher.find()) {
             try {
@@ -297,6 +303,7 @@ public class MainActivity extends Activity {
         int dia = 0;
         int pulse = 0;
 
+        // Best case: three plausible consecutive numbers from the display.
         for (int i = 0; i < numbers.size(); i++) {
             int a = numbers.get(i);
             int b = i + 1 < numbers.size() ? numbers.get(i + 1) : 0;
@@ -305,22 +312,46 @@ public class MainActivity extends Activity {
             if (a >= 80 && a <= 240 && b >= 40 && b <= 160) {
                 sys = a;
                 dia = b;
-                if (c >= 35 && c <= 180) pulse = c;
+
+                if (c >= 40 && c <= 140) {
+                    pulse = c;
+                } else {
+                    pulse = findPulseCandidate(numbers, i + 2, sys, dia);
+                }
                 return new int[]{sys, dia, pulse};
             }
         }
 
+        // Fallback: choose by ranges and prefer pulse near the end of OCR numbers.
         for (int n : numbers) {
             if (sys == 0 && n >= 80 && n <= 240) {
                 sys = n;
-            } else if (dia == 0 && n >= 40 && n <= 160) {
+            } else if (dia == 0 && n >= 40 && n <= 160 && n != sys) {
                 dia = n;
-            } else if (pulse == 0 && n >= 35 && n <= 180) {
-                pulse = n;
             }
         }
 
+        pulse = findPulseCandidate(numbers, 0, sys, dia);
+
         return new int[]{sys, dia, pulse};
+    }
+
+    private int findPulseCandidate(List<Integer> numbers, int startIndex, int sys, int dia) {
+        for (int i = Math.max(0, startIndex); i < numbers.size(); i++) {
+            int n = numbers.get(i);
+            if (n >= 40 && n <= 140 && n != sys && n != dia) {
+                return n;
+            }
+        }
+
+        for (int i = numbers.size() - 1; i >= 0; i--) {
+            int n = numbers.get(i);
+            if (n >= 40 && n <= 140 && n != sys && n != dia) {
+                return n;
+            }
+        }
+
+        return 0;
     }
 
     private void saveEntry() {
@@ -328,22 +359,31 @@ public class MainActivity extends Activity {
         Integer dia = parseInt(diastolicInput.getText().toString());
         Integer pulse = parseInt(pulseInput.getText().toString());
 
-        if (sys == null || dia == null || pulse == null) {
-            Toast.makeText(this, "Bitte alle drei Werte eintragen.", Toast.LENGTH_LONG).show();
+        if (sys == null && dia == null && pulse == null) {
+            Toast.makeText(this, "Bitte mindestens einen Wert eintragen.", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if (sys < 60 || sys > 260 || dia < 35 || dia > 180 || pulse < 30 || pulse > 220) {
+        int sysValue = sys == null ? 0 : sys;
+        int diaValue = dia == null ? 0 : dia;
+        int pulseValue = pulse == null ? 0 : pulse;
+
+        boolean unusual =
+                (sysValue > 0 && (sysValue < 60 || sysValue > 260)) ||
+                (diaValue > 0 && (diaValue < 35 || diaValue > 180)) ||
+                (pulseValue > 0 && (pulseValue < 30 || pulseValue > 220));
+
+        if (unusual) {
             new AlertDialog.Builder(this)
                     .setTitle("Werte prüfen")
                     .setMessage("Mindestens ein Wert ist ungewöhnlich. Trotzdem speichern?")
-                    .setPositiveButton("Speichern", (dialog, which) -> saveEntryConfirmed(sys, dia, pulse))
+                    .setPositiveButton("Speichern", (dialog, which) -> saveEntryConfirmed(sysValue, diaValue, pulseValue))
                     .setNegativeButton("Abbrechen", null)
                     .show();
             return;
         }
 
-        saveEntryConfirmed(sys, dia, pulse);
+        saveEntryConfirmed(sysValue, diaValue, pulseValue);
     }
 
     private Integer parseInt(String value) {
@@ -381,7 +421,7 @@ public class MainActivity extends Activity {
             diastolicInput.setText("");
             pulseInput.setText("");
             currentPhotoTime = null;
-            statusText.setText("Gespeichert.");
+            statusText.setText("Gespeichert und unten im Verlauf aufgelistet.");
             refreshHistory();
         } catch (Exception e) {
             statusText.setText("Speichern fehlgeschlagen: " + safeError(e));
@@ -416,11 +456,26 @@ public class MainActivity extends Activity {
         for (int i = entries.length() - 1; i >= 0; i--) {
             try {
                 JSONObject e = entries.getJSONObject(i);
-                builder.append(e.optString("timestamp"))
-                        .append("\\n")
-                        .append(e.optInt("systolic")).append("/")
-                        .append(e.optInt("diastolic")).append(" mmHg")
-                        .append(" · Puls ").append(e.optInt("pulse"));
+                int s = e.optInt("systolic", 0);
+                int d = e.optInt("diastolic", 0);
+                int p = e.optInt("pulse", 0);
+
+                builder.append(e.optString("timestamp")).append("\\n");
+
+                boolean wroteValue = false;
+                if (s > 0 || d > 0) {
+                    builder.append(s > 0 ? s : "?")
+                            .append("/")
+                            .append(d > 0 ? d : "?")
+                            .append(" mmHg");
+                    wroteValue = true;
+                }
+                if (p > 0) {
+                    if (wroteValue) builder.append(" · ");
+                    builder.append("Puls ").append(p);
+                    wroteValue = true;
+                }
+                if (!wroteValue) builder.append("Wert gespeichert");
 
                 if (e.has("photo")) builder.append("\\nFoto: gespeichert");
 
