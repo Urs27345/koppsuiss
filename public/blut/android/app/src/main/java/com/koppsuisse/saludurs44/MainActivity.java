@@ -1,4 +1,4 @@
-package com.koppsuisse.saludurs;
+package com.koppsuisse.saludurs4444;
 
 import android.Manifest;
 import android.app.Activity;
@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
 public class MainActivity extends Activity {
     private static final int REQUEST_CAMERA = 1001;
     private static final int REQUEST_PERMISSION_CAMERA = 1002;
-    private static final String PREFS_NAME = "salud_urs_blut_storage_v42";
+    private static final String PREFS_NAME = "salud_urs_blut_storage_v44";
     private static final String PREF_ENTRIES = "blood_pressure_entries";
 
     private EditText systolicInput;
@@ -74,13 +74,13 @@ public class MainActivity extends Activity {
         scrollView.addView(root);
 
         TextView title = new TextView(this);
-        title.setText("Salud Urs");
+        title.setText("Salud Urs 4.4");
         title.setTextSize(30);
         title.setGravity(Gravity.CENTER_HORIZONTAL);
         root.addView(title);
 
         TextView subtitle = new TextView(this);
-        subtitle.setText("Blutdruck-App · Version 4.2 · OCR fixed");
+        subtitle.setText("Blutdruck-App · Version 4.4 · OCR fixed");
         subtitle.setTextSize(14);
         subtitle.setGravity(Gravity.CENTER_HORIZONTAL);
         subtitle.setPadding(0, 0, 0, dp(18));
@@ -281,76 +281,104 @@ public class MainActivity extends Activity {
     }
 
     private int[] extractLikelyValues(String text) {
-        String cleaned = text == null ? "" : text
-                .replace(',', ' ')
-                .replace('.', ' ')
-                .replace(':', ' ')
-                .replace('|', ' ')
-                .replace('O', '0')
-                .replace('o', '0');
-
-        List<Integer> numbers = new ArrayList<>();
-        Matcher matcher = Pattern.compile("\\b\\d{2,3}\\b").matcher(cleaned);
-        while (matcher.find()) {
-            try {
-                int n = Integer.parseInt(matcher.group());
-                if (n >= 30 && n <= 260) numbers.add(n);
-            } catch (NumberFormatException ignored) {
-            }
-        }
+        String raw = text == null ? "" : text;
+        String normalized = normalizeOcr(raw);
 
         int sys = 0;
         int dia = 0;
         int pulse = 0;
 
-        // Best case: three plausible consecutive numbers from the display.
-        for (int i = 0; i < numbers.size(); i++) {
-            int a = numbers.get(i);
-            int b = i + 1 < numbers.size() ? numbers.get(i + 1) : 0;
-            int c = i + 2 < numbers.size() ? numbers.get(i + 2) : 0;
+        // 1) Omron-specific label search: SYS / DIA / PULSE lines and following lines.
+        String[] lines = normalized.split("\\n");
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i].trim().toLowerCase(Locale.ROOT);
+            String area = line;
+            if (i + 1 < lines.length) area += " " + lines[i + 1].trim().toLowerCase(Locale.ROOT);
+            if (i + 2 < lines.length) area += " " + lines[i + 2].trim().toLowerCase(Locale.ROOT);
 
-            if (a >= 80 && a <= 240 && b >= 40 && b <= 160) {
-                sys = a;
-                dia = b;
+            List<Integer> nums = extractNumbers(area);
 
-                if (c >= 40 && c <= 140) {
-                    pulse = c;
-                } else {
-                    pulse = findPulseCandidate(numbers, i + 2, sys, dia);
+            if ((line.contains("sys") || line.contains("5ys")) && sys == 0) {
+                sys = firstInRange(nums, 70, 250, 0, 0);
+            }
+            if ((line.contains("dia") || line.contains("d1a")) && dia == 0) {
+                dia = firstInRange(nums, 35, 170, sys, 0);
+            }
+            if ((line.contains("pulse") || line.contains("puls") || line.contains("/min") || line.contains("min")) && pulse == 0) {
+                pulse = firstInRange(nums, 30, 220, sys, dia);
+            }
+        }
+
+        // 2) General Omron display order: top number = SYS, middle = DIA, bottom = PULSE.
+        List<Integer> all = extractNumbers(normalized);
+        List<Integer> filtered = new ArrayList<>();
+        for (int n : all) {
+            // ignore obvious date/year fragments and tiny OCR noise
+            if (n >= 30 && n <= 260) filtered.add(n);
+        }
+
+        if (sys == 0 || dia == 0 || pulse == 0) {
+            for (int i = 0; i < filtered.size(); i++) {
+                int a = filtered.get(i);
+                int b = i + 1 < filtered.size() ? filtered.get(i + 1) : 0;
+                int c = i + 2 < filtered.size() ? filtered.get(i + 2) : 0;
+
+                if (a >= 70 && a <= 250 && b >= 35 && b <= 170) {
+                    if (sys == 0) sys = a;
+                    if (dia == 0) dia = b;
+                    if (pulse == 0 && c >= 30 && c <= 220) pulse = c;
+                    break;
                 }
-                return new int[]{sys, dia, pulse};
             }
         }
 
-        // Fallback: choose by ranges and prefer pulse near the end of OCR numbers.
-        for (int n : numbers) {
-            if (sys == 0 && n >= 80 && n <= 240) {
-                sys = n;
-            } else if (dia == 0 && n >= 40 && n <= 160 && n != sys) {
-                dia = n;
+        // 3) Pulse fallback: prefer the last plausible number that is not SYS/DIA.
+        if (pulse == 0) {
+            for (int i = filtered.size() - 1; i >= 0; i--) {
+                int n = filtered.get(i);
+                if (n >= 30 && n <= 220 && n != sys && n != dia) {
+                    pulse = n;
+                    break;
+                }
             }
         }
-
-        pulse = findPulseCandidate(numbers, 0, sys, dia);
 
         return new int[]{sys, dia, pulse};
     }
 
-    private int findPulseCandidate(List<Integer> numbers, int startIndex, int sys, int dia) {
-        for (int i = Math.max(0, startIndex); i < numbers.size(); i++) {
-            int n = numbers.get(i);
-            if (n >= 40 && n <= 140 && n != sys && n != dia) {
+    private String normalizeOcr(String text) {
+        return text
+                .replace('O', '0')
+                .replace('o', '0')
+                .replace('I', '1')
+                .replace('l', '1')
+                .replace('|', '1')
+                .replace('S', '5')
+                .replace(',', ' ')
+                .replace('.', ' ')
+                .replace(':', ' ')
+                .replace(';', ' ');
+    }
+
+    private List<Integer> extractNumbers(String text) {
+        List<Integer> numbers = new ArrayList<>();
+        Matcher matcher = Pattern.compile("\\b\\d{2,3}\\b").matcher(text);
+        while (matcher.find()) {
+            try {
+                int n = Integer.parseInt(matcher.group());
+                numbers.add(n);
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return numbers;
+    }
+
+    private int firstInRange(List<Integer> nums, int min, int max, int excludeA, int excludeB) {
+        for (int n : nums) {
+            if (n >= min && n <= max && n != excludeA && n != excludeB) {
                 return n;
             }
         }
-
-        for (int i = numbers.size() - 1; i >= 0; i--) {
-            int n = numbers.get(i);
-            if (n >= 40 && n <= 140 && n != sys && n != dia) {
-                return n;
-            }
-        }
-
         return 0;
     }
 

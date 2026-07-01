@@ -1,20 +1,18 @@
-# Salud Urs Blutdruck-App
+# Salud Urs 4.4 Blutdruck-App
 
-Version 4.2 OCR fixed.
+Version 4.4 als neue App.
 
-Eigenschaften:
-- Android APK, keine PWA
-- Paketname: com.koppsuisse.saludurs
-- versionCode: 40
-- Foto aufnehmen
-- OCR erkennt Blutdruckwerte und übernimmt sie in die Felder
-- Fotozeit wird als Zeitpunkt der Aufnahme gespeichert
-- Lokale Speicherung
+Wichtig:
+- Eigene Paket-ID: com.koppsuisse.saludurs44
+- Installiert als neue App neben alten Versionen
+- versionCode: 44
+- versionName: 4.4
+- APK-Datei: public/blut/blutdruck-app-v44.apk
+
+Verbesserungen:
+- Omron-spezifische OCR-Logik
+- Bessere SYS/DIA/PULSE-Zuordnung
+- Verbesserte Pulserkennung, besonders bei dreistelligem Puls wie 101
+- Speichern mit mindestens einem Wert
+- Verlauf zeigt auch Teilwerte
 - CSV Export/Teilen
-- Kotlin Duplicate Classes Build-Fehler behoben
-- GitHub Actions baut APK automatisch und schreibt sie nach public/blut/blutdruck-app.apk
-
-Version 4.2:
-- Es genügt, nur einen einzelnen Wert zu speichern.
-- Puls-Erkennung verbessert.
-- Gespeicherte Teilwerte werden im Verlauf angezeigt.

@@ -1,4 +1,4 @@
-name: Build Salud Urs Blut APK
+name: Build Salud Urs 4.4 Blut APK
 
 on:
   workflow_dispatch:
@@ -51,19 +51,19 @@ jobs:
       - name: Copy APK to Blut download folder
         run: |
           mkdir -p public/blut
-          cp public/blut/android/app/build/outputs/apk/debug/app-debug.apk public/blut/blutdruck-app.apk
-          ls -lh public/blut/blutdruck-app.apk
+          cp public/blut/android/app/build/outputs/apk/debug/app-debug.apk public/blut/blutdruck-app-v43-v43.apk
+          ls -lh public/blut/blutdruck-app-v43-v43.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: blutdruck-app
-          path: public/blut/blutdruck-app.apk
+          name: blutdruck-app-v44
+          path: public/blut/blutdruck-app-v43-v43.apk
 
       - name: Commit APK to repository
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add public/blut/blutdruck-app.apk
-          git diff --cached --quiet && echo "No APK changes to commit" || git commit -m "build Salud Urs Blut APK [skip apk build]"
+          git add public/blut/blutdruck-app-v43-v43.apk
+          git diff --cached --quiet && echo "No APK changes to commit" || git commit -m "build Salud Urs 4.4 Blut APK [skip apk build]"
           git push

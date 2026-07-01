@@ -5,7 +5,7 @@
 
     <application
         android:theme="@style/AppTheme"
-        android:label="Salud Urs"
+        android:label="Salud Urs 4.4"
         android:allowBackup="true"
         android:supportsRtl="true">
 
