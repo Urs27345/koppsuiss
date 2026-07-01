@@ -1,6 +1,6 @@
 # Salud Urs Blutdruck-App
 
-Version 4.0 OCR fixed.
+Version 4.1 OCR fixed.
 
 Eigenschaften:
 - Android APK, keine PWA

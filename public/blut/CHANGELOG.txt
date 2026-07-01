@@ -1,4 +1,4 @@
-Version 4.0
+Version 4.1
 - Kotlin duplicate classes Fehler behoben
 - OCR bleibt aktiv
 - Werte werden nach Foto automatisch in Felder übernommen

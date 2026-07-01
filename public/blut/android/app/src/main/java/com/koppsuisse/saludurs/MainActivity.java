@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
 public class MainActivity extends Activity {
     private static final int REQUEST_CAMERA = 1001;
     private static final int REQUEST_PERMISSION_CAMERA = 1002;
-    private static final String PREFS_NAME = "salud_urs_blut_storage_v4";
+    private static final String PREFS_NAME = "salud_urs_blut_storage_v41";
     private static final String PREF_ENTRIES = "blood_pressure_entries";
 
     private EditText systolicInput;
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
         root.addView(title);
 
         TextView subtitle = new TextView(this);
-        subtitle.setText("Blutdruck-App · Version 4.0 · OCR fixed");
+        subtitle.setText("Blutdruck-App · Version 4.1 · OCR fixed");
         subtitle.setTextSize(14);
         subtitle.setGravity(Gravity.CENTER_HORIZONTAL);
         subtitle.setPadding(0, 0, 0, dp(18));
