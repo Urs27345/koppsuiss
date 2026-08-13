@@ -1,0 +1,88 @@
+import { FinishOption } from "../types/cabinet";
+
+export const FRONT_FINISHES: FinishOption[] = [
+  {
+    id: "WH01",
+    name: "Blanco Puro / White",
+    code: "WH01",
+    type: "lacquer",
+    colorHex: "#F4F5F7",
+    sku: "FIN-FR-WH01",
+    priceMultiplier: 1.0,
+  },
+  {
+    id: "BK01",
+    name: "Negro Mate / Black",
+    code: "BK01",
+    type: "lacquer",
+    colorHex: "#222326",
+    sku: "FIN-FR-BK01",
+    priceMultiplier: 1.15,
+  },
+  {
+    id: "OAK_LT",
+    name: "Roble Claro / Light Oak",
+    code: "OAK01",
+    type: "veneer",
+    colorHex: "#D4B38A",
+    sku: "FIN-FR-OAK01",
+    priceMultiplier: 1.25,
+  },
+  {
+    id: "OAK_NAT",
+    name: "Roble Natural / Natural Oak",
+    code: "OAK02",
+    type: "veneer",
+    colorHex: "#B89267",
+    sku: "FIN-FR-OAK02",
+    priceMultiplier: 1.25,
+  },
+  {
+    id: "OAK_DK",
+    name: "Roble Oscuro / Dark Oak",
+    code: "OAK03",
+    type: "veneer",
+    colorHex: "#5C4433",
+    sku: "FIN-FR-OAK03",
+    priceMultiplier: 1.3,
+  },
+  {
+    id: "GR01",
+    name: "Gris Basalto / Grey",
+    code: "GR01",
+    type: "lacquer",
+    colorHex: "#7A828A",
+    sku: "FIN-FR-GR01",
+    priceMultiplier: 1.1,
+  },
+];
+
+export const CARCASS_FINISHES: FinishOption[] = [
+  {
+    id: "CAR_WH",
+    name: "Blanco Melamina / White",
+    code: "WH",
+    type: "melamine",
+    colorHex: "#ECEEF0",
+    sku: "FIN-CAR-WH",
+    priceMultiplier: 1.0,
+  },
+  {
+    id: "CAR_GR",
+    name: "Gris Grafito / Grey",
+    code: "GR",
+    type: "melamine",
+    colorHex: "#4A5056",
+    sku: "FIN-CAR-GR",
+    priceMultiplier: 1.05,
+  },
+  {
+    id: "CAR_WOOD",
+    name: "Madera Natural / Natural Wood",
+    code: "WD",
+    type: "melamine",
+    colorHex: "#C5A075",
+    sku: "FIN-CAR-WD",
+    priceMultiplier: 1.15,
+  },
+];
