@@ -1,9 +1,5 @@
 export const headerNavigationList = [
   {
-    label: "crea",
-    link: "/crea",
-  },
-  {
     label: "floorPlan",
     link: "/planos/101",
   },
