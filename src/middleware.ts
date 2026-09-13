@@ -3,15 +3,17 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const lowerPath = pathname.toLowerCase();
 
-  if (pathname === "/franzkopp") {
+  if (lowerPath === "/franzkopp" || lowerPath === "/franzkopp/") {
     const response = NextResponse.next();
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive, nosnippet");
     return response;
   }
 
-  if (pathname.toLowerCase().includes("franzkopp")) {
-    return NextResponse.redirect(new URL("/franzkopp", request.url), 307);
+  if (lowerPath.includes("franzkopp")) {
+    const redirectUrl = new URL("/franzkopp", request.url);
+    return NextResponse.redirect(redirectUrl, 307);
   }
 
   return NextResponse.next();
