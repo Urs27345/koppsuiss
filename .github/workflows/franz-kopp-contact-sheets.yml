@@ -1,0 +1,81 @@
+name: Franz Kopp Contact Sheets
+
+on:
+  push:
+    branches: [analysis-franzkopp]
+    paths:
+      - ".github/workflows/franz-kopp-contact-sheets.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: pip install pillow
+
+      - name: Build contact sheets
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageOps, ImageDraw, ImageFont
+          from pathlib import Path
+          import math, os
+
+          src = Path("public/media/franz-kopp/thumbnails")
+          out = Path("franz-kopp-contact-sheets")
+          out.mkdir(exist_ok=True)
+
+          files = sorted(src.glob("franz-kopp-*.webp"))
+          print("images:", len(files))
+
+          per_sheet = 25
+          cols = 5
+          cell_w, cell_h = 260, 220
+          thumb_w, thumb_h = 240, 180
+
+          try:
+              font = ImageFont.truetype("DejaVuSans.ttf", 18)
+          except:
+              font = ImageFont.load_default()
+
+          for start in range(0, len(files), per_sheet):
+              batch = files[start:start+per_sheet]
+              rows = math.ceil(len(batch)/cols)
+              sheet = Image.new("RGB", (cols*cell_w, rows*cell_h), "white")
+              draw = ImageDraw.Draw(sheet)
+
+              for j, path in enumerate(batch):
+                  img = Image.open(path).convert("RGB")
+                  fitted = ImageOps.contain(img, (thumb_w, thumb_h))
+                  x0 = (j % cols)*cell_w + (cell_w-fitted.width)//2
+                  y0 = (j // cols)*cell_h + 5
+                  sheet.paste(fitted, (x0,y0))
+                  label = path.stem.replace("franz-kopp-","")
+                  tx = (j % cols)*cell_w + 8
+                  ty = (j // cols)*cell_h + 188
+                  draw.text((tx,ty), label, fill="black", font=font)
+
+              first = start+1
+              last = start+len(batch)
+              sheet.save(out/f"contact-{first:03d}-{last:03d}.jpg", quality=92)
+
+          # Generate simple inventory
+          with open(out/"inventory.csv","w",encoding="utf-8") as f:
+              f.write("number,filename\n")
+              for i,p in enumerate(files,1):
+                  f.write(f"{i},{p.name}\n")
+          PY
+
+      - name: Upload contact sheets
+        uses: actions/upload-artifact@v4
+        with:
+          name: franz-kopp-contact-sheets
+          path: franz-kopp-contact-sheets/
+          if-no-files-found: error
