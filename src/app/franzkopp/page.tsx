@@ -9,6 +9,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Archiv Franz Kopp",
+  description: "Privates Archiv Franz Kopp",
   robots: {
     index: false,
     follow: false,
