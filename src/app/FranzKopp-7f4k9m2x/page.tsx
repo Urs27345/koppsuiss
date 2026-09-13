@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function FranzKoppPage() {
+export default async function FranzKoppPage() {
   const cookieStore = cookies();
   const sessionCookie = cookieStore.get(GALLERY_COOKIE_NAME);
   const isAuthenticated = verifySessionToken(sessionCookie?.value);
