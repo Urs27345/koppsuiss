@@ -1,4 +1,6 @@
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
+
+const VALID_LOCALES = ["es", "de", "en"];
 
 export default async function Layout({
   children,
@@ -7,8 +9,8 @@ export default async function Layout({
   children: React.ReactNode;
   params?: { locale?: string };
 }>) {
-  if (params?.locale && params.locale.toLowerCase().includes("franzkopp")) {
-    redirect("/franzkopp");
+  if (params?.locale && !VALID_LOCALES.includes(params.locale)) {
+    notFound();
   }
   return <>{children}</>;
 }

@@ -12,21 +12,6 @@ const nextConfig = {
         destination: "/franzkopp",
         permanent: true,
       },
-      {
-        source: "/:locale/FranzKopp",
-        destination: "/franzkopp",
-        permanent: true,
-      },
-      {
-        source: "/:locale/franzkopp",
-        destination: "/franzkopp",
-        permanent: true,
-      },
-      {
-        source: "/:locale/FranzKopp-7f4k9m2x",
-        destination: "/franzkopp",
-        permanent: true,
-      },
     ];
   },
   webpack(config) {
