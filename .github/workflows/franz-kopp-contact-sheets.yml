@@ -12,6 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: |
+            public/media/franz-kopp/thumbnails
+          sparse-checkout-cone-mode: false
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -26,7 +32,7 @@ jobs:
           python - <<'PY'
           from PIL import Image, ImageOps, ImageDraw, ImageFont
           from pathlib import Path
-          import math, os
+          import math
 
           src = Path("public/media/franz-kopp/thumbnails")
           out = Path("franz-kopp-contact-sheets")
@@ -66,7 +72,6 @@ jobs:
               last = start+len(batch)
               sheet.save(out/f"contact-{first:03d}-{last:03d}.jpg", quality=92)
 
-          # Generate simple inventory
           with open(out/"inventory.csv","w",encoding="utf-8") as f:
               f.write("number,filename\n")
               for i,p in enumerate(files,1):
