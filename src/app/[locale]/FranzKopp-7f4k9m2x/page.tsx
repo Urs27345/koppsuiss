@@ -5,6 +5,8 @@ import FranzKoppGallery, { MediaItem } from "@/components/franz-kopp/FranzKoppGa
 import PasswordGate from "@/components/franz-kopp/PasswordGate";
 import galleryData from "@/data/gallery-data.json";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Archiv Franz Kopp",
   robots: {
