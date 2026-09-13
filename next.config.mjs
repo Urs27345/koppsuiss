@@ -3,13 +3,28 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/FranzKopp",
+        destination: "/franzkopp",
+        permanent: true,
+      },
+      {
         source: "/FranzKopp-7f4k9m2x",
         destination: "/franzkopp",
         permanent: true,
       },
       {
+        source: "/:locale/FranzKopp",
+        destination: "/franzkopp",
+        permanent: true,
+      },
+      {
+        source: "/:locale/franzkopp",
+        destination: "/franzkopp",
+        permanent: true,
+      },
+      {
         source: "/:locale/FranzKopp-7f4k9m2x",
-        destination: "/:locale/franzkopp",
+        destination: "/franzkopp",
         permanent: true,
       },
     ];

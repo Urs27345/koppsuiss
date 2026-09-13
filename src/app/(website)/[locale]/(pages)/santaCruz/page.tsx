@@ -6,9 +6,9 @@ import image1 from "@/assets/ventas/1.png";
 import image2 from "@/assets/ventas/2.jpg";
 import image3 from "@/assets/ventas/3.jpg";
 
-import Container from "../../../../components/module/container";
-import { useMyContext } from "../../../context/context";
-import PageMeta from "../../../../components/module/pageMeta";
+import Container from "@/components/module/container";
+import { useMyContext } from "@/app/context/context";
+import PageMeta from "@/components/module/pageMeta";
 
 import styles from "./style.module.scss";
 

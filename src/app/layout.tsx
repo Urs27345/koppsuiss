@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { MyContextProvider } from "./context/context";
-import { getDictionary } from "../lib/getDictionary";
-import Header from "../components/module/header";
-import Footer from "../components/module/footer";
-import HeaderNavigation from "../components/module/headerNavigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -52,18 +48,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Load Spanish dictionary by default for Google Ads compatibility
-  const dict = await getDictionary("es");
-
   return (
     <html lang="es">
       <body className={`${geistSans.variable} ${jost.className} antialiased`}>
-        <MyContextProvider>
-          <Header />
-          <HeaderNavigation dict={dict} locale="es" />
-          {children}
-          <Footer />
-        </MyContextProvider>
+        <MyContextProvider>{children}</MyContextProvider>
       </body>
     </html>
   );

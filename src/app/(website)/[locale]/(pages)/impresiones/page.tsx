@@ -10,9 +10,9 @@ import image5 from "@/assets/impression/5.png";
 import image6 from "@/assets/impression/6.png";
 
 import styles from "./style.module.scss";
-import Container from "../../../../components/module/container";
-import { useMyContext } from "../../../context/context";
-import PageMeta from "../../../../components/module/pageMeta";
+import Container from "@/components/module/container";
+import { useMyContext } from "@/app/context/context";
+import PageMeta from "@/components/module/pageMeta";
 
 const Impressions = () => {
   const { dictionary } = useMyContext();

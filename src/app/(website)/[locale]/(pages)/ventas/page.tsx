@@ -13,11 +13,11 @@ import zulma from "@/assets/santa/zulma.png";
 
 import map from "@/assets/map.jpeg";
 
-import { partnerList } from "../../../../utils/constant";
-import Container from "../../../../components/module/container";
-import { useMyContext } from "../../../context/context";
-import ContactForm from "../../../../components/module/base/contactForm";
-import PageMeta from "../../../../components/module/pageMeta";
+import { partnerList } from "@/utils/constant";
+import Container from "@/components/module/container";
+import { useMyContext } from "@/app/context/context";
+import ContactForm from "@/components/module/base/contactForm";
+import PageMeta from "@/components/module/pageMeta";
 
 import styles from "./style.module.scss";
 

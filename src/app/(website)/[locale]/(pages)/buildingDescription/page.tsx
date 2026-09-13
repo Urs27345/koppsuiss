@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { useMyContext } from "../../../context/context";
+import { useMyContext } from "@/app/context/context";
 
 import icon2 from "@/assets/buildingDescription/1.png";
 import icon3 from "@/assets/buildingDescription/2.png";
@@ -38,7 +38,7 @@ import icon32 from "@/assets/buildingDescription/31.png";
 import icon33 from "@/assets/buildingDescription/32.png";
 import icon34 from "@/assets/buildingDescription/33.png";
 import icon35 from "@/assets/buildingDescription/34.png";
-import PageMeta from "../../../../components/module/pageMeta";
+import PageMeta from "@/components/module/pageMeta";
 
 import styles from "./style.module.scss";
 
