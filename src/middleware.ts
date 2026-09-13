@@ -3,14 +3,15 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const cleanPath = pathname.replace(/\/$/, "");
 
-  if (pathname === "/franzkopp") {
+  if (cleanPath === "/franzkopp") {
     const response = NextResponse.next();
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive, nosnippet");
     return response;
   }
 
-  if (pathname.toLowerCase().includes("franzkopp")) {
+  if (cleanPath.toLowerCase().includes("franzkopp")) {
     const redirectUrl = new URL("/franzkopp", request.url);
     return NextResponse.redirect(redirectUrl, 308);
   }
