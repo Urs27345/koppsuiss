@@ -1,7 +1,7 @@
 import crypto from "crypto";
 
 export const GALLERY_COOKIE_NAME = "fk_gallery_session";
-export const DEFAULT_GALLERY_PASSWORD = process.env.GALLERY_PASSWORD || "Kopp-Archiv-2026!x9q";
+export const DEFAULT_GALLERY_PASSWORD = process.env.GALLERY_PASSWORD || "archiv";
 const SECRET_SALT = process.env.GALLERY_AUTH_SECRET || "kopp-suisse-private-gallery-salt-2026-9f8a";
 
 export function generateSessionToken(): string {

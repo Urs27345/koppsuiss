@@ -1,5 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/FranzKopp-7f4k9m2x",
+        destination: "/franzkopp",
+        permanent: true,
+      },
+      {
+        source: "/:locale/FranzKopp-7f4k9m2x",
+        destination: "/:locale/franzkopp",
+        permanent: true,
+      },
+    ];
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
