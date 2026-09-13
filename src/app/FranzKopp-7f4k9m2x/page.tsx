@@ -28,7 +28,7 @@ export default function FranzKoppPage() {
   const isAuthenticated = verifySessionToken(sessionCookie?.value);
 
   if (!isAuthenticated) {
-    return <PasswordGate onSuccess={() => window.location.reload()} />;
+    return <PasswordGate />;
   }
 
   const items: MediaItem[] = [...(galleryData.photos as MediaItem[]), ...(galleryData.videos as MediaItem[])];

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 interface PasswordGateProps {
-  onSuccess: () => void;
+  onSuccess?: () => void;
 }
 
 export default function PasswordGate({ onSuccess }: PasswordGateProps) {
@@ -25,7 +25,11 @@ export default function PasswordGate({ onSuccess }: PasswordGateProps) {
 
       const data = await res.json();
       if (res.ok && data.success) {
-        onSuccess();
+        if (onSuccess) {
+          onSuccess();
+        } else {
+          window.location.reload();
+        }
       } else {
         setError(data.message || "Falsches Passwort. Bitte erneut versuchen.");
       }
