@@ -32,10 +32,7 @@ export function verifySessionToken(token: string | undefined): boolean {
     .digest("hex");
 
   try {
-    return crypto.timingSafeEqual(
-      Buffer.from(signature, "hex"),
-      Buffer.from(expectedSignature, "hex")
-    );
+    return crypto.timingSafeEqual(Buffer.from(signature, "hex"), Buffer.from(expectedSignature, "hex"));
   } catch {
     return false;
   }

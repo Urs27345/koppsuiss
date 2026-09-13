@@ -11,7 +11,10 @@ export async function POST(request: NextRequest) {
     }
 
     if (password.trim() !== DEFAULT_GALLERY_PASSWORD.trim()) {
-      return NextResponse.json({ success: false, message: "Ungültiges Passwort. Bitte überprüfen Sie Ihre Eingabe." }, { status: 401 });
+      return NextResponse.json(
+        { success: false, message: "Ungültiges Passwort. Bitte überprüfen Sie Ihre Eingabe." },
+        { status: 401 },
+      );
     }
 
     const token = generateSessionToken();

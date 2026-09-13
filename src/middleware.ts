@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
-  
+
   if (request.nextUrl.pathname.includes("FranzKopp")) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive, nosnippet");
   }

@@ -31,10 +31,7 @@ export default function FranzKoppPage() {
     return <PasswordGate onSuccess={() => window.location.reload()} />;
   }
 
-  const items: MediaItem[] = [
-    ...(galleryData.photos as MediaItem[]),
-    ...(galleryData.videos as MediaItem[]),
-  ];
+  const items: MediaItem[] = [...(galleryData.photos as MediaItem[]), ...(galleryData.videos as MediaItem[])];
 
   return <FranzKoppGallery items={items} />;
 }
