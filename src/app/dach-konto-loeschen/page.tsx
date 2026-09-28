@@ -1,5 +1,3 @@
-[Reading 301 lines from start (total: 301 lines, 0 remaining)]
-
 "use client";
 
 import { FormEvent, useState } from "react";
