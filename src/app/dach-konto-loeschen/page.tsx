@@ -1,9 +1,12 @@
+[Reading 301 lines from start (total: 301 lines, 0 remaining)]
+
 "use client";
 
 import { FormEvent, useState } from "react";
 
 const SUPABASE_URL = "https://yyekbhnyjlpyuttrnldw.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_yxl-wQSzKUcHo06ZLM2mNQ_BAIIRb8U";
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_yxl-wQSzKUcHo06ZLM2mNQ_BAIIRb8U";
 
 type LoginResponse = {
   access_token?: string;
@@ -30,7 +33,9 @@ export default function DachDeleteAccountPage() {
       return;
     }
     if (!accepted || confirmation.trim().toUpperCase() !== "LÖSCHEN") {
-      setMessage("Bitte die dauerhafte Löschung bestätigen und LÖSCHEN eingeben.");
+      setMessage(
+        "Bitte die dauerhafte Löschung bestätigen und LÖSCHEN eingeben.",
+      );
       return;
     }
 
@@ -52,7 +57,9 @@ export default function DachDeleteAccountPage() {
         },
       );
 
-      const loginData = (await loginResponse.json().catch(() => ({}))) as LoginResponse;
+      const loginData = (await loginResponse
+        .json()
+        .catch(() => ({}))) as LoginResponse;
 
       if (!loginResponse.ok || !loginData.access_token) {
         setMessage(
@@ -187,7 +194,9 @@ export default function DachDeleteAccountPage() {
                 marginBottom: 16,
               }}
             >
-              <strong>Achtung: Dieser Vorgang kann nicht rückgängig gemacht werden.</strong>
+              <strong>
+                Achtung: Dieser Vorgang kann nicht rückgängig gemacht werden.
+              </strong>
               <p style={{ marginBottom: 8 }}>
                 Gib zur Bestätigung <strong>LÖSCHEN</strong> ein:
               </p>
@@ -249,9 +258,9 @@ export default function DachDeleteAccountPage() {
             ) : null}
 
             <p style={{ fontSize: 14, color: "#555", marginBottom: 0 }}>
-              Dein Passwort wird direkt über eine verschlüsselte HTTPS-Verbindung
-              an den DACH-Community-Authentifizierungsdienst übermittelt und
-              nicht auf der KoppSuisse-Webseite gespeichert.
+              Dein Passwort wird direkt über eine verschlüsselte
+              HTTPS-Verbindung an den DACH-Community-Authentifizierungsdienst
+              übermittelt und nicht auf der KoppSuisse-Webseite gespeichert.
             </p>
           </form>
         )}
@@ -259,17 +268,16 @@ export default function DachDeleteAccountPage() {
 
       <h2>Was wird gelöscht?</h2>
       <p>
-        Dein Authentifizierungskonto, dein Community-Profil sowie
-        kontobezogene Blockier- und Meldebeziehungen werden entfernt. Von dir
-        zusätzlich hochgeladene Community-Fotos werden aus der
-        Multi-Foto-Galerie und dem zugehörigen Speicher gelöscht.
+        Dein Authentifizierungskonto, dein Community-Profil sowie kontobezogene
+        Blockier- und Meldebeziehungen werden entfernt. Von dir zusätzlich
+        hochgeladene Community-Fotos werden aus der Multi-Foto-Galerie und dem
+        zugehörigen Speicher gelöscht.
       </p>
       <p>
         Bereits freigegebene öffentliche Community-Empfehlungen können ohne
         Verknüpfung zu deinem Konto als anonymisierte Community-Inhalte bestehen
-        bleiben. Gesetzlich oder aus Sicherheitsgründen zwingend
-        aufzubewahrende Daten können nur für den erforderlichen Zeitraum
-        gespeichert bleiben.
+        bleiben. Gesetzlich oder aus Sicherheitsgründen zwingend aufzubewahrende
+        Daten können nur für den erforderlichen Zeitraum gespeichert bleiben.
       </p>
 
       <h2>Alternativen</h2>
@@ -293,3 +301,5 @@ export default function DachDeleteAccountPage() {
     </main>
   );
 }
+
+[executed on device: DESKTOP-1NORO9H (efd378c4-af77-4864-aa0d-d4d836caad39)]
