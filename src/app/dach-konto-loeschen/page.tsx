@@ -299,5 +299,3 @@ export default function DachDeleteAccountPage() {
     </main>
   );
 }
-
-[executed on device: DESKTOP-1NORO9H (efd378c4-af77-4864-aa0d-d4d836caad39)]
