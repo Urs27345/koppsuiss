@@ -1,10 +1,10 @@
+
 "use client";
 
 import { FormEvent, useState } from "react";
 
 const SUPABASE_URL = "https://yyekbhnyjlpyuttrnldw.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_yxl-wQSzKUcHo06ZLM2mNQ_BAIIRb8U";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_yxl-wQSzKUcHo06ZLM2mNQ_BAIIRb8U";
 
 type LoginResponse = {
   access_token?: string;
@@ -31,53 +31,41 @@ export default function DachDeleteAccountPage() {
       return;
     }
     if (!accepted || confirmation.trim().toUpperCase() !== "LÖSCHEN") {
-      setMessage(
-        "Bitte die dauerhafte Löschung bestätigen und LÖSCHEN eingeben.",
-      );
+      setMessage("Bitte die dauerhafte Löschung bestätigen und LÖSCHEN eingeben.");
       return;
     }
 
     setBusy(true);
 
     try {
-      const loginResponse = await fetch(
-        `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
-        {
-          method: "POST",
-          headers: {
-            apikey: SUPABASE_PUBLISHABLE_KEY,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email.trim(),
-            password,
-          }),
+      const loginResponse = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+        method: "POST",
+        headers: {
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          email: email.trim(),
+          password,
+        }),
+      });
 
-      const loginData = (await loginResponse
-        .json()
-        .catch(() => ({}))) as LoginResponse;
+      const loginData = (await loginResponse.json().catch(() => ({}))) as LoginResponse;
 
       if (!loginResponse.ok || !loginData.access_token) {
-        setMessage(
-          "Anmeldung fehlgeschlagen. Bitte registrierte E-Mail-Adresse und Passwort prüfen.",
-        );
+        setMessage("Anmeldung fehlgeschlagen. Bitte registrierte E-Mail-Adresse und Passwort prüfen.");
         return;
       }
 
-      const deleteResponse = await fetch(
-        `${SUPABASE_URL}/functions/v1/delete-account`,
-        {
-          method: "POST",
-          headers: {
-            apikey: SUPABASE_PUBLISHABLE_KEY,
-            Authorization: `Bearer ${loginData.access_token}`,
-            "Content-Type": "application/json",
-          },
-          body: "{}",
+      const deleteResponse = await fetch(`${SUPABASE_URL}/functions/v1/delete-account`, {
+        method: "POST",
+        headers: {
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+          Authorization: `Bearer ${loginData.access_token}`,
+          "Content-Type": "application/json",
         },
-      );
+        body: "{}",
+      });
 
       const deleteData = (await deleteResponse.json().catch(() => ({}))) as {
         ok?: boolean;
@@ -97,9 +85,7 @@ export default function DachDeleteAccountPage() {
       setSuccess(true);
       setMessage("");
     } catch {
-      setMessage(
-        "Die Verbindung ist fehlgeschlagen. Bitte Internetverbindung prüfen und erneut versuchen.",
-      );
+      setMessage("Die Verbindung ist fehlgeschlagen. Bitte Internetverbindung prüfen und erneut versuchen.");
     } finally {
       setBusy(false);
     }
@@ -137,9 +123,8 @@ export default function DachDeleteAccountPage() {
       <p>Stand: 28. September 2026</p>
 
       <p>
-        Hier kannst du dein DACH-Community-Konto auch ohne installierte App
-        selbst dauerhaft löschen. Dafür meldest du dich mit der registrierten
-        E-Mail-Adresse und deinem Passwort an.
+        Hier kannst du dein DACH-Community-Konto auch ohne installierte App selbst dauerhaft löschen. Dafür meldest du
+        dich mit der registrierten E-Mail-Adresse und deinem Passwort an.
       </p>
 
       <section style={cardStyle}>
@@ -147,12 +132,10 @@ export default function DachDeleteAccountPage() {
 
         {success ? (
           <>
-            <p style={{ fontWeight: 700, color: "#176b2c" }}>
-              Dein DACH-Community-Konto wurde dauerhaft gelöscht.
-            </p>
+            <p style={{ fontWeight: 700, color: "#176b2c" }}>Dein DACH-Community-Konto wurde dauerhaft gelöscht.</p>
             <p>
-              Die Authentifizierungsidentität und das zugehörige Profil wurden
-              entfernt. Du kannst dich mit diesem Konto nicht mehr anmelden.
+              Die Authentifizierungsidentität und das zugehörige Profil wurden entfernt. Du kannst dich mit diesem Konto
+              nicht mehr anmelden.
             </p>
           </>
         ) : (
@@ -192,9 +175,7 @@ export default function DachDeleteAccountPage() {
                 marginBottom: 16,
               }}
             >
-              <strong>
-                Achtung: Dieser Vorgang kann nicht rückgängig gemacht werden.
-              </strong>
+              <strong>Achtung: Dieser Vorgang kann nicht rückgängig gemacht werden.</strong>
               <p style={{ marginBottom: 8 }}>
                 Gib zur Bestätigung <strong>LÖSCHEN</strong> ein:
               </p>
@@ -215,20 +196,13 @@ export default function DachDeleteAccountPage() {
                   disabled={busy}
                   required
                 />
-                <span>
-                  Ich bestätige, dass mein DACH-Community-Konto dauerhaft
-                  gelöscht werden soll.
-                </span>
+                <span>Ich bestätige, dass mein DACH-Community-Konto dauerhaft gelöscht werden soll.</span>
               </label>
             </div>
 
             <button
               type="submit"
-              disabled={
-                busy ||
-                !accepted ||
-                confirmation.trim().toUpperCase() !== "LÖSCHEN"
-              }
+              disabled={busy || !accepted || confirmation.trim().toUpperCase() !== "LÖSCHEN"}
               style={{
                 width: "100%",
                 border: 0,
@@ -237,11 +211,7 @@ export default function DachDeleteAccountPage() {
                 fontSize: 16,
                 fontWeight: 700,
                 background:
-                  busy ||
-                  !accepted ||
-                  confirmation.trim().toUpperCase() !== "LÖSCHEN"
-                    ? "#b9b9b9"
-                    : "#a40000",
+                  busy || !accepted || confirmation.trim().toUpperCase() !== "LÖSCHEN" ? "#b9b9b9" : "#a40000",
                 color: "#fff",
                 cursor: busy ? "wait" : "pointer",
               }}
@@ -256,9 +226,8 @@ export default function DachDeleteAccountPage() {
             ) : null}
 
             <p style={{ fontSize: 14, color: "#555", marginBottom: 0 }}>
-              Dein Passwort wird direkt über eine verschlüsselte
-              HTTPS-Verbindung an den DACH-Community-Authentifizierungsdienst
-              übermittelt und nicht auf der KoppSuisse-Webseite gespeichert.
+              Dein Passwort wird direkt über eine verschlüsselte HTTPS-Verbindung an den
+              DACH-Community-Authentifizierungsdienst übermittelt und nicht auf der KoppSuisse-Webseite gespeichert.
             </p>
           </form>
         )}
@@ -266,30 +235,24 @@ export default function DachDeleteAccountPage() {
 
       <h2>Was wird gelöscht?</h2>
       <p>
-        Dein Authentifizierungskonto, dein Community-Profil sowie kontobezogene
-        Blockier- und Meldebeziehungen werden entfernt. Von dir zusätzlich
-        hochgeladene Community-Fotos werden aus der Multi-Foto-Galerie und dem
-        zugehörigen Speicher gelöscht.
+        Dein Authentifizierungskonto, dein Community-Profil sowie kontobezogene Blockier- und Meldebeziehungen werden
+        entfernt. Von dir zusätzlich hochgeladene Community-Fotos werden aus der Multi-Foto-Galerie und dem zugehörigen
+        Speicher gelöscht.
       </p>
       <p>
-        Bereits freigegebene öffentliche Community-Empfehlungen können ohne
-        Verknüpfung zu deinem Konto als anonymisierte Community-Inhalte bestehen
-        bleiben. Gesetzlich oder aus Sicherheitsgründen zwingend aufzubewahrende
-        Daten können nur für den erforderlichen Zeitraum gespeichert bleiben.
+        Bereits freigegebene öffentliche Community-Empfehlungen können ohne Verknüpfung zu deinem Konto als
+        anonymisierte Community-Inhalte bestehen bleiben. Gesetzlich oder aus Sicherheitsgründen zwingend
+        aufzubewahrende Daten können nur für den erforderlichen Zeitraum gespeichert bleiben.
       </p>
 
       <h2>Alternativen</h2>
       <p>
         In der App kannst du die Löschung ebenfalls unter{" "}
-        <strong>Profil → Community-Konto → Konto dauerhaft löschen</strong>{" "}
-        durchführen.
+        <strong>Profil → Community-Konto → Konto dauerhaft löschen</strong> durchführen.
       </p>
       <p>
-        Wenn du dich nicht mehr anmelden kannst, kannst du eine Löschanfrage von
-        deiner registrierten E-Mail-Adresse an{" "}
-        <a href="mailto:casa@koppsuisse.ch?subject=DACH%20Community%20-%20Kontol%C3%B6schung">
-          casa@koppsuisse.ch
-        </a>{" "}
+        Wenn du dich nicht mehr anmelden kannst, kannst du eine Löschanfrage von deiner registrierten E-Mail-Adresse an{" "}
+        <a href="mailto:casa@koppsuisse.ch?subject=DACH%20Community%20-%20Kontol%C3%B6schung">casa@koppsuisse.ch</a>{" "}
         senden. Vor einer manuellen Löschung wird die Identität geprüft.
       </p>
 
