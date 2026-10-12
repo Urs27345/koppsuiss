@@ -2,14 +2,14 @@
 
 import { FormEvent, useState } from "react";
 
-const SUPABASE_URL = "https://yyekbhnyjlpyuttrnldw.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_yxl-wQSzKUcHo06ZLM2mNQ_BAIIRb8U";
+const FIREBASE_AUTH_URL = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword";
+// Firebase client API key identifies the project; it grants no administrative access.
+const FIREBASE_API_KEY = "AIzaSyAvHti7Ofc0fIEkbhv6zQIHj2SY5859M98";
+const DELETE_ACCOUNT_URL = "https://us-central1-dach-community-ferre.cloudfunctions.net/deleteAccount";
 
 type LoginResponse = {
-  access_token?: string;
-  error?: string;
-  error_description?: string;
-  msg?: string;
+  idToken?: string;
+  error?: { message?: string };
 };
 
 export default function DachDeleteAccountPage() {
@@ -37,42 +37,40 @@ export default function DachDeleteAccountPage() {
     setBusy(true);
 
     try {
-      const loginResponse = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+      const loginResponse = await fetch(`${FIREBASE_AUTH_URL}?key=${FIREBASE_API_KEY}`, {
         method: "POST",
         headers: {
-          apikey: SUPABASE_PUBLISHABLE_KEY,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: email.trim(),
           password,
+          returnSecureToken: true,
         }),
       });
 
       const loginData = (await loginResponse.json().catch(() => ({}))) as LoginResponse;
 
-      if (!loginResponse.ok || !loginData.access_token) {
+      if (!loginResponse.ok || !loginData.idToken) {
         setMessage("Anmeldung fehlgeschlagen. Bitte registrierte E-Mail-Adresse und Passwort prüfen.");
         return;
       }
 
-      const deleteResponse = await fetch(`${SUPABASE_URL}/functions/v1/delete-account`, {
+      const deleteResponse = await fetch(DELETE_ACCOUNT_URL, {
         method: "POST",
         headers: {
-          apikey: SUPABASE_PUBLISHABLE_KEY,
-          Authorization: `Bearer ${loginData.access_token}`,
+          Authorization: `Bearer ${loginData.idToken}`,
           "Content-Type": "application/json",
         },
-        body: "{}",
+        body: JSON.stringify({ data: {} }),
       });
 
       const deleteData = (await deleteResponse.json().catch(() => ({}))) as {
-        ok?: boolean;
-        deleted?: boolean;
-        error?: string;
+        result?: { ok?: boolean; deleted?: boolean };
+        error?: { message?: string };
       };
 
-      if (!deleteResponse.ok || !deleteData.ok || !deleteData.deleted) {
+      if (!deleteResponse.ok || !deleteData.result?.ok || !deleteData.result?.deleted) {
         setMessage(
           "Die Kontolöschung konnte nicht abgeschlossen werden. Bitte später erneut versuchen oder den Support kontaktieren.",
         );
@@ -86,6 +84,7 @@ export default function DachDeleteAccountPage() {
     } catch {
       setMessage("Die Verbindung ist fehlgeschlagen. Bitte Internetverbindung prüfen und erneut versuchen.");
     } finally {
+      setPassword("");
       setBusy(false);
     }
   }
@@ -119,7 +118,7 @@ export default function DachDeleteAccountPage() {
       }}
     >
       <h1>DACH Community – Konto und Daten dauerhaft löschen</h1>
-      <p>Stand: 28. September 2026</p>
+      <p>Stand: 12. Oktober 2026</p>
 
       <p>
         Hier kannst du dein DACH-Community-Konto auch ohne installierte App selbst dauerhaft löschen. Dafür meldest du
@@ -234,14 +233,14 @@ export default function DachDeleteAccountPage() {
 
       <h2>Was wird gelöscht?</h2>
       <p>
-        Dein Authentifizierungskonto, dein Community-Profil sowie kontobezogene Blockier- und Meldebeziehungen werden
-        entfernt. Von dir zusätzlich hochgeladene Community-Fotos werden aus der Multi-Foto-Galerie und dem zugehörigen
-        Speicher gelöscht.
+        Dein Firebase-Authentifizierungskonto, dein Community-Profil und die persönlichen Kontoverknüpfungen werden
+        entfernt. Noch nicht freigegebene eigene Beiträge werden gelöscht.
       </p>
       <p>
-        Bereits freigegebene öffentliche Community-Empfehlungen können ohne Verknüpfung zu deinem Konto als
-        anonymisierte Community-Inhalte bestehen bleiben. Gesetzlich oder aus Sicherheitsgründen zwingend
-        aufzubewahrende Daten können nur für den erforderlichen Zeitraum gespeichert bleiben.
+        Bereits freigegebene öffentliche Community-Inhalte und Fotos können ohne Kontoverknüpfung bestehen bleiben. Bei
+        veröffentlichten Kommentaren wird der Anzeigename durch „Ehemaliges Mitglied“ ersetzt. Die Entfernung weiterer
+        personenbezogener Angaben oder veröffentlichter Fotos kannst du beim Support beantragen. In zeitlich begrenzten
+        Sicherungen können gelöschte Daten bis zu sieben Tage enthalten sein.
       </p>
 
       <h2>Alternativen</h2>
